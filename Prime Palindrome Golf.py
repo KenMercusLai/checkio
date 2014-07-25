@@ -7,12 +7,7 @@ def golf(number):
         numberString = str(number)
         index = int(ceil(len(numberString) / 2.0))
         if numberString[:index] == numberString[-index:][::-1]:
-            isPrime = True
-            for i in range(2, number):
-                if number % i == 0:
-                    isPrime = False
-                    break
-            if isPrime:
+            if all(number % i for i in xrange(2, number)):
                 return number
 
 print golf(13)
