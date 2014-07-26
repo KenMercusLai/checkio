@@ -3,28 +3,23 @@ import itertools
 
 def checkio(chips):
     # generate all possible status for each chip
-    print '--------------'
     chipPlaces = []
     for i in chips:
         chipPlaces.append([ij for ij in itertools.permutations(i)])
     # permutations for chips
     possiblePlaces = []
     for j in itertools.permutations(chipPlaces):
-        possiblePlaces += [i for i in itertools.product(*j)]
-    # extract all valid solutions
-    validSolutions = [i for i in possiblePlaces
-                      if (i[0][2] == i[1][0]
-                          and i[1][2] == i[2][0]
-                          and i[2][2] == i[3][0]
-                          and i[3][2] == i[4][0]
-                          and i[4][2] == i[5][0]
-                          and i[5][2] == i[0][0])]
-    # print validSolutions
-    if validSolutions:
-        # sum each solution
-        # print [(map(lambda x: x[1], i)) for i in validSolutions]
-        sumOfSolutions = [sum(map(lambda x: x[1], i)) for i in validSolutions]
-        # print sumOfSolutions
+        for i in itertools.product(*j):
+            if (i[0][2] == i[1][0]
+                    and i[1][2] == i[2][0]
+                    and i[2][2] == i[3][0]
+                    and i[3][2] == i[4][0]
+                    and i[4][2] == i[5][0]
+                    and i[5][2] == i[0][0]):
+                possiblePlaces.append(i)
+    possiblePlaces = [i for i, j in itertools.groupby(possiblePlaces)]
+    if possiblePlaces:
+        sumOfSolutions = [sum(map(lambda x: x[1], i)) for i in possiblePlaces]
         return max(sumOfSolutions)
     else:
         return 0
