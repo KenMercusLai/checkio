@@ -26,7 +26,6 @@ def checkio(chips):
                     and i[5][2] == i[0][0]):
                 possiblePlaces.append(i)
         counter += 1
-    possiblePlaces = [i for i, j in itertools.groupby(possiblePlaces)]
     if possiblePlaces:
         sumOfSolutions = [sum(map(lambda x: x[1], i)) for i in possiblePlaces]
         return max(sumOfSolutions)
