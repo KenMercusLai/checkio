@@ -1,4 +1,5 @@
 import itertools
+import math
 
 
 def checkio(chips):
@@ -8,7 +9,14 @@ def checkio(chips):
         chipPlaces.append([ij for ij in itertools.permutations(i)])
     # permutations for chips
     possiblePlaces = []
+
+    # not all permutations are unique,
+    # in loop, (1, 2, 3) == (3, 1, 2) == (2, 3, 1)
+    counter = 0
+    totalUniqueCounter = math.factorial(len(chipPlaces) - 1)
     for j in itertools.permutations(chipPlaces):
+        if counter > totalUniqueCounter:
+            break
         for i in itertools.product(*j):
             if (i[0][2] == i[1][0]
                     and i[1][2] == i[2][0]
@@ -17,6 +25,7 @@ def checkio(chips):
                     and i[4][2] == i[5][0]
                     and i[5][2] == i[0][0]):
                 possiblePlaces.append(i)
+        counter += 1
     possiblePlaces = [i for i, j in itertools.groupby(possiblePlaces)]
     if possiblePlaces:
         sumOfSolutions = [sum(map(lambda x: x[1], i)) for i in possiblePlaces]
