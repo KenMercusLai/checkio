@@ -2,7 +2,6 @@ def checkio(data):
     # replace this for solution
     leftStack = []
     for i in data:
-        print i, leftStack
         if i == '(' or i == '[' or i == '{':
             leftStack.append(i)
         elif i == ")":
