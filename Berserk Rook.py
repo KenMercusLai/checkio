@@ -5,13 +5,13 @@ def findConnectRook(berserker, enemies):
     bigger = True
     smaller = True
     for i in range(8):
-        if bigger and int(row)+i <= 8:
-            pseudoEnemy = col+str(int(row)+i)
+        if bigger and int(row) + i <= 8:
+            pseudoEnemy = col + str(int(row) + i)
             if pseudoEnemy in enemies:
                 result.append(pseudoEnemy)
                 bigger = False
-        if smaller and int(row)-i >= 8:
-            pseudoEnemy = col+str(int(row)-i)
+        if smaller and int(row) - i >= 1:
+            pseudoEnemy = col + str(int(row) - i)
             if pseudoEnemy in enemies:
                 result.append(pseudoEnemy)
                 smaller = False
@@ -19,13 +19,13 @@ def findConnectRook(berserker, enemies):
     bigger = True
     smaller = True
     for i in range(8):
-        if bigger and chr(ord(col)+i) <= 'h':
-            pseudoEnemy = chr(ord(col)+i)+row
+        if bigger and chr(ord(col) + i) <= 'h':
+            pseudoEnemy = chr(ord(col) + i) + row
             if pseudoEnemy in enemies:
                 result.append(pseudoEnemy)
                 bigger = False
-        if smaller and chr(ord(col)-i) >= 'a':
-            pseudoEnemy = chr(ord(col)-i)+row
+        if smaller and chr(ord(col) - i) >= 'a':
+            pseudoEnemy = chr(ord(col) - i) + row
             if pseudoEnemy in enemies:
                 result.append(pseudoEnemy)
                 smaller = False
