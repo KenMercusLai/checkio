@@ -15,7 +15,7 @@ def parse_array(s, _w=WHITESPACE_STR, _sep=","):
             continue
         if ch == "[":
             if started_flag and not stack:
-                raise ValueError("Wrong string1.")
+                raise ValueError("Wrong string.")
             if closed_flag or accumulator:
                 raise ValueError
             in_array = []
@@ -26,11 +26,11 @@ def parse_array(s, _w=WHITESPACE_STR, _sep=","):
                 started_flag = True
             stack.append(in_array.append)
         elif not started_flag:
-            raise ValueError("Wrong string2.")
+            raise ValueError("Wrong string.")
         elif ch == "]":
 
             if not stack:
-                raise ValueError("Wrong string3.")
+                raise ValueError("Wrong string.")
             if accumulator:
                 stack[-1](int(accumulator))
                 accumulator = ""
@@ -45,7 +45,7 @@ def parse_array(s, _w=WHITESPACE_STR, _sep=","):
             elif closed_flag:
                 pass
             else:
-                raise ValueError("Wrong string4.")
+                raise ValueError("Wrong string.")
             sep_flag = True
             closed_flag = False
             whitespace_flag = False
@@ -54,10 +54,14 @@ def parse_array(s, _w=WHITESPACE_STR, _sep=","):
                 raise ValueError
             accumulator += ch
         whitespace_flag = False
+    if not closed_flag:
+        raise ValueError("Wrong string")
+    if stack:
+        raise ValueError("Wrong string")
     if not array is None:
         return array
     else:
-        raise ValueError("Wrong string5")
+        raise ValueError("Wrong string")
 
 
 if __name__ == "__main__":
