@@ -1,5 +1,4 @@
 from copy import deepcopy
-# GOAL = (0, 2, 1, 3, 2, 1, 4, 0, 0, 4, 0, 3)
 GOAL = (1, 2, 1, 0, 2, 0, 0, 3, 0, 4, 3, 4)
 
 
@@ -71,8 +70,6 @@ class EigthyEighthPuzzle(AStar):
 
     def Heuristic(self, Node):
         return 0
-        # return (abs(Node.Status[0] - self.Goal[0]) +
-        #         abs(Node.Status[1] - self.Goal[1]))
 
     def GetResult(self, Node):
         Result = ''
@@ -90,7 +87,6 @@ class EigthyEighthPuzzleNode(AStarNode):
     def PossibleNextNodes(self):
         result = []
 
-        # print self.Status
         # rotate 1
         tempList = list(deepcopy(self.Status))
         tempList[0], tempList[2], tempList[3], tempList[
