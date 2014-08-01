@@ -69,7 +69,9 @@ class EigthyEighthPuzzle(AStar):
         super(EigthyEighthPuzzle, self).__init__(Goal)
 
     def Heuristic(self, Node):
-        return 0
+        # return 0
+        return sum([1 for i, j in enumerate(Node.Status)
+                    if i not in [3, 5, 6, 8] and GOAL[i] != j])
 
     def GetResult(self, Node):
         Result = ''
