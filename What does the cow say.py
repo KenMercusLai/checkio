@@ -1,4 +1,5 @@
 import re
+from copy import deepcopy
 COW = r'''
         \   ^__^
          \  (oo)\_______
@@ -9,32 +10,56 @@ COW = r'''
 
 
 def cowsay(text):
-    print text
-    words = text.split()
-    if len(words) == 1 & len(text) - text.count(' ') == 1:
-        words[0] = re.subn('\s+', ' ', text)[0]
-    lines = []
-    aLine = []
-    for i in words:
-        if len(i) > 39:
-            while len(i) > 39:
-                if aLine:
-                    lines.append(' '.join(aLine))
-                    aLine = []
-                lines.append(i[:39])
-                i = i[39:]
-            if i:
-                aLine.append(i)
-        elif sum(map(len, aLine)) + len(aLine) + len(i) <= 39:
-            aLine.append(i)
+    # replace multiple space with single space
+    newText = re.subn('\s+', ' ', text)[0]
+    # split text into elements
+    elements = []
+    word = ''
+    for i in newText:
+        if i == ' ':
+            if word:
+                elements.append(word)
+                word = ''
+            elements.append(i)
         else:
-            lines.append(' '.join(aLine))
-            aLine = []
-            aLine.append(i)
+            word = word + i
     else:
-        if aLine:
-            lines.append(' '.join(aLine))
-            aLine = []
+        if word:
+            elements.append(word)
+
+    # find if there are words longer than 39, cut it for every 39
+    elementsCopy = deepcopy(elements)
+    for i, j in enumerate(elements):
+        if len(j) > 39:
+            print i, j
+            tempList = []
+            while len(j) > 39:
+                tempList.append(j[:39])
+                j = j[39:]
+            if j:
+                tempList.append(j)
+            elementsCopy = elementsCopy[:i] + tempList + elementsCopy[i + 1:]
+    elements = deepcopy(elementsCopy)
+
+    # arrange elements
+    lines = []
+    oneLine = ''
+    for i in elements:
+        if len(oneLine) + len(i) <= 39:
+            oneLine = oneLine + i
+        else:
+            if i == ' ':
+                pass
+            else:
+                if oneLine[-1] == ' ':
+                    lines.append(oneLine[:-1])
+                else:
+                    lines.append(oneLine)
+                oneLine = i
+    else:
+        lines.append(oneLine)
+
+    # let the cow say
     maxLength = max(map(len, lines))
     if len(lines) == 1:
         lines[0] = '< ' + lines[0] + ' >'
