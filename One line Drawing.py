@@ -1,47 +1,106 @@
 import itertools
+from copy import deepcopy
 
 
-def CanBeChained(segment):
-    # print segment
-    stack = []
-    if len(segment) == 1:
-        x11, y11, x12, y12 = segment[0]
-        stack.append((x11, y11))
-        stack.append((x12, y12))
-    for i in zip(segment, segment[1:]):
-        # print i, stack
-        if not len(stack):
-            x11, y11, x12, y12 = i[0]
-            x21, y21, x22, y22 = i[1]
-            if (x11, y11) == (x21, y21) or (x11, y11) == (x22, y22):
-                stack.append((x12, y12))
-                stack.append((x11, y11))
-            elif (x12, y12) == (x21, y21) or (x12, y12) == (x22, y22):
-                stack.append((x11, y11))
-                stack.append((x12, y12))
-            else:
-                break
+class AStar(object):
+
+    def __init__(self, Goal):
+        self.Goal = Goal
+
+    def Heuristic(self, Node):
+        raise NotImplementedError
+
+    def GetResult(self, Node):
+        raise NotImplementedError
+
+    def Search(self, StartNode):
+        OpenSet = set()
+        ClosedSet = set()
+        StartNode.H = self.Heuristic(StartNode)
+        OpenSet.add(StartNode)
+        while OpenSet:
+            Current = min(OpenSet, key=lambda o: o.G + o.H)
+            if Current.Status == self.Goal:
+                return self.GetResult(Current)
+            OpenSet.remove(Current)
+            ClosedSet.add(Current)
+            for Node in Current.PossibleNextNodes():
+                if Node.Status in [i.Status for i in ClosedSet]:
+                    continue
+                if Node.Status in [i.Status for i in OpenSet]:
+                    index = [i.Status for i in OpenSet].index(Node.Status)
+                    if Node.G < list(OpenSet)[index].G:
+                        list(OpenSet)[index].G = Node.G
+                        list(OpenSet)[index].Parent = Node.Parent
+                else:
+                    Node.H = self.Heuristic(Node)
+                    if Node.SelfCheck:
+                        OpenSet.add(Node)
+        return None
+
+
+class AStarNode(object):
+
+    def __init__(self, Status, G, Parent):
+        self.G = G
+        self.H = None
+        self.Parent = Parent
+        self.Status = Status
+        self.Comment = None
+
+    def SelfCheck(self):
+        if self.G and self.H and self.Status:
+            return True
         else:
-            lastx, lasty = stack[-1]
-            # print lastx, lasty
-            x21, y21, x22, y22 = i[0]
-            if (lastx, lasty) == (x21, y21):
-                stack.append((x22, y22))
-            elif (lastx, lasty) == (x22, y22):
-                stack.append((x21, y21))
-            else:
-                break
-    # print stack
-    if stack and len(segment) != 1:
-        lastx, lasty = stack[-1]
-        x21, y21, x22, y22 = i[1]
-        if (lastx, lasty) == (x21, y21):
-            stack.append((x22, y22))
-        elif (lastx, lasty) == (x22, y22):
-            stack.append((x21, y21))
-    # print stack
-    # print '--------------'
-    return stack
+            print self.G
+            print self.H
+            print self.Parent
+            print self.Status
+            print self.Comment
+            assert 1 == 0
+
+    def PossibleNextNodes(self):
+        raise NotImplementedError
+
+
+class OneLineDrawingPuzzle(AStar):
+
+    def __init__(self, Goal):
+        super(OneLineDrawingPuzzle, self).__init__(Goal)
+
+    def Heuristic(self, Node):
+        return sum([1 for i in Node.Status if Node.Status[i] != self.Goal[i]])
+
+    def GetResult(self, Node):
+        Result = []
+        while Node.Parent:
+            Result = [Node.Comment] + Result
+            Node = Node.Parent
+        Result = [Node.Comment] + Result
+        return Result
+
+
+class OneLineDrawingPuzzleNode(AStarNode):
+
+    def __init__(self, Status, G, Parent):
+        super(OneLineDrawingPuzzleNode, self).__init__(Status, G, Parent)
+
+    def PossibleNextNodes(self):
+        result = []
+        for i in self.Status:
+            x1, y1, x2, y2 = i
+            if self.Status[i] == 0:
+                if (x1, y1) == self.Comment or (x2, y2) == self.Comment:
+                    tempStatus = deepcopy(self.Status)
+                    tempStatus[i] = 1
+                    newNode = OneLineDrawingPuzzleNode(
+                        tempStatus, self.G + 1, self)
+                    if (x1, y1) == self.Comment:
+                        newNode.Comment = (x2, y2)
+                    else:
+                        newNode.Comment = (x1, y1)
+                    result.append(newNode)
+        return result
 
 
 def CanBeDrawInOneLine(segments):
@@ -59,46 +118,19 @@ def draw(segments):
     OddPoints = CanBeDrawInOneLine(segments)
     # 0 or 2 odd points, else cannot be drawn by one line
     if len(OddPoints) in [2, 0]:
-        if len(segments) != 1:
-            if len(OddPoints) == 0:
-                startLine = list(segments)[0]
-                segments.remove(startLine)
-                x, y, _, _ = startLine
-                for i in segments:
-                    if (x, y) in [(i[0], i[1]), (i[2], i[3])]:
-                        endLine = i
-                        break
-                segments.remove(endLine)
-                aaa = 0
-                print len(segments)
-                for i in itertools.permutations(segments):
-                    print aaa, '\r',
-                    aaa += 1
-                    ret = CanBeChained([startLine] + list(i) + [endLine])
-                    if len(ret) == len(segments) + 3:
-                        return ret
-            else:
-                x, y = OddPoints[0][0]
-                for i in segments:
-                    if (x, y) in [(i[0], i[1]), (i[2], i[3])]:
-                        startLine = i
-                        break
-                segments.remove(i)
-                x, y = OddPoints[1][0]
-                for i in segments:
-                    if (x, y) in [(i[0], i[1]), (i[2], i[3])]:
-                        endLine = i
-                        break
-                segments.remove(i)
-                for i in itertools.permutations(segments):
-                    ret = CanBeChained([startLine] + list(i) + [endLine])
-                    if len(ret) == len(segments) + 3:
-                        return ret
+        GOAL = {}
+        state = {}
+        for i in segments:
+            GOAL[i] = 1
+            state[i] = 0
+        Puzzle = OneLineDrawingPuzzle(GOAL)
+        startNode = OneLineDrawingPuzzleNode(state, 0, None)
+        if len(OddPoints) == 2:
+            startNode.Comment = OddPoints[0][0]
         else:
-            for i in itertools.permutations(segments):
-                ret = CanBeChained(i)
-                if len(ret) == len(segments) + 1:
-                    return ret
+            startNode.Comment = (i[0], i[1])
+        ret = Puzzle.Search(startNode)
+        return ret
     return []
 
 
@@ -131,30 +163,15 @@ if __name__ == '__main__':
             return False
         return True
 
-    # assert checker(draw,
-    #                {(1, 2, 1, 5), (1, 2, 7, 2),
-    #                 (1, 5, 4, 7), (4, 7, 7, 5)}), "Example 1"
-    # assert checker(draw,
-    #                {(1, 2, 1, 5), (1, 2, 7, 2), (1, 5, 4, 7),
-    #                 (4, 7, 7, 5), (7, 5, 7, 2), (1, 5, 7, 2),
-    #                 (7, 5, 1, 2)}, False), "Example 2"
-    # assert checker(draw,
-    #                {(1, 2, 1, 5), (1, 2, 7, 2),
-    #                 (1, 5, 4, 7), (4, 7, 7, 5),
-    #                 (7, 5, 7, 2), (1, 5, 7, 2),
-    #                 (7, 5, 1, 2), (1, 5, 7, 5)}), "Example 3"
-    # edge 3
-    print draw({(8, 4, 8, 6), (4, 8, 6, 2), (6, 8, 8, 6), (4, 8, 8, 6),
-                (2, 6, 4, 2), (6, 2, 8, 4), (6, 8, 6, 2), (2, 6, 6, 2),
-                (2, 4, 8, 4), (6, 8, 8, 4), (4, 2, 6, 2), (4, 2, 8, 6),
-                (2, 4, 2, 6), (4, 2, 6, 8), (4, 2, 4, 8), (2, 4, 6, 2),
-                (2, 4, 4, 8), (4, 8, 6, 8), (6, 2, 8, 6), (4, 8, 8, 4),
-                (2, 6, 8, 6), (2, 6, 6, 8), (2, 4, 4, 2), (4, 2, 8, 4),
-                (2, 4, 6, 8), (2, 6, 4, 8), (2, 6, 8, 4), (2, 4, 8, 6)})
-    # edge 4
-    print draw({(4, 2, 6, 8), (2, 4, 6, 2), (4, 8, 6, 2), (2, 4, 6, 8),
-                (6, 8, 6, 2), (6, 2, 8, 4), (4, 2, 8, 4), (2, 6, 4, 8),
-                (2, 6, 6, 8), (2, 6, 4, 2), (4, 2, 4, 8), (2, 4, 4, 8),
-                (4, 8, 6, 8), (2, 4, 4, 2), (2, 4, 8, 4), (6, 8, 8, 4),
-                (2, 6, 6, 2), (2, 6, 8, 4), (4, 2, 6, 2), (4, 8, 8, 4),
-                (2, 4, 2, 6)})
+    assert checker(draw,
+                   {(1, 2, 1, 5), (1, 2, 7, 2),
+                    (1, 5, 4, 7), (4, 7, 7, 5)}), "Example 1"
+    assert checker(draw,
+                   {(1, 2, 1, 5), (1, 2, 7, 2), (1, 5, 4, 7),
+                    (4, 7, 7, 5), (7, 5, 7, 2), (1, 5, 7, 2),
+                    (7, 5, 1, 2)}, False), "Example 2"
+    assert checker(draw,
+                   {(1, 2, 1, 5), (1, 2, 7, 2),
+                    (1, 5, 4, 7), (4, 7, 7, 5),
+                    (7, 5, 7, 2), (1, 5, 7, 2),
+                    (7, 5, 1, 2), (1, 5, 7, 5)}), "Example 3"
