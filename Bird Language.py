@@ -1,21 +1,21 @@
-import re
 VOWELS = "aeiouy"
 
 
 def translate(phrase):
     i = 0
-    newPhrase = ''
+    new_phrase = ''
     while i < len(phrase):
         if phrase[i] == ' ':
-            newPhrase += phrase[i]
+            new_phrase += phrase[i]
             i += 1
         elif phrase[i] in VOWELS:
-            newPhrase += phrase[i]
+            new_phrase += phrase[i]
             i += 3
         else:
-            newPhrase += phrase[i]
+            new_phrase += phrase[i]
             i += 2
-    return newPhrase
+    return new_phrase
+
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for

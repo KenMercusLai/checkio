@@ -1,6 +1,6 @@
 def chase(a1_speed, t2_speed, advantage):
-    advantageDistance = t2_speed * advantage
-    return round(advantage + advantageDistance * 1.0 / (a1_speed - t2_speed),
+    advantage_distance = t2_speed * advantage
+    return round(advantage + advantage_distance * 1.0 / (a1_speed - t2_speed),
                  8)
 
 if __name__ == '__main__':

@@ -1,18 +1,18 @@
 import itertools
 
 
-def GetPassword(cipher_grille, ciphered_password):
-    flatGrille = [True if j == 'X' else False
-                  for i in cipher_grille
-                  for j in i]
-    flatPassword = [j for i in ciphered_password for j in i]
-    return ''.join(itertools.compress(flatPassword, flatGrille))
+def get_password(cipher_grille, ciphered_password):
+    flat_grille = [True if j == 'X' else False
+                   for i in cipher_grille
+                   for j in i]
+    flat_password = [j for i in ciphered_password for j in i]
+    return ''.join(itertools.compress(flat_password, flat_grille))
 
 
 def recall_password(cipher_grille, ciphered_password):
     password = ''
     for i in range(4):
-        password += GetPassword(cipher_grille, ciphered_password)
+        password += get_password(cipher_grille, ciphered_password)
         cipher_grille = map(lambda x: ''.join(x), zip(*cipher_grille[::-1]))
     return password
 
