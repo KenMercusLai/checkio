@@ -1,8 +1,10 @@
 def flat_list(a):
-    t=[]
+    t = []
     for i in a:
-        if isinstance(i,list):t=t+flat_list(i)
-        else:t.append(i)
+        if isinstance(i, list):
+            t = t + flat_list(i)
+        else:
+            t.append(i)
     return t
 
 

@@ -1,6 +1,6 @@
 def digit_stack(commands):
     stack = []
-    sumOfCommands = 0
+    sum_of_commands = 0
     for i in commands:
         cmd = i.split()
         if cmd[0] == 'PUSH':
@@ -10,14 +10,15 @@ def digit_stack(commands):
                 tmp = stack.pop()
             except:
                 tmp = 0
-            sumOfCommands += tmp
+            sum_of_commands += tmp
         elif cmd[0] == 'PEEK':
             try:
                 tmp = stack[-1]
             except:
                 tmp = 0
-            sumOfCommands += tmp
-    return sumOfCommands
+            sum_of_commands += tmp
+    return sum_of_commands
+
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for

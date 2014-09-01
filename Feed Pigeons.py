@@ -1,16 +1,16 @@
 def checkio(number):
-    pigeonQueue = []
-    newPigeon = 1
+    pigeon_queue = []
+    new_pigeon = 1
     while number:
-        pigeonQueue += [0] * newPigeon
-        for i in range(len(pigeonQueue)):
-            pigeonQueue[i] += 1
+        pigeon_queue += [0] * new_pigeon
+        for i in range(len(pigeon_queue)):
+            pigeon_queue[i] += 1
             number -= 1
             if number == 0:
                 break
-        newPigeon += 1
-    print pigeonQueue
-    return len(filter(lambda x: x, pigeonQueue))
+        new_pigeon += 1
+    print pigeon_queue
+    return len(filter(lambda x: x, pigeon_queue))
 
 
 if __name__ == '__main__':

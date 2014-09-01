@@ -23,6 +23,7 @@ def find_distance(first, second):
     b = getPosition(second)
     return sum(map(lambda x: abs(x[0] - x[1]), zip(a, b)))
 
+
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing

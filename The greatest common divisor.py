@@ -2,6 +2,7 @@ def greatest_common_divisor(*args):
     """
         Find the greatest common divisor
     """
+
     def factors(n):
         return sorted(set(reduce(list.__add__,
                                  ([i, n // i]
@@ -11,6 +12,7 @@ def greatest_common_divisor(*args):
     for i in factors(min(args)):
         if all(map(lambda x: x % i == 0, args)):
             return i
+
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for
