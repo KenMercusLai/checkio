@@ -35,15 +35,12 @@ def move2048(state, move):
             ResultState[i] += [0] * (4 - len(ResultState[i]))
     elif move in ['right', 'down']:
         for i in FilteredState:
-            print '-----'
-            print i
             if len(i) == 1:
                 ResultState.append(i)
             else:
                 index = len(i) - 1
                 temp = []
                 while index > -1:
-                    print index, len(i[:index + 1]) == 1
                     if len(i[:index + 1]) == 1:
                         temp = i[:index + 1] + temp
                         index -= 1
@@ -53,7 +50,6 @@ def move2048(state, move):
                     else:
                         temp.insert(0, i[index])
                         index -= 1
-                    print temp
                 ResultState.append(temp)
         for i in range(len(ResultState)):
             ResultState[i] = [0] * (4 - len(ResultState[i])) + ResultState[i]
@@ -85,7 +81,6 @@ def move2048(state, move):
                     break
             if quit:
                 break
-        print ResultState
         return ResultState
 
 
