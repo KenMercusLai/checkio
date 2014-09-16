@@ -1,4 +1,4 @@
-def findConnectRook(berserker, enemies):
+def find_connect_rook(berserker, enemies):
     col, row = list(berserker)
     result = []
     # same row
@@ -6,40 +6,41 @@ def findConnectRook(berserker, enemies):
     smaller = True
     for i in range(8):
         if bigger and int(row) + i <= 8:
-            pseudoEnemy = col + str(int(row) + i)
-            if pseudoEnemy in enemies:
-                result.append(pseudoEnemy)
+            pseudo_enemy = col + str(int(row) + i)
+            if pseudo_enemy in enemies:
+                result.append(pseudo_enemy)
                 bigger = False
         if smaller and int(row) - i >= 1:
-            pseudoEnemy = col + str(int(row) - i)
-            if pseudoEnemy in enemies:
-                result.append(pseudoEnemy)
+            pseudo_enemy = col + str(int(row) - i)
+            if pseudo_enemy in enemies:
+                result.append(pseudo_enemy)
                 smaller = False
     # same col
     bigger = True
     smaller = True
     for i in range(8):
         if bigger and chr(ord(col) + i) <= 'h':
-            pseudoEnemy = chr(ord(col) + i) + row
-            if pseudoEnemy in enemies:
-                result.append(pseudoEnemy)
+            pseudo_enemy = chr(ord(col) + i) + row
+            if pseudo_enemy in enemies:
+                result.append(pseudo_enemy)
                 bigger = False
         if smaller and chr(ord(col) - i) >= 'a':
-            pseudoEnemy = chr(ord(col) - i) + row
-            if pseudoEnemy in enemies:
-                result.append(pseudoEnemy)
+            pseudo_enemy = chr(ord(col) - i) + row
+            if pseudo_enemy in enemies:
+                result.append(pseudo_enemy)
                 smaller = False
     return result
 
 
 def berserk_rook(berserker, enemies):
-    connectedEnemies = findConnectRook(berserker, enemies)
-    if not connectedEnemies:
+    connected_enemies = find_connect_rook(berserker, enemies)
+    if not connected_enemies:
         return 0
-    newStatus = [(i, [j for j in enemies if j != i]) for i in connectedEnemies]
-    aaa = [berserk_rook(*i) for i in newStatus]
+    new_status = [(i, [j for j in enemies if j != i]) for i in connected_enemies]
+    aaa = [berserk_rook(*i) for i in new_status]
     result = max(aaa)
     return 1 + result
+
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for

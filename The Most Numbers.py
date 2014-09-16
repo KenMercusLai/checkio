@@ -1,8 +1,8 @@
 def checkio(*args):
     if args:
-        minValue = min(args)
-        maxValue = max(args)
-        return maxValue - minValue
+        min_value = min(args)
+        max_value = max(args)
+        return max_value - min_value
     else:
         return 0
 

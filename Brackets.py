@@ -1,25 +1,25 @@
 def checkio(data):
     # replace this for solution
-    leftStack = []
+    left_stack = []
     for i in data:
         if i == '(' or i == '[' or i == '{':
-            leftStack.append(i)
+            left_stack.append(i)
         elif i == ")":
-            if len(leftStack) == 0 or leftStack[-1] != '(':
+            if len(left_stack) == 0 or left_stack[-1] != '(':
                 return False
             else:
-                leftStack.pop()
+                left_stack.pop()
         elif i == ']':
-            if len(leftStack) == 0 or leftStack[-1] != '[':
+            if len(left_stack) == 0 or left_stack[-1] != '[':
                 return False
             else:
-                leftStack.pop()
+                left_stack.pop()
         elif i == '}':
-            if len(leftStack) == 0 or leftStack[-1] != '{':
+            if len(left_stack) == 0 or left_stack[-1] != '{':
                 return False
             else:
-                leftStack.pop()
-    if len(leftStack) == 0:
+                left_stack.pop()
+    if len(left_stack) == 0:
         return True
     else:
         return False
