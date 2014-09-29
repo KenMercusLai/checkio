@@ -68,16 +68,22 @@ class RobotSortPuzzle(AStar):
         super(RobotSortPuzzle, self).__init__(Goal)
 
     def Heuristic(self, Node):
-        return sum([i * 2 for i, j in enumerate(self.Goal)
+        return sum([10 for i, j in enumerate(self.Goal)
                     if Node.Status[i] != j])
 
     def GetResult(self, Node):
-        Result = ''
+        Result = []
         while Node.Parent:
-            Result = Node.Comment + ',' + Result
-            print Node.Comment, Node.Status
+            Result.insert(0, Node.Status)
             Node = Node.Parent
-        return Result
+        Result.insert(0, Node.Status)
+        Moves = []
+        for i, j in zip(Result, Result[1:]):
+            for k in range(len(i)):
+                if i[k] != j[k]:
+                    Moves.append(str(k) + str(k + 1))
+                    break
+        return ','.join(Moves)
 
 
 class RobotSortPuzzleNode(AStarNode):
@@ -90,9 +96,7 @@ class RobotSortPuzzleNode(AStarNode):
         for i in range(len(self.Status) - 1):
             temp = deepcopy(self.Status)
             temp[i], temp[i + 1] = temp[i + 1], temp[i]
-            newNode = RobotSortPuzzleNode(temp,
-                                          self.G + 1, self)
-            newNode.Comment = str(i) + str(i + 1)
+            newNode = RobotSortPuzzleNode(temp, self.G + 1, self)
             result.append(newNode)
         return result
 
@@ -100,7 +104,7 @@ class RobotSortPuzzleNode(AStarNode):
 def swapsort(array):
     Puzzle = RobotSortPuzzle(sorted(array))
     startNode = RobotSortPuzzleNode(list(array), 0, None)
-    return Puzzle.Search(startNode)[:-1]
+    return Puzzle.Search(startNode)
 
 
 if __name__ == '__main__':
