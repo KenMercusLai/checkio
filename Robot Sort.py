@@ -1,106 +1,51 @@
+import heapq
+from itertools import permutations
 from copy import deepcopy
 
 
-class AStar(object):
-
-    def __init__(self, Goal):
-        self.Goal = Goal
-
-    def Heuristic(self, Node):
-        raise NotImplementedError
-
-    def GetResult(self, Node):
-        raise NotImplementedError
-
-    def Search(self, StartNode):
-        OpenSet = set()
-        ClosedSet = set()
-        StartNode.H = self.Heuristic(StartNode)
-        OpenSet.add(StartNode)
-        while OpenSet:
-            Current = min(OpenSet, key=lambda o: o.G + o.H)
-            if Current.Status == self.Goal:
-                return self.GetResult(Current)
-            OpenSet.remove(Current)
-            ClosedSet.add(Current)
-            for Node in Current.PossibleNextNodes():
-                if Node.Status in [i.Status for i in ClosedSet]:
-                    continue
-                if Node.Status in [i.Status for i in OpenSet]:
-                    index = [i.Status for i in OpenSet].index(Node.Status)
-                    if Node.G < list(OpenSet)[index].G:
-                        list(OpenSet)[index].G = Node.G
-                        list(OpenSet)[index].Parent = Node.Parent
-                else:
-                    Node.H = self.Heuristic(Node)
-                    if Node.SelfCheck:
-                        OpenSet.add(Node)
-        return None
-
-
-class AStarNode(object):
-
-    def __init__(self, Status, G, Parent):
-        self.G = G
-        self.H = None
-        self.Parent = Parent
-        self.Status = Status
-        self.Comment = None
-
-    def SelfCheck(self):
-        if self.G and self.H and self.Status:
-            return True
-        else:
-            print self.G
-            print self.H
-            print self.Parent
-            print self.Status
-            print self.Comment
-            assert 1 == 0
-
-    def PossibleNextNodes(self):
-        raise NotImplementedError
-
-
-class RobotSortPuzzle(AStar):
-
-    def __init__(self, Goal):
-        super(RobotSortPuzzle, self).__init__(Goal)
-
-    def Heuristic(self, Node):
-        return sum([i * 2 for i, j in enumerate(self.Goal)
-                    if Node.Status[i] != j])
-
-    def GetResult(self, Node):
-        Result = ''
-        while Node.Parent:
-            Result = Node.Comment + ',' + Result
-            print Node.Comment, Node.Status
-            Node = Node.Parent
-        return Result
-
-
-class RobotSortPuzzleNode(AStarNode):
-
-    def __init__(self, Status, G, Parent):
-        super(RobotSortPuzzleNode, self).__init__(Status, G, Parent)
-
-    def PossibleNextNodes(self):
-        result = []
-        for i in range(len(self.Status) - 1):
-            temp = deepcopy(self.Status)
-            temp[i], temp[i + 1] = temp[i + 1], temp[i]
-            newNode = RobotSortPuzzleNode(temp,
-                                          self.G + 1, self)
-            newNode.Comment = str(i) + str(i + 1)
-            result.append(newNode)
-        return result
+def shortestPath(graph, start, end):
+    queue = [(0, start, [])]
+    seen = set()
+    while True:
+        (cost, v, path) = heapq.heappop(queue)
+        if v not in seen:
+            path = path + [v]
+            seen.add(v)
+            if v == end:
+                return cost, path
+            for (next, c) in graph[v].iteritems():
+                heapq.heappush(queue, (cost + c, next, path))
+    return queue
 
 
 def swapsort(array):
-    Puzzle = RobotSortPuzzle(sorted(array))
-    startNode = RobotSortPuzzleNode(list(array), 0, None)
-    return Puzzle.Search(startNode)[:-1]
+    if list(array) == sorted(array):
+        return ''
+    DistanceMetrics = {}
+    Status = set()
+    for i in permutations(array, len(array)):
+        Status.add(i)
+    Status = list(Status)
+    for i in Status:
+        if i not in DistanceMetrics:
+            DistanceMetrics[str(i)] = {}
+        for j in range(len(i) - 1):
+            temp = list(deepcopy(i))
+            temp[j], temp[j + 1] = temp[j + 1], temp[j]
+            temp = tuple(temp)
+            DistanceMetrics[str(i)][str(temp)] = 1
+    steps = shortestPath(DistanceMetrics,
+                         str(array), str(tuple(sorted(array))))[-1]
+    result = []
+    for i, j in zip(steps, steps[1:]):
+        i = eval(i)
+        j = eval(j)
+        for k in range(len(i)):
+            if i[k] != j[k]:
+                result.append(str(k) + str(k + 1))
+                break
+    print ','.join(result)
+    return ','.join(result)
 
 
 if __name__ == '__main__':
@@ -137,3 +82,4 @@ if __name__ == '__main__':
     assert check_solution(swapsort, (6, 4, 2)), "Reverse simple"
     assert check_solution(swapsort, (1, 2, 3, 4, 5)), "All right!"
     assert check_solution(swapsort, (1, 2, 3, 5, 3)), "One move"
+    swapsort((1,2,3,4,5,6,7,8,9,1,))
