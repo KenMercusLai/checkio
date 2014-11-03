@@ -735,10 +735,3 @@ if __name__ == '__main__':
     assert check_solution(winning_die, [4, 4, 4, 4, 4, 4]), "All Fours"
     assert check_solution(winning_die, [1, 1, 1, 4]), "Unities and Four"
     assert winning_die([1, 2, 3, 4, 5, 6]) == [], "All in row -- No die"
-
-    print winning_die([1, 1, 3])
-    print winning_die([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-    print winning_die([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
-    print winning_die([1, 1, 1, 2, 2, 2, 3, 3, 3, 4])
-    print winning_die([10, 10, 10, 10, 10, 10, 10, 10, 10, 10])
-    print winning_die([1, 5, 5, 5, 5, 6, 6, 6, 6, 10])
