@@ -3,8 +3,8 @@ def checkio(matrix):
         for s in range(-180, 181):
             for t in range(-180, 181):
                 if ((f + s * matrix[1][0] + t * matrix[2][0]) % 360 == 0 and
-                    (f * matrix[0][1] + s + t * matrix[2][1]) % 360 in [-135, 225] and
-                    (f * matrix[0][2] + s * matrix[1][2] + t) % 360 in [-45, 315]):
+                        (f * matrix[0][1] + s + t * matrix[2][1]) % 360 in [-135, 225] and
+                        (f * matrix[0][2] + s * matrix[1][2] + t) % 360 in [-45, 315]):
                     return [f, s, t]
 
 # These "asserts" using only for self-checking and not necessary for
