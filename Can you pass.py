@@ -1,58 +1,46 @@
-from copy import deepcopy
+import heapq
 
 
-def check_connection(network, first, second):
-    # create non duplicates individuals
-    all_people = []
-    for i in network:
-        all_people += i.split('-')
-    temp_all_people = [[i] for i in set(all_people)]
-
-    # create connections
-    all_people = None
-    while temp_all_people != all_people:
-        all_people = deepcopy(temp_all_people)
-        for i in network:
-            person1, person2 = i.split('-')
-            group1 = filter(lambda x: person1 in x, temp_all_people)
-            group2 = filter(lambda x: person2 in x, temp_all_people)
-            group1, group2 = group1[0], group2[0]
-            if group1 != group2:
-                temp_all_people.remove(group1)
-                temp_all_people.remove(group2)
-                temp_all_people.append(group1 + group2)
-    # determine first and second are in same group or not
-    group1 = filter(lambda x: first in x, temp_all_people)
-    group2 = filter(lambda x: second in x, temp_all_people)
-    if group1 == group2:
-        return True
-    return False
+def shortestPath(graph, start, end):
+    queue = [(0, start, [])]
+    seen = set()
+    while True:
+        (cost, v, path) = heapq.heappop(queue)
+        if v not in seen:
+            path = path + [v]
+            seen.add(v)
+            if v == end:
+                return cost, path
+            for (next, c) in graph[v].iteritems():
+                heapq.heappush(queue, (cost + c, next, path))
+    return queue
 
 
-def build_network(matrix):
-    network = []
-    for row in range(len(matrix)):
-        for col in range(len(matrix[0])):
-            try:
-                if matrix[row][col] == matrix[row][col + 1]:
-                    network.append('(%d, %d)-(%d, %d)' %
-                                   (row, col, row, col + 1))
-            except:
-                pass
-            try:
-                if matrix[row][col] == matrix[row + 1][col]:
-                    network.append('(%d, %d)-(%d, %d)' %
-                                   (row, col, row + 1, col))
-            except:
-                pass
-    return network
+def build_network(matrix, TargetNumber):
+    MatrixDict = {}
+    neighbors = [(-1, 0), (0, -1), (0, 1), (1, 0)]
+    matrix = [tuple(['X']) + i + tuple(['X']) for i in matrix]
+    matrix = [tuple(['X'] * len(matrix[0]))] \
+        + matrix \
+        + [tuple(['X'] * len(matrix[0]))]
+    for i in range(len(matrix) - 2):
+        for j in range(len(matrix[0]) - 2):
+            if matrix[i + 1][j + 1] == TargetNumber:
+                if (i, j) not in MatrixDict:
+                    MatrixDict[(i, j)] = {}
+                for k in neighbors:
+                    if matrix[i + 1 + k[0]][j + 1 + k[1]] == TargetNumber:
+                        MatrixDict[(i, j)][(i + k[0], j + k[1])] = 1
+    return MatrixDict
 
 
 def can_pass(matrix, first, second):
-    if first == second:
+    TargetNumber = matrix[first[0]][first[1]]
+    try:
+        shortestPath(build_network(matrix, TargetNumber), first, second)
+        return True
+    except:
         return False
-    network = build_network(matrix)
-    return check_connection(network, str(first), str(second))
 
 
 if __name__ == '__main__':

@@ -1,5 +1,10 @@
-def checkio(data):
-    if len(data) > 1:
-        return data[0] + checkio(data[1:])
-    else:
-        return data[0]
+def checkio(number):
+    a = True + True
+    while a < number:
+        b = True + True
+        while not a * b > number:
+            if a * b == number:
+                return False
+            b += True
+        a += True
+    return True
