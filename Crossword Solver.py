@@ -688,8 +688,6 @@ def solver(crossword, words):
         for col in range(len(crossword[row])):
             if crossword[row][col] == '.':
                 EmptySlots.append((row, col))
-                CrosswordProblem.addVariable((row, col),
-                                             list('abcdefghijklmnopqrstuvwxyz'))
 
     # group empty slots
     EmptySlots = [[i] for i in EmptySlots]
@@ -719,21 +717,32 @@ def solver(crossword, words):
                 break
     WordSlots = [i for i in WordsInRows + WordsInCols if len(i) > 1]
 
-    # build up constraint rules
-    def func(*args):
-        return ''.join(args) in words
-
     for i in WordSlots:
-        CrosswordProblem.addConstraint(func, i)
+        CrosswordProblem.addVariable(WordSlots.index(i),
+                                     filter(lambda x: len(x) == len(i),
+                                            words))
+    CrosswordProblem.addConstraint(AllDifferentConstraint())
 
-    FilledCrossword = copy.deepcopy(crossword)
-    result = CrosswordProblem.getSolution()
-    for i in result:
-        FilledCrossword[i[0]] = (FilledCrossword[i[0]][:i[1]]
-                                 + result[i]
-                                 + FilledCrossword[i[0]][i[1]+1:])
-    print FilledCrossword
+    # constraint rules for all cross points
+    for i in range(len(WordSlots)-1):
+        for j in range(i+1, len(WordSlots)):
+            CrossPosition = [k for k in WordSlots[i] if k in WordSlots[j]]
+            if CrossPosition:
+                CrossPosition = CrossPosition[0]
+                p0 = WordSlots[i].index(CrossPosition)
+                p1 = WordSlots[j].index(CrossPosition)
+                CrosswordProblem.addConstraint(lambda x, y, p0=p0, p1=p1:
+                                               x[p0] == y[p1],
+                                               (i, j))
+
+    solution = CrosswordProblem.getSolution()
+    FilledCrossword = [list(i) for i in crossword]
+    for i in solution:
+        for j, k in enumerate(solution[i]):
+            FilledCrossword[WordSlots[i][j][0]][WordSlots[i][j][1]] = solution[i][j]
+    FilledCrossword = [''.join(i) for i in FilledCrossword]
     return FilledCrossword
+
 
 
 if __name__ == '__main__':
