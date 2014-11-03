@@ -692,7 +692,18 @@ def winning_die(enemy_die):
         return []
 
     problem = Problem()
-    problem.addVariables(range(len(enemy_die)),
+    ElementCount = len(enemy_die)
+    # get the median number of the list
+    if len(enemy_die) % 2 == 0:
+        median = (sorted(enemy_die)[ElementCount / 2] +
+                  sorted(enemy_die)[ElementCount / 2 - 1]) / 2
+    else:
+        median = sorted(enemy_die)[ElementCount / 2]
+    problem.addVariables(range(0, ElementCount / 3),
+                         range(1, median + 1))
+    problem.addVariables(range(ElementCount / 3, ElementCount * 2 / 3),
+                         range(max(enemy_die) + 1, median - 1, -1))
+    problem.addVariables(range(ElementCount * 2 / 3, len(enemy_die)),
                          range(max(enemy_die) + 1, 0, -1))
     problem.addConstraint(ExactSumConstraint(sum(enemy_die)),
                           range(len(enemy_die)))
@@ -729,9 +740,10 @@ if __name__ == '__main__':
     assert check_solution(winning_die, [4, 4, 4, 4, 4, 4]), "All Fours"
     assert check_solution(winning_die, [1, 1, 1, 4]), "Unities and Four"
     assert winning_die([1, 2, 3, 4, 5, 6]) == [], "All in row -- No die"
+
     print winning_die([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
     print winning_die([1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
     print winning_die([1, 1, 1, 2, 2, 2, 3, 3, 3, 4])
-    # print winning_die( [10, 10, 10, 10, 10, 10, 10, 10, 10, 10])
+    print winning_die( [10, 10, 10, 10, 10, 10, 10, 10, 10, 10])
     print winning_die([1, 5, 5, 5, 5, 6, 6, 6, 6, 10])
     # print winning_die([2, 4, 6, 8, 10, 12, 14, 16, 18])
