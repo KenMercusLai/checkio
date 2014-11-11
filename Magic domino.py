@@ -688,55 +688,39 @@ class SomeNotInSetConstraint(Constraint):
 
 
 def magic_domino(size, number):
-    dominos = [(i, j) for i in range(7) for j in range(7)]
-    DominosId = [i for i in range(size * size / 2)]
+    # dominos = [(i, j) for i in range(7) for j in range(7)]
     problem = Problem()
-    problem.addVariables(DominosId, dominos)
+    for i in range(size):
+        for j in range(size):
+            problem.addVariable((i, j), range(7))
 
-    problem.addConstraint(AllDifferentConstraint(), DominosId)
+    for i in range(size):
+        problem.addConstraint(ExactSumConstraint(number),
+                              [(i, j) for j in range(size)])
+        problem.addConstraint(ExactSumConstraint(number),
+                              [(j, i) for j in range(size)])
 
-    def CheckRow(*args):
-        return (sum([i[0] for i in args]) == number
-                and sum([i[1] for i in args]) == number)
-    for i in range(0, size * size / 2, size):
-        problem.addConstraint(CheckRow, DominosId[i:i + size])
+    problem.addConstraint(ExactSumConstraint(number),
+                          [(i, i) for i in range(size)])
+    problem.addConstraint(ExactSumConstraint(number),
+                          [(i, size - i - 1) for i in range(size)])
 
-    def CheckCol(*args):
-        return sum([sum(i) for i in args]) == number
-    for j in range(size):
-        problem.addConstraint(CheckCol,
-                              [i + j for i in range(0, size * size / 2, size)])
-
-    # true unique check
-    def CheckUnique(*args):
-        return len(set([tuple(sorted(i)) for i in args])) == len(DominosId)
-    problem.addConstraint(CheckUnique, DominosId)
-
-    # cross check
-    def CheckCross(*args):
-        CrossNumbers = []
-        for i in range(size):
-            CrossNumbers.append(args[(i / 2) * size + i][i % 2])
-        return sum(CrossNumbers) == number
-    problem.addConstraint(CheckCross, DominosId)
-
-    def CheckReverseCross(*args):
-        ReverseCrossNumbers = []
-        for i in range(size):
-            ReverseCrossNumbers.append(args[(i / 2 + 1) * size - i - 1][i % 2])
-        return sum(ReverseCrossNumbers) == number
-    problem.addConstraint(CheckReverseCross, DominosId)
+    def CheckDups(*args):
+        numbers = [args[i:i + size] for i in range(0, len(args), size)]
+        DominoNumbers = reduce(lambda x, y: x + y, zip(*numbers[::]))
+        UsedDominos = [DominoNumbers[i:i + 2]
+                       for i in range(0, len(args), 2)]
+        UsedDominos = [tuple(sorted(i)) for i in UsedDominos]
+        return len(set(UsedDominos)) * 2 == len(args)
+    problem.addConstraint(CheckDups,
+                          [(i, j) for i in range(size) for j in range(size)])
 
     solution = problem.getSolution()
-    TempMatrix = [[], []]
-    for j in DominosId:
-        TempMatrix[0].append(solution[j][0])
-        TempMatrix[1].append(solution[j][1])
-    TempMatrix[0] = [TempMatrix[0][k:k + size]
-                     for k in range(0, len(TempMatrix[0]), size)]
-    TempMatrix[1] = [TempMatrix[1][k:k + size]
-                     for k in range(0, len(TempMatrix[1]), size)]
-    return [j for i in zip(*TempMatrix) for j in i]
+    TempMatrix = [[-1 for i in range(size)] for j in range(size)]
+    for i in range(size):
+        for j in range(size):
+            TempMatrix[i][j] = solution[(i, j)]
+    return TempMatrix
 
 
 if __name__ == '__main__':
@@ -785,3 +769,4 @@ if __name__ == '__main__':
             tiles.add(tile)
 
     check_data(4, 5, magic_domino(4, 5))
+    # print magic_domino(6, 13)
