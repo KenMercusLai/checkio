@@ -688,40 +688,45 @@ class SomeNotInSetConstraint(Constraint):
 
 
 def magic_domino(size, number):
-    # dominos = [(i, j) for i in range(7) for j in range(7)]
+    # make possible combines
     problem = Problem()
-    for i in range(size):
-        for j in range(size):
-            problem.addVariable((i, j), range(7))
-
-    for i in range(size):
-        problem.addConstraint(ExactSumConstraint(number),
-                              [(i, j) for j in range(size)])
-        problem.addConstraint(ExactSumConstraint(number),
-                              [(j, i) for j in range(size)])
-
-    problem.addConstraint(ExactSumConstraint(number),
-                          [(i, i) for i in range(size)])
-    problem.addConstraint(ExactSumConstraint(number),
-                          [(i, size - i - 1) for i in range(size)])
+    problem.addVariables(range(size), range(7))
+    problem.addConstraint(ExactSumConstraint(number), range(size))
 
     def CheckDups(*args):
-        numbers = [args[i:i + size] for i in range(0, len(args), size)]
-        DominoNumbers = reduce(lambda x, y: x + y, zip(*numbers[::]))
-        UsedDominos = [DominoNumbers[i:i + 2]
-                       for i in range(0, len(args), 2)]
-        UsedDominos = [tuple(sorted(i)) for i in UsedDominos]
-        return len(set(UsedDominos)) * 2 == len(args)
-    problem.addConstraint(CheckDups,
-                          [(i, j) for i in range(size) for j in range(size)])
+        dominos = [args[i:i + 2] for i in range(0, len(args), 2)]
+        for i in range(len(dominos) - 1):
+            for j in range(i + 1, len(dominos)):
+                if dominos[i] == dominos[j] or dominos[i] == dominos[j][::-1]:
+                    return False
+        return True
+    problem.addConstraint(CheckDups, range(size))
 
-    solution = problem.getSolution()
-    TempMatrix = [[-1 for i in range(size)] for j in range(size)]
-    for i in range(size):
-        for j in range(size):
-            TempMatrix[i][j] = solution[(i, j)]
-    return TempMatrix
+    PossibleCombines = []
+    for i in problem.getSolutions():
+        PossibleCombines.append(''.join([str(i[j]) for j in i]))
 
+    print 'candidates done'
+    # make matrix
+    problem = Problem()
+    problem.addVariables(range(size), PossibleCombines)
+
+    problem.addConstraint(AllDifferentConstraint(), range(size))
+
+    def CheckCols(*args):
+        for i in range(size):
+            if sum([int(j[i]) for j in args]) != number:
+                return False
+        return True
+    problem.addConstraint(CheckCols, range(size))
+
+    def CheckCross(*args):
+        if sum([int(args[i][i]) for i in range(size)]) != number:
+            return False
+
+
+
+    print problem.getSolution()
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for
@@ -768,5 +773,5 @@ if __name__ == '__main__':
                 raise Exception("It's not a domino magic square.")
             tiles.add(tile)
 
-    check_data(4, 5, magic_domino(4, 5))
-    # print magic_domino(6, 13)
+    # check_data(4, 5, magic_domino(4, 5))
+    magic_domino(6, 15)
