@@ -22,7 +22,7 @@ def cowsay(text):
                 word = ''
             elements.append(i)
         else:
-            word = word + i
+            word += i
     else:
         if word:
             elements.append(word)

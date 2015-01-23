@@ -2,36 +2,36 @@ VOWELS = "AEIOUY"
 CONSONANTS = "BCDFGHJKLMNPQRSTVWXZ"
 
 
-def SplitText(text):
+def split_text(text):
     result = []
-    tempText = ''
+    temp_text = ''
     for i in text:
         if i.isalpha() or i.isdigit():
-            tempText += i.upper()
+            temp_text += i.upper()
         else:
-            result.append(tempText)
-            tempText = ''
-    if tempText:
-        result.append(tempText)
+            result.append(temp_text)
+            temp_text = ''
+    if temp_text:
+        result.append(temp_text)
     return [i for i in result if i]
 
 
 def checkio(text):
     counter = 0
-    for j in SplitText(text):
-        notStriped = True
+    for j in split_text(text):
+        not_striped = True
         if len(j) == 1:
-            notStriped = False
+            not_striped = False
         for i in zip(j, j[1:]):
             if ((i[0] in VOWELS + CONSONANTS)
                     and (i[1] in VOWELS + CONSONANTS)):
                 if ((i[0] in CONSONANTS and i[1] in CONSONANTS)
                         or (i[1] in VOWELS and i[0] in VOWELS)):
-                    notStriped = False
+                    not_striped = False
                     break
             else:
-                notStriped = False
-        if notStriped:
+                not_striped = False
+        if not_striped:
             counter += 1
     return counter
 

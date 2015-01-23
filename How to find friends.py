@@ -3,27 +3,27 @@ from copy import deepcopy
 
 def check_connection(network, first, second):
     # create non duplicates individuals
-    allPeople = []
+    all_people = []
     for i in network:
-        allPeople += i.split('-')
-    tempAllPeople = [[i] for i in set(allPeople)]
+        all_people += i.split('-')
+    temp_all_people = [[i] for i in set(all_people)]
 
     # create connections
-    allPeople = None
-    while tempAllPeople != allPeople:
-        allPeople = deepcopy(tempAllPeople)
+    all_people = None
+    while temp_all_people != all_people:
+        all_people = deepcopy(temp_all_people)
         for i in network:
             person1, person2 = i.split('-')
-            group1 = filter(lambda x: person1 in x, tempAllPeople)
-            group2 = filter(lambda x: person2 in x, tempAllPeople)
+            group1 = filter(lambda x: person1 in x, temp_all_people)
+            group2 = filter(lambda x: person2 in x, temp_all_people)
             group1, group2 = group1[0], group2[0]
             if group1 != group2:
-                tempAllPeople.remove(group1)
-                tempAllPeople.remove(group2)
-                tempAllPeople.append(group1 + group2)
+                temp_all_people.remove(group1)
+                temp_all_people.remove(group2)
+                temp_all_people.append(group1 + group2)
     # determine first and second are in same group or not
-    group1 = filter(lambda x: first in x, tempAllPeople)
-    group2 = filter(lambda x: second in x, tempAllPeople)
+    group1 = filter(lambda x: first in x, temp_all_people)
+    group2 = filter(lambda x: second in x, temp_all_people)
     if group1 == group2:
         return True
     return False

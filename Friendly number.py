@@ -1,9 +1,9 @@
 def friendly_number(number, base=1000, decimals=0, suffix='',
-                    powers=['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y']):
+                    powers=tuple(['', 'k', 'M', 'G', 'T', 'P', 'E', 'Z', 'Y'])):
     """
     Format a number as friendly text, using common suffixes.
     """
-    greaterThan0 = number >= 0
+    greater_than_0 = number >= 0
     number = abs(number)
     for i in range(len(powers)):
         if number / base ** i < base:
@@ -13,13 +13,13 @@ def friendly_number(number, base=1000, decimals=0, suffix='',
     else:
         value = number / base ** i
     if decimals:
-        formatString = '{0:.%df}{1}{2}' % decimals
+        format_string = '{0:.%df}{1}{2}' % decimals
     else:
-        formatString = '{0:d}{1}{2}'
+        format_string = '{0:d}{1}{2}'
     if i + 1 > len(powers):
         i = -1
-    value = formatString.format(value, powers[i], suffix)
-    if greaterThan0:
+    value = format_string.format(value, powers[i], suffix)
+    if greater_than_0:
         return value
     else:
         return '-' + value

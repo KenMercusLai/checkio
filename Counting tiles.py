@@ -6,11 +6,8 @@ def getMaxAndMinDistances(radius):
     distances = []
     for row in range(radius):
         for col in range(radius):
-            temp = []
-            temp.append(hypot(row - radius, col - radius))
-            temp.append(hypot(row - radius, radius - col - 1))
-            temp.append(hypot(radius - row - 1, radius - col))
-            temp.append(hypot(radius - row - 1, radius - col - 1))
+            temp = [hypot(row - radius, col - radius), hypot(row - radius, radius - col - 1),
+                    hypot(radius - row - 1, radius - col), hypot(radius - row - 1, radius - col - 1)]
             distances.append((min(temp), max(temp)))
     return distances
 
@@ -18,7 +15,7 @@ def getMaxAndMinDistances(radius):
 def checkio(radius):
     distances = getMaxAndMinDistances(radius)
     solid = len(filter(lambda x: x[1] < radius, distances))
-    partial = len(filter(lambda x: x[1] > radius and x[0] < radius, distances))
+    partial = len(filter(lambda x: x[1] > radius > x[0], distances))
     """count tiles"""
     return [solid * 4, partial * 4]
 

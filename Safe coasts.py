@@ -15,7 +15,7 @@ def finish_map(regional_map):
                                          + extended_map[row + 1][col - 1:col + 2])
                     if 'X' not in surronded_squares:
                         if ('D' in surronded_squares[1] or 'D' in surronded_squares[3] or
-                                    'D' in surronded_squares[5] or 'D' in surronded_squares[7]):
+                                'D' in surronded_squares[5] or 'D' in surronded_squares[7]):
                             extended_map[row] = extended_map[row][:col] + 'D' + extended_map[row][col + 1:]
                             changed = True
                             break

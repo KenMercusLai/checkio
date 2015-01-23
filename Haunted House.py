@@ -4,7 +4,7 @@ DIRS = {"N": -4, "S": 4, "E": 1, "W": -1}
 import heapq
 
 
-def shortestPath(graph, start, end):
+def shortest_path(graph, start, end):
     queue = [(0, start, [])]
     seen = set()
     while True:
@@ -14,8 +14,8 @@ def shortestPath(graph, start, end):
             seen.add(v)
             if v == end:
                 return cost, path
-            for (next, c) in graph[v].iteritems():
-                heapq.heappush(queue, (cost + c, next, path))
+            for (next_item, c) in graph[v].iteritems():
+                heapq.heappush(queue, (cost + c, next_item, path))
     return queue
 
 
@@ -43,16 +43,16 @@ def checkio(house, stephan, ghost):
         for k in j:
             adj[i + 1][i + 1 + DIRS[k]] = 1000
     for i in range(1, 17):
-        _, path = shortestPath(adj, i, 1)
+        _, path = shortest_path(adj, i, 1)
         for j in zip(path, path[1:]):
-            adj[j[0]][j[1]] = adj[j[0]][j[1]] - 10
+            adj[j[0]][j[1]] -= 10
     shared_destination = set(map(lambda x: stephan + DIRS[x],
                                  house_status[stephan - 1])) \
         & set(map(lambda x: ghost + DIRS[x],
                   house_status[ghost - 1]))
     for i in list(shared_destination):
         adj[stephan][i] = 9999
-    metrics, path = shortestPath(adj, stephan, 1)
+    metrics, path = shortest_path(adj, stephan, 1)
     if path[1] - path[0] == 4:
         return 'S'
     elif path[1] - path[0] == -4:

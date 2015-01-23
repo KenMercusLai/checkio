@@ -7,7 +7,7 @@ def volume(height, width):
     return round(pi * 4.0 / 3 * a * a * c, 2)
 
 
-def SurfaceArea(height, width):
+def surface_area(height, width):
     a = width / 2.0
     c = height / 2.0
     if c == a:
@@ -22,7 +22,7 @@ def SurfaceArea(height, width):
 
 
 def checkio(height, width):
-    return [volume(height, width), SurfaceArea(height, width)]
+    return [volume(height, width), surface_area(height, width)]
 
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing

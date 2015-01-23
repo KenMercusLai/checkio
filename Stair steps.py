@@ -1,13 +1,13 @@
-def MaxSteps(numbers):
+def max_steps(numbers):
     if len(numbers) == 1:
         return numbers[0]
     elif len(numbers) == 0:
         return 0
-    return numbers[-1] + max(MaxSteps(numbers[:-1]), MaxSteps(numbers[:-2]))
+    return numbers[-1] + max(max_steps(numbers[:-1]), max_steps(numbers[:-2]))
 
 
 def checkio(numbers):
-    return MaxSteps(numbers + [0])
+    return max_steps(numbers + [0])
 
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing

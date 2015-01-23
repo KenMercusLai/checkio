@@ -13,8 +13,8 @@ def shortestPath(graph, start, end):
             seen.add(v)
             if v == end:
                 return cost, path
-            for (next, c) in graph[v].iteritems():
-                heapq.heappush(queue, (cost + c, next, path))
+            for (next_item, c) in graph[v].iteritems():
+                heapq.heappush(queue, (cost + c, next_item, path))
     return queue
 
 

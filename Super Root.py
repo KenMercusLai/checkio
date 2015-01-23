@@ -5,7 +5,7 @@ def super_root(number):
         if x ** x <= number - 0.001:
             x += base
         else:
-            base = base / 2
+            base /= 2
             x -= base
     return x
 

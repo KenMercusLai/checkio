@@ -47,22 +47,22 @@ def life_counter(state, tick_n):
             # calc new state
             rows = len(state)
             cols = len(state[0])
-            NewState = deepcopy(state)
-            NewState = [list(i) for i in NewState]
+            new_state = deepcopy(state)
+            new_state = [list(i) for i in new_state]
             for i in range(rows):
                 for j in range(cols):
                     neighbors = count_neighbours(state, i, j)
                     if state[i][j]:
                         if neighbors < 2:
-                            NewState[i][j] = 0
+                            new_state[i][j] = 0
                         elif neighbors in [2, 3]:
-                            NewState[i][j] = 1
+                            new_state[i][j] = 1
                         elif neighbors > 3:
-                            NewState[i][j] = 0
+                            new_state[i][j] = 0
                     else:
                         if neighbors == 3:
-                            NewState[i][j] = 1
-            cache[str(state)] = NewState
+                            new_state[i][j] = 1
+            cache[str(state)] = new_state
         state = deepcopy(cache[str(state)])
         tick_n -= 1
     return sum([sum(i) for i in state])

@@ -123,13 +123,13 @@ def draw(segments):
         for i in segments:
             GOAL[i] = 1
             state[i] = 0
-        Puzzle = OneLineDrawingPuzzle(GOAL)
-        startNode = OneLineDrawingPuzzleNode(state, 0, None)
+        puzzle = OneLineDrawingPuzzle(GOAL)
+        start_node = OneLineDrawingPuzzleNode(state, 0, None)
         if len(OddPoints) == 2:
-            startNode.Comment = OddPoints[0][0]
+            start_node.Comment = OddPoints[0][0]
         else:
-            startNode.Comment = (i[0], i[1])
-        ret = Puzzle.Search(startNode)
+            start_node.Comment = (i[0], i[1])
+        ret = puzzle.Search(start_node)
         return ret
     return []
 

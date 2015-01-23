@@ -4,13 +4,13 @@ from copy import deepcopy
 def count_gold(pyramid):
     result = []
     for i in pyramid[::-1]:
-        tempResult = deepcopy(list(i))
+        temp_result = deepcopy(list(i))
         if not result:
-            result = deepcopy(tempResult)
+            result = deepcopy(temp_result)
             continue
-        for j in range(len(tempResult)):
-            tempResult[j] = tempResult[j] + max(result[j], result[j + 1])
-        result = deepcopy(tempResult)
+        for j in range(len(temp_result)):
+            temp_result[j] = temp_result[j] + max(result[j], result[j + 1])
+        result = deepcopy(temp_result)
     return max(result)
 
 

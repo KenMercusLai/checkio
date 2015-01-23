@@ -72,14 +72,14 @@ def move2048(state, move):
                 ['O', 'V', 'E', 'R']]
     else:
         # add 2 in last 0
-        quit = False
+        be_quit = False
         for i in range(len(ResultState) - 1, -1, -1):
             for j in range(len(ResultState[i]) - 1, -1, -1):
                 if ResultState[i][j] == 0:
                     ResultState[i][j] = 2
-                    quit = True
+                    be_quit = True
                     break
-            if quit:
+            if be_quit:
                 break
         return ResultState
 

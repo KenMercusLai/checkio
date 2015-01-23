@@ -17,7 +17,7 @@ def capture(matrix):
     while remained or currectAttack:
         timer += 1
         for i in currectAttack:
-            currectAttack[i] = currectAttack[i] - 1
+            currectAttack[i] -= 1
             if currectAttack[i] == 0:
                 attacked.append(i)
         for i in attacked:
