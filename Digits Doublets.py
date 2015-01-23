@@ -1,7 +1,7 @@
 import heapq
 
 
-def shortestPath(graph, start, end):
+def shortest_path(graph, start, end):
     queue = [(0, start, [])]
     seen = set()
     while True:
@@ -11,24 +11,24 @@ def shortestPath(graph, start, end):
             seen.add(v)
             if v == end:
                 return cost, path
-            for (next, c) in graph[v].iteritems():
-                heapq.heappush(queue, (cost + c, next, path))
+            for (next_item, c) in graph[v].iteritems():
+                heapq.heappush(queue, (cost + c, next_item, path))
     return queue
 
 
 def checkio(numbers):
-    NumberDict = {}
+    number_dict = {}
     for i in range(len(numbers)):
         for j in range(i + 1, len(numbers)):
             if len([k for k in zip(str(numbers[i]), str(numbers[j]))
                     if k[0] != k[1]]) == 1:
-                if numbers[i] not in NumberDict:
-                    NumberDict[numbers[i]] = {}
-                if numbers[j] not in NumberDict:
-                    NumberDict[numbers[j]] = {}
-                NumberDict[numbers[i]][numbers[j]] = 1
-                NumberDict[numbers[j]][numbers[i]] = 1
-    return shortestPath(NumberDict, numbers[0], numbers[-1])[1]
+                if numbers[i] not in number_dict:
+                    number_dict[numbers[i]] = {}
+                if numbers[j] not in number_dict:
+                    number_dict[numbers[j]] = {}
+                number_dict[numbers[i]][numbers[j]] = 1
+                number_dict[numbers[j]][numbers[i]] = 1
+    return shortest_path(number_dict, numbers[0], numbers[-1])[1]
 
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing

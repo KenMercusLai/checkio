@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-#!/usr/bin/env python
+# !/usr/bin/env python
 import re
 from math import pi, cos, sin, radians, acos
+
 R = 6371
 
 
-def ExtractPosition(PositionStr):
-    items = re.search('(\d+)\D(\d+)\D(\d+)\D(\w)', PositionStr).groups()
-    if 'W' in PositionStr or 'S' in PositionStr:
+def extract_position(position_str):
+    items = re.search('(\d+)\D(\d+)\D(\d+)\D(\w)', position_str).groups()
+    if 'W' in position_str or 'S' in position_str:
         return radians(-(int(items[0]) * 3600
                          + int(items[1]) * 60 + int(items[2])) / 3600.0)
     return radians((int(items[0]) * 3600 + int(items[1]) * 60
@@ -23,13 +24,13 @@ def distance(first, second):
         second = second.split()
     else:
         second = second.split(',')
-    FirstLatitude, FirstLongitude, SecondLatitude, SecondLongitude = map(
-        ExtractPosition, first + second)
-    DirectDistance = sin(FirstLatitude) * sin(SecondLatitude) + cos(FirstLatitude) * \
-        cos(SecondLatitude) * cos(FirstLongitude - SecondLongitude)
-    if acos(DirectDistance) == 0:
+    first_latitude, first_longitude, second_latitude, second_longitude = map(
+        extract_position, first + second)
+    direct_distance = sin(first_latitude) * sin(second_latitude) + cos(first_latitude) * cos(second_latitude) * cos(
+        first_longitude - second_longitude)
+    if acos(direct_distance) == 0:
         return pi * R
-    return round(R * acos(DirectDistance), 1)
+    return round(R * acos(direct_distance), 1)
 
 
 if __name__ == '__main__':

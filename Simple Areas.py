@@ -9,7 +9,7 @@ def simple_areas(*args):
     else:
         s = sum(args) / 2.0
         return round(sqrt(s * (s - args[0]) * (s - args[1]) * (s - args[2])), 2)
-    return 0
+
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for

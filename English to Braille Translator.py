@@ -1,4 +1,5 @@
 from copy import deepcopy
+
 LETTERS = 'abcdefghijklmnopqrstuvwxyz'
 NUMBERS = '1234567890'
 
@@ -20,55 +21,57 @@ WHITESPACE = convert(0)
 
 
 def braille_page(text):
-    CodeStream = [[], [], []]
+    code_stream = [[], [], []]
     for i in text:
-        CodeStream[0].append(0)
-        CodeStream[1].append(0)
-        CodeStream[2].append(0)
+        code_stream[0].append(0)
+        code_stream[1].append(0)
+        code_stream[2].append(0)
         if i.lower() in LETTERS:
-            ConvertedCode = deepcopy(LETTERS_NUMBERS[LETTERS.index(i.lower())])
+            converted_code = deepcopy(LETTERS_NUMBERS[LETTERS.index(i.lower())])
             if i not in LETTERS:
-                ConvertedCode[0] = CAPITAL_FORMAT[0] + [0] + ConvertedCode[0]
-                ConvertedCode[1] = CAPITAL_FORMAT[1] + [0] + ConvertedCode[1]
-                ConvertedCode[2] = CAPITAL_FORMAT[2] + [0] + ConvertedCode[2]
+                converted_code[0] = CAPITAL_FORMAT[0] + [0] + converted_code[0]
+                converted_code[1] = CAPITAL_FORMAT[1] + [0] + converted_code[1]
+                converted_code[2] = CAPITAL_FORMAT[2] + [0] + converted_code[2]
         elif i in NUMBERS:
-            ConvertedCode = deepcopy(LETTERS_NUMBERS[NUMBERS.index(i)])
-            ConvertedCode[0] = NUMBER_FORMAT[0] + [0] + ConvertedCode[0]
-            ConvertedCode[1] = NUMBER_FORMAT[1] + [0] + ConvertedCode[1]
-            ConvertedCode[2] = NUMBER_FORMAT[2] + [0] + ConvertedCode[2]
+            converted_code = deepcopy(LETTERS_NUMBERS[NUMBERS.index(i)])
+            converted_code[0] = NUMBER_FORMAT[0] + [0] + converted_code[0]
+            converted_code[1] = NUMBER_FORMAT[1] + [0] + converted_code[1]
+            converted_code[2] = NUMBER_FORMAT[2] + [0] + converted_code[2]
         elif i in PUNCTUATION:
-            ConvertedCode = deepcopy(PUNCTUATION[i])
+            converted_code = deepcopy(PUNCTUATION[i])
         else:
-            ConvertedCode = deepcopy(WHITESPACE)
-        CodeStream[0] = CodeStream[0] + ConvertedCode[0]
-        CodeStream[1] = CodeStream[1] + ConvertedCode[1]
-        CodeStream[2] = CodeStream[2] + ConvertedCode[2]
-        del ConvertedCode
+            converted_code = deepcopy(WHITESPACE)
+        code_stream[0] = code_stream[0] + converted_code[0]
+        code_stream[1] = code_stream[1] + converted_code[1]
+        code_stream[2] = code_stream[2] + converted_code[2]
+        del converted_code
     for i in range(3):
-        CodeStream[i] = CodeStream[i][1:]
+        code_stream[i] = code_stream[i][1:]
 
     # cut stream into 10 symbles long each line
-    if len(CodeStream[0]) > 29:
-        CodeStack = []
-        while len(CodeStream[0]) > 29:
-            CodeStack.append(CodeStream[0][:29])
-            CodeStack.append(CodeStream[1][:29])
-            CodeStack.append(CodeStream[2][:29])
-            CodeStream[0] = CodeStream[0][30:]
-            CodeStream[1] = CodeStream[1][30:]
-            CodeStream[2] = CodeStream[2][30:]
+    if len(code_stream[0]) > 29:
+        code_stack = []
+        while len(code_stream[0]) > 29:
+            code_stack.append(code_stream[0][:29])
+            code_stack.append(code_stream[1][:29])
+            code_stack.append(code_stream[2][:29])
+            code_stream[0] = code_stream[0][30:]
+            code_stream[1] = code_stream[1][30:]
+            code_stream[2] = code_stream[2][30:]
 
-        CodeStack.append(CodeStream[0][:29])
-        CodeStack.append(CodeStream[1][:29])
-        CodeStack.append(CodeStream[2][:29])
-        CodeStream = []
-        for i in range(len(CodeStack) / 3):
-            CodeStream.append([0 for k in range(29)])
-            CodeStream.append([0 if k+1 > len(CodeStack[i * 3]) else CodeStack[i * 3][k] for k in range(29)])
-            CodeStream.append([0 if k+1 > len(CodeStack[i * 3+1]) else CodeStack[i * 3+1][k] for k in range(29)])
-            CodeStream.append([0 if k+1 > len(CodeStack[i * 3+2]) else CodeStack[i * 3+2][k] for k in range(29)])
-        return CodeStream[1:]
-    return CodeStream
+        code_stack.append(code_stream[0][:29])
+        code_stack.append(code_stream[1][:29])
+        code_stack.append(code_stream[2][:29])
+        code_stream = []
+        for i in range(len(code_stack) / 3):
+            code_stream.append([0 for k in range(29)])
+            code_stream.append([0 if k + 1 > len(code_stack[i * 3]) else code_stack[i * 3][k] for k in range(29)])
+            code_stream.append(
+                [0 if k + 1 > len(code_stack[i * 3 + 1]) else code_stack[i * 3 + 1][k] for k in range(29)])
+            code_stream.append(
+                [0 if k + 1 > len(code_stack[i * 3 + 2]) else code_stack[i * 3 + 2][k] for k in range(29)])
+        return code_stream[1:]
+    return code_stream
 
 
 if __name__ == '__main__':

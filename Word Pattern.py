@@ -14,6 +14,7 @@ def check_command(pattern, command):
             return False
     return True
 
+
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing

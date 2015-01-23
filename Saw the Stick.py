@@ -1,15 +1,14 @@
 from math import sqrt
-from itertools import combinations
 
 
-def TriangularNumber(n):
+def triangular_number(n):
     return n * (n + 1) / 2
 
 
-def IsConsecutive(NumberList, j):
-    StartIndex = NumberList.index(j[0])
-    EndIndex = NumberList.index(j[-1])
-    if StartIndex + len(j) - 1 == EndIndex:
+def is_consecutive(number_list, j):
+    start_index = number_list.index(j[0])
+    end_index = number_list.index(j[-1])
+    if start_index + len(j) - 1 == end_index:
         return True
     else:
         return False
@@ -17,13 +16,13 @@ def IsConsecutive(NumberList, j):
 
 def checkio(number):
     n = sqrt(number * 2)
-    NumberList = [TriangularNumber(i) for i in range(1, int(n) + 1)
-                  if TriangularNumber(i) < number]
-    length = len(NumberList)
+    number_list = [triangular_number(i) for i in range(1, int(n) + 1)
+                   if triangular_number(i) < number]
+    length = len(number_list)
     while length > 1:
-        for i in range(len(NumberList) - length + 1):
-            if sum(NumberList[i:i+length]) == number:
-                return NumberList[i:i+length]
+        for i in range(len(number_list) - length + 1):
+            if sum(number_list[i:i + length]) == number:
+                return number_list[i:i + length]
         length -= 1
     return []
 

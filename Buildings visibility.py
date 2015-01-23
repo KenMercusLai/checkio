@@ -1,11 +1,11 @@
 def checkio(buildings):
-    ViewMap = [[-1 for x in range(max([i[2] for i in buildings]) + 1)]
+    view_map = [[-1 for x in range(max([i[2] for i in buildings]) + 1)]
                for x in range(max([i[4] for i in buildings]) + 1)]
     buildings = sorted(buildings, key=lambda x: x[3], reverse=True)
     for i, j in enumerate(buildings):
         for k in range(int(j[4])):
-            ViewMap[k][j[0]:j[2]] = [i] * (j[2] - j[0])
-    return len(set([j for i in ViewMap for j in i if j != -1]))
+            view_map[k][j[0]:j[2]] = [i] * (j[2] - j[0])
+    return len(set([j for i in view_map for j in i if j != -1]))
 
 if __name__ == '__main__':
     assert checkio([

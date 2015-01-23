@@ -12,7 +12,7 @@ def divide_pie(groups):
             pie -= Fraction(1, 1) * fraction[abs(i)]
         else:
             pie -= pie * fraction[abs(i)]
-    return (pie.numerator, pie.denominator)
+    return pie.numerator, pie.denominator
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for

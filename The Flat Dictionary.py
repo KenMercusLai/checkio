@@ -1,22 +1,22 @@
 def flatten(dictionary):
     result = {}
     dicts = dictionary.copy()
-    firstRound = True
-    while firstRound or filter(lambda x: isinstance(x, dict), dicts.values()):
-        tempDict = {}
-        firstRound = False
+    first_round = True
+    while first_round or filter(lambda x: isinstance(x, dict), dicts.values()):
+        temp_dict = {}
+        first_round = False
         for key, value in dicts.items():
             if not isinstance(value, dict):
-                tempDict[key] = value
+                temp_dict[key] = value
             else:
                 # nested dict
                 if value:
                     for j in value:
-                        tempDict[key + '/' + j] = value[j]
+                        temp_dict[key + '/' + j] = value[j]
                 # empty dict
                 else:
-                    tempDict[key] = ''
-        result = tempDict.copy()
+                    temp_dict[key] = ''
+        result = temp_dict.copy()
         dicts = result.copy()
     return result
 

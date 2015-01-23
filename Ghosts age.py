@@ -7,14 +7,14 @@ def fib_to(n):
 
 def checkio(opacity):
     age = 0
-    OpacityLeft = 10000
-    FibNumbers = fib_to(20)
-    while opacity != OpacityLeft:
+    opacity_left = 10000
+    fib_numbers = fib_to(20)
+    while opacity != opacity_left:
         age += 1
-        if age in FibNumbers:
-            OpacityLeft -= age
+        if age in fib_numbers:
+            opacity_left -= age
         else:
-            OpacityLeft += 1
+            opacity_left += 1
     return age
 
 # These "asserts" using only for self-checking and not necessary for

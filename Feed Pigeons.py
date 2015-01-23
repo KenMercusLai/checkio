@@ -9,7 +9,6 @@ def checkio(number):
             if number == 0:
                 break
         new_pigeon += 1
-    print pigeon_queue
     return len(filter(lambda x: x, pigeon_queue))
 
 

@@ -4,17 +4,15 @@ from math import ceil
 def total_cost(calls):
     day_cost = {}
     for i in calls:
-        # calc how many mins for each day
+        # calc how many minutes for each day
         day, _, seconds = i.split()
         seconds = int(seconds)
-        mins = ceil(seconds * 1.0 / 60)
+        minutes = ceil(seconds * 1.0 / 60)
         if day in day_cost:
-            day_cost[day] += mins
+            day_cost[day] += minutes
         else:
-            day_cost[day] = mins
-    total_cost = [day_cost[i] if day_cost[i] <=
-                                 100 else 100 + (day_cost[i] - 100) * 2 for i in day_cost]
-    return sum(total_cost)
+            day_cost[day] = minutes
+    return sum([day_cost[i] if day_cost[i] <= 100 else 100 + (day_cost[i] - 100) * 2 for i in day_cost])
 
 
 if __name__ == '__main__':

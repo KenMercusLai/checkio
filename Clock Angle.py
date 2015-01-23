@@ -2,7 +2,7 @@ def clock_angle(time):
     hour, minute = time.split(':')
     hour = int(hour) + int(minute) * 1.0 / 60
     if hour > 12:
-        hour = hour - 12
+        hour -= 12
     AngelHour = hour / 12 * 360
     AngelMinute = int(minute) / 60.0 * 360
     if AngelMinute > AngelHour:

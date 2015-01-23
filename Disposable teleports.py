@@ -1,21 +1,21 @@
 from copy import deepcopy
 
 
-def FindPath(connection_dict, StartPoint):
-    if StartPoint in connection_dict:
+def find_path(connection_dict, start_point):
+    if start_point in connection_dict:
         if len(connection_dict) == 1:
-            return connection_dict[StartPoint]
+            return connection_dict[start_point]
         else:
             ret = []
-            for i in connection_dict[StartPoint]:
-                NewConnectionDict = deepcopy(connection_dict)
-                NewConnectionDict[StartPoint].remove(i)
-                if not NewConnectionDict[StartPoint]:
-                    del NewConnectionDict[StartPoint]
-                NewConnectionDict[i].remove(StartPoint)
-                if not NewConnectionDict[i]:
-                    del NewConnectionDict[i]
-                for j in FindPath(NewConnectionDict, i):
+            for i in connection_dict[start_point]:
+                new_connection_dict = deepcopy(connection_dict)
+                new_connection_dict[start_point].remove(i)
+                if not new_connection_dict[start_point]:
+                    del new_connection_dict[start_point]
+                new_connection_dict[i].remove(start_point)
+                if not new_connection_dict[i]:
+                    del new_connection_dict[i]
+                for j in find_path(new_connection_dict, i):
                     ret.append(i + j)
                 # add this to mean i can stop here even I have path to go
                 ret.append(i)
@@ -34,7 +34,7 @@ def checkio(teleports_string):
             connection_dict[i[1]] = []
         connection_dict[i[0]].append(i[1])
         connection_dict[i[1]].append(i[0])
-    path = FindPath(connection_dict, '1')
+    path = find_path(connection_dict, '1')
     path = map(lambda x: '1' + x, path)
     path = filter(lambda x: ('1' == x[-1]
                              and set(x) == set(connection_dict.keys())),
@@ -56,7 +56,7 @@ if __name__ == "__main__":
         ch_route = route[0]
         for i in range(len(route) - 1):
             teleport = tuple(sorted([int(route[i]), int(route[i + 1])]))
-            if not teleport in teleports_map:
+            if not (teleport in teleports_map):
                 print("No way from {0} to {1}".format(route[i], route[i + 1]))
                 return False
             teleports_map.remove(teleport)

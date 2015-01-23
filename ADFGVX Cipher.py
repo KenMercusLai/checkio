@@ -59,18 +59,18 @@ def DefractionatedForm(FracForm, secret_alphabet):
 
 def decode(message, secret_alphabet, keyword):
     keyword = RemoveDups(keyword)
-    HeadingTable = CreateHeadingTable(keyword, message)
+    heading_table = CreateHeadingTable(keyword, message)
     counter = 0
-    FractionatedForm = ''
+    fractionated_form = ''
     for i in cycle(keyword):
-        FractionatedForm += HeadingTable[i][0]
-        del HeadingTable[i][0]
+        fractionated_form += heading_table[i][0]
+        del heading_table[i][0]
         counter += 1
         if counter == len(message):
             break
     OriginalMessage = ''
-    for i in [FractionatedForm[i:i + 2]
-              for i in range(0, len(FractionatedForm), 2)]:
+    for i in [fractionated_form[i:i + 2]
+              for i in range(0, len(fractionated_form), 2)]:
         OriginalMessage += DefractionatedForm(i, secret_alphabet)
     return OriginalMessage
 
