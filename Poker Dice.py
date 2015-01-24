@@ -14,5 +14,10 @@ HANDS = (
 
 
 def poker_dice(rolls, scores):
+    rolls = rolls[0]
+    if len(set(rolls)) ==1:
     return "one pair" or rolls[:]
 
+
+
+print poker_dice([["KH","KH","TH","9S","9S"]],{})
