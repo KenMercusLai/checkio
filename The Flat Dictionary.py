@@ -1,24 +1,19 @@
-def flatten(dictionary):
-    result = {}
-    dicts = dictionary.copy()
-    first_round = True
-    while first_round or filter(lambda x: isinstance(x, dict), dicts.values()):
-        temp_dict = {}
-        first_round = False
-        for key, value in dicts.items():
-            if not isinstance(value, dict):
-                temp_dict[key] = value
-            else:
-                # nested dict
-                if value:
-                    for j in value:
-                        temp_dict[key + '/' + j] = value[j]
-                # empty dict
+def flatten(a):
+    if a:
+        result = {}
+        for i in a:
+            if isinstance(a[i], dict):
+                temp = flatten(a[i])
+                if temp:
+                    for j in temp:
+                        result['%s/%s' % (i, j)] = temp[j]
                 else:
-                    temp_dict[key] = ''
-        result = temp_dict.copy()
-        dicts = result.copy()
-    return result
+                    result[i] = ''
+            else:
+                result[i] = a[i]
+        return result
+    else:
+        return None
 
 
 if __name__ == '__main__':
