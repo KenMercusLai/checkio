@@ -26,7 +26,38 @@ class Line(object):
         Returns:
             bool: return true when intersects
         """
-        pass
+
+        # Find the four orientations needed for general and special cases
+        o1 = self.__orientation(self.point1, self.point2, another_line.point1)
+        o2 = self.__orientation(self.point1, self.point2, another_line.point2)
+        o3 = self.__orientation(another_line.point1, another_line.point2,
+                                self.point1)
+        o4 = self.__orientation(another_line.point1, another_line.point2,
+                                self.point2)
+
+        # General case
+        if o1 != o2 and o3 != o4:
+            return True
+
+        # Special Cases
+        # p1, q1 and p2 are colinear and p2 lies on segment p1q1
+        if o1 == 0 and self.__on_segment(self.point1, another_line.point1, self.point2):
+            return True
+
+        # p1, q1 and p2 are colinear and q2 lies on segment p1q1
+        if o2 == 0 and self.__on_segment(self.point1, another_line.point2, self.point2):
+            return True
+
+        # p2, q2 and p1 are colinear and p1 lies on segment p2q2
+        if o3 == 0 and self.__on_segment(another_line.point1, self.point1, another_line.point2):
+            return True
+
+        # p2, q2 and q1 are colinear and q1 lies on segment p2q2
+        if o4 == 0 and self.__on_segment(another_line.point1, self.point2, another_line.point2):
+            return True
+
+        # Doesn't fall in any of the above cases
+        return False
 
     def __on_segment(self, point1, point2, point3):
         """Given three colinear points p, q, r, the function checks if
@@ -42,8 +73,8 @@ class Line(object):
         """
 
         if (point2.x <= max(point1.x, point3.x)
-            and point2.x >= min(point1.x, point3.x)
-            and point2.y <= max(point1.y, point3.y)
+                and point2.x >= min(point1.x, point3.x)
+                and point2.y <= max(point1.y, point3.y)
                 and point2.y >= min(point1.y, point3.y)):
             return True
         else:
@@ -83,6 +114,7 @@ class Point(object):
 
 
 def is_inside(polygon, point):
+    print([i for i in zip(polygon, polygon[1:])])
     return True or False
 
 
