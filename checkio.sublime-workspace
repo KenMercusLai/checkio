@@ -1,0 +1,802 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"oen",
+				"open_set	statement"
+			],
+			[
+				"left",
+				"left_cells_score	statement"
+			],
+			[
+				"max",
+				"matrix_cols"
+			],
+			[
+				"chi",
+				"children"
+			],
+			[
+				"remo",
+				"removed_cells	statement"
+			],
+			[
+				"next",
+				"next_status"
+			],
+			[
+				"a",
+				"a_parent	forstmt"
+			],
+			[
+				"chil",
+				"children"
+			],
+			[
+				"def",
+				"defaultdict	class"
+			],
+			[
+				"rem",
+				"removed_cells	forstmt"
+			],
+			[
+				"dire",
+				"directly_connected_nodes	statement"
+			],
+			[
+				"nex",
+				"next_node"
+			],
+			[
+				"remove",
+				"removed_cells"
+			],
+			[
+				"sta",
+				"status	statement"
+			],
+			[
+				"issu",
+				"issuperset	function"
+			],
+			[
+				"ma",
+				"matrix	statement"
+			],
+			[
+				"new",
+				"new_item	statement"
+			],
+			[
+				"matr",
+				"matrix	statement"
+			],
+			[
+				"matri",
+				"matrix	statement"
+			],
+			[
+				"upda",
+				"update_source	param"
+			],
+			[
+				"up",
+				"update_source	param"
+			],
+			[
+				"nei",
+				"neighbour	statement"
+			],
+			[
+				"open",
+				"open_set	statement"
+			],
+			[
+				"ne",
+				"next_status	forstmt"
+			],
+			[
+				"Pop",
+				"PopstarsNode	class"
+			],
+			[
+				"cl",
+				"closed_status_set	statement"
+			],
+			[
+				"status",
+				"status_set"
+			],
+			[
+				"fi",
+				"find_next_moves"
+			],
+			[
+				"start",
+				"start_node	statement"
+			],
+			[
+				"curr",
+				"current_status	statement"
+			],
+			[
+				"cal",
+				"calc_new_status	function"
+			],
+			[
+				"game",
+				"game_rows	statement"
+			],
+			[
+				"ca",
+				"calc_score"
+			],
+			[
+				"con",
+				"convert_coordinations"
+			],
+			[
+				"class",
+				"classmethod	class"
+			],
+			[
+				"cla",
+				"classmethod	class"
+			],
+			[
+				"coordination",
+				"coordinations"
+			],
+			[
+				"group",
+				"grouped_cells	statement"
+			],
+			[
+				"fin",
+				"find_next_moves	function"
+			],
+			[
+				"represt",
+				"represents"
+			],
+			[
+				"to",
+				"total_score"
+			],
+			[
+				"pre",
+				"previous_score	statement"
+			],
+			[
+				"searched",
+				"searched_set"
+			],
+			[
+				"sear",
+				"searched_set	statement"
+			],
+			[
+				"current_",
+				"current_node	statement"
+			],
+			[
+				"current",
+				"current_node"
+			],
+			[
+				"se",
+				"searched_set	statement"
+			],
+			[
+				"be",
+				"beginning"
+			],
+			[
+				"pop",
+				"PopstarsNode"
+			],
+			[
+				"st",
+				"start_status	statement"
+			],
+			[
+				"NOT",
+				"NotImplementedError	class"
+			],
+			[
+				"intri",
+				"intrinsic-right"
+			],
+			[
+				"in",
+				"intrinsic-top"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"bo",
+				"bottom"
+			],
+			[
+				"by",
+				"bytes"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"pro",
+				"PROJECT_ROOT"
+			],
+			[
+				"att",
+				"attr"
+			],
+			[
+				"attr",
+				"attrib"
+			],
+			[
+				"audio",
+				"audio_page_parameters"
+			],
+			[
+				"cu",
+				"CurrentBranchName"
+			],
+			[
+				"word",
+				"word_difficulty"
+			]
+		]
+	},
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"trai",
+				"Whitespace: Remove Trailing Whitespace"
+			],
+			[
+				"pep",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"test",
+				"Pyunit: Run All Tests"
+			],
+			[
+				"te",
+				"Pyunit: Run All Tests"
+			],
+			[
+				"",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"aut",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"auto",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"unit",
+				"Pyunit: Run All Tests"
+			],
+			[
+				"termin",
+				"SublimeLinter: Make Warnings Passive"
+			],
+			[
+				"uni",
+				"Pyunit: Run All Tests"
+			],
+			[
+				"au",
+				"Anaconda: Autoformat PEP8 Errors"
+			],
+			[
+				"pyunit",
+				"Pyunit: Source/Test Switching"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"unittest",
+				"UnitTesting: Quick Run"
+			],
+			[
+				"white",
+				"Whitespace: Remove Trailing Whitespace"
+			],
+			[
+				"whi",
+				"Whitespace: Remove Trailing Whitespace"
+			],
+			[
+				"doc",
+				"AutoDocstring: All"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"dis",
+				"Package Control: Disable Package"
+			],
+			[
+				"enab",
+				"Package Control: Enable Package"
+			],
+			[
+				"y",
+				"PyYapf: Reformat Python"
+			],
+			[
+				"python",
+				"Set Syntax: Python"
+			],
+			[
+				"ya",
+				"Set Syntax: YAML"
+			],
+			[
+				"subli ",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"enable",
+				"Package Control: Enable Package"
+			],
+			[
+				"sublime",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"subli",
+				"SublimeLinter: Disable Linter"
+			],
+			[
+				"sub",
+				"Preferences: SublimeLinter Settings – User"
+			],
+			[
+				"li",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"linter",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"lin",
+				"SublimeLinter: Show All Errors"
+			],
+			[
+				"anaco",
+				"Anaconda: McCabe complexity check"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"filter",
+				"Filter Lines: Filter With Regex"
+			],
+			[
+				"bui",
+				"HTMLBeautify"
+			],
+			[
+				"css",
+				"Set Syntax: CSS"
+			],
+			[
+				"html",
+				"HTMLBeautify"
+			],
+			[
+				"pack",
+				"Package Control: Remove Package"
+			],
+			[
+				"pre",
+				"Markdown Preview: Open Markdown Cheat sheet"
+			],
+			[
+				"mark",
+				"Set Syntax: Markdown GFM"
+			],
+			[
+				"previ",
+				"Markdown Preview: Export HTML in Sublime Text"
+			],
+			[
+				"m",
+				"Set Syntax: Markdown"
+			]
+		],
+		"width": 467.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/KenMLai/Projects/checkio/checkio.sublime-project",
+		"/Users/KenMLai/Projects/networkdeviceconfigs/湖北/仙桃BRAS.txt",
+		"/Users/KenMLai/Desktop/天门BRAS 2.txt",
+		"/Users/KenMLai/Projects/networkdeviceconfigs/湖北/潜江BRAS.txt",
+		"/private/var/folders/cy/p3wmkv0n2x5b67h3qzpvfgn80000gn/T/湖北_仙桃BRAS_Before_355d216b890f1734107d97936931efc00eb02d29.txt",
+		"/Users/KenMLai/Projects/networkdeviceconfigs/湖北/天门BRAS.txt",
+		"/Users/KenMLai/Projects/networkdeviceconfigs/湖北/RP:0:RSP0:CPU0:TM-HeXin-BRAS#show run",
+		"/private/var/folders/cy/p3wmkv0n2x5b67h3qzpvfgn80000gn/T/湖北_天门BRAS_Before_5c094c07ca0ee174027b3a09e031151473eb200d.txt",
+		"/private/var/folders/cy/p3wmkv0n2x5b67h3qzpvfgn80000gn/T/湖北_天门BRAS_Before_98b7c24a1c20e3255e819f6a9823d14828385ed5.txt",
+		"/Users/KenMLai/Desktop/XT-9L-ASR9010.log",
+		"/Users/KenMLai/Downloads/plugin.php",
+		"/Users/KenMLai/Desktop/untitled",
+		"/Users/KenMLai/Desktop/Capstone/eda1_auxFunctions.R",
+		"/Users/KenMLai/Desktop/Capstone/nCodeNgram.R",
+		"/Users/KenMLai/Desktop/Capstone/ngram2.R",
+		"/Users/KenMLai/Downloads/asr9000.txt",
+		"/Users/KenMLai/Desktop/XT TEST",
+		"/Users/KenMLai/Desktop/XT-9L-Bras.log",
+		"/Users/KenMLai/Projects/python-rtmbot/plugins/canary.py",
+		"/Users/KenMLai/Projects/python-rtmbot/plugins/counter.py",
+		"/Users/KenMLai/百度云同步盘/超体字幕组/How does your memory work.srt",
+		"/Users/KenMLai/Desktop/Writting.txt",
+		"/Users/KenMLai/Projects/popstar_solver/popstars.py",
+		"/Users/KenMLai/Projects/popstar_solver/tests/test_popstars.py",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/User/Anaconda.sublime-settings",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/Anaconda/Anaconda.sublime-settings",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/AutoDocstring/AutoDocstring.sublime-settings",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/User/Python.sublime-settings",
+		"/Users/KenMLai/Projects/popstar_solver/README.md",
+		"/Users/KenMLai/Desktop/7.25",
+		"/Users/KenMLai/Downloads/stop-words-collection-2014-02-24/stop-words/stop-words_english_1_en.txt",
+		"/Users/KenMLai/Downloads/stop-words-collection-2014-02-24/stop-words/stop-words_english_2_en.txt",
+		"/Users/KenMLai/Downloads/stop-words-collection-2014-02-24/stop-words/stop-words_english_3_en.txt",
+		"/Users/KenMLai/Downloads/stop-words-collection-2014-02-24/stop-words/stop-words_english_4_google_en.txt",
+		"/Users/KenMLai/Downloads/stop-words-collection-2014-02-24/stop-words/stop-words_english_5_en.txt",
+		"/Users/KenMLai/Downloads/stop-words-collection-2014-02-24/stop-words/stop-words_english_6_en.txt",
+		"/Users/KenMLai/Desktop/192.168.73.254_02_24_14_16_55_TW1.txt",
+		"/Users/KenMLai/Desktop/CUTV_D07_S5700_SVR_1.txt",
+		"/Users/KenMLai/Desktop/CUTV_D07_S5700_SVR_2.txt",
+		"/Users/KenMLai/Desktop/Terminal Saved Output.txt",
+		"/Users/KenMLai/Desktop/CUTV_D02_S5700_Sobey.txt",
+		"/Users/KenMLai/Desktop/CUTV_DO3_USG5330_A.txt",
+		"/Users/KenMLai/Desktop/CUTV_D08_S5700_SVR_3.txt",
+		"/Users/KenMLai/Desktop/CUTV_D08_S5700_SVR_2.txt",
+		"/Users/KenMLai/Desktop/CUTV_D08_S5700_SVR_4.txt",
+		"/Users/KenMLai/Desktop/CUTV_D08_S5700_SVR_6.txt",
+		"/Users/KenMLai/Downloads/final/en_US/en_US.twitter.txt",
+		"/usr/local/bin/git-sf",
+		"/Users/KenMLai/.oh-my-zsh/plugins/virtualenvwrapper/virtualenvwrapper.plugin.zsh",
+		"/Users/KenMLai/Projects/test/.venv",
+		"/Users/KenMLai/.oh-my-zsh/plugins/virtualenv/virtualenv.plugin.zsh",
+		"/Users/KenMLai/.zshrc",
+		"/Users/KenMLai/Projects/pelican_publish_theme/content/test.md",
+		"/Users/KenMLai/Desktop/wuthering heights.txt",
+		"/Users/KenMLai/Desktop/1.html",
+		"/Users/KenMLai/Dropbox/Blog/Wuthering Heights.md",
+		"/Users/KenMLai/Library/Containers/com.microsoft.onenote.mac/Data/Documents/EmbeddedFiles/system_3.tech",
+		"/Users/KenMLai/Downloads/homedir/public_html/wp-content/themes/read-v4-2-9/footer.php",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/Users/KenMLai/Desktop/1.md",
+		"/Users/KenMLai/Library/Application Support/Sublime Text 3/Packages/Markdown Preview/MarkdownPreview.sublime-settings",
+		"/Users/KenMLai/Downloads/Why Do We Forget Things? [English].srt"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"\\n",
+			"^\\d\\d\\n\\d\\d\\:\\d\\d:\\d\\d\\,\\d\\d\\d.*",
+			">>>>",
+			">>",
+			"ipv4 acc",
+			"dynamic",
+			"aaa authentication",
+			"_10M",
+			"_100M",
+			"loopback",
+			"Pool_Yangshiqixi",
+			"Pool_TEST",
+			"ZhongXinJiFang",
+			"NOAUTH_ZhongXinJiFang",
+			"ZhongXinJiFang",
+			"Pool_ZhongXinJiFang",
+			"10.233.0.",
+			"10.233.0.1",
+			"Loopback1111",
+			"lo o p",
+			"10.254.5.35",
+			"10.254.2.65",
+			"ZhongXinJiFang",
+			"NOAUTH_ZongKou",
+			"DT",
+			"AAA_TEST",
+			"10.233.184.2",
+			"Pool_XiDa",
+			"10.233.184.1",
+			"Loopback2552",
+			"DTTest",
+			"TEST",
+			"DTTes",
+			"720",
+			"1099",
+			"JiangHanJiFang",
+			"Jiang",
+			"1099",
+			"1092",
+			"Pool_TEST",
+			"Pool_Test",
+			" bba",
+			"^ bba",
+			"bba",
+			"TEST",
+			"DTTest",
+			"AAA_TEST",
+			"AAA_TEST\nAAA_TEST",
+			"AAA_TEST",
+			"Pool_JiangHanJiFang",
+			"Pool_TEST",
+			"Pool_TEST\nPool_TEST",
+			"Pool_TEST",
+			"TEST",
+			"DTTest",
+			"session",
+			"dynamic-template",
+			"BNG",
+			"CLIENT",
+			"control",
+			"CLID-FORMAT",
+			"attri",
+			"AAA_XT",
+			"XTBNG",
+			"default",
+			"XTBNG",
+			"go t t en",
+			"\\. ",
+			"\\n",
+			"\\. ",
+			"\\n\\n",
+			"^\\d+",
+			"^\\d\\d:\\d\\d:\\d\\d,\\d\\d\\d.*",
+			"、的、d",
+			"  ",
+			"\\n\\n",
+			"\\n",
+			"、n",
+			"^::,\\d.*",
+			"\\d\\d",
+			"find_ne",
+			"print",
+			"can ",
+			"status_set",
+			"neighbour",
+			"closeded_set",
+			"current_status",
+			"status",
+			"solver",
+			"self.closeded_set",
+			"closeded_set",
+			"status",
+			"rul",
+			"auto",
+			"current_node",
+			"searched_set",
+			"self.searched_set",
+			"start_node",
+			"Parent",
+			"Node",
+			"OpenSet",
+			"ClosedSet",
+			"current",
+			"Current",
+			"white",
+			"moves",
+			"cache",
+			"youku",
+			"\"",
+			"'",
+			"port-security",
+			"vtp",
+			"msdp",
+			"atm",
+			"bgp",
+			"2/3",
+			"Vlan80",
+			"Vlan 80",
+			"tianhua1",
+			"tw2tb",
+			"tb2tw",
+			"tw2tl",
+			"tl2tw",
+			"JSB",
+			"channel-group 1",
+			"log",
+			"logg",
+			"log"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			" ",
+			"",
+			"\\.\\n",
+			" ",
+			"\\.\\n",
+			"\\n",
+			"",
+			" ",
+			"",
+			"255.255.240.0",
+			"255.255.252.0",
+			"\\n"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 266.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unittests":
+	{
+		"height": 112.0
+	},
+	"pinned_build_system": "",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 187.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 392.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
