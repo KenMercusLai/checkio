@@ -1,6 +1,11 @@
 class Line(object):
 
-    """Line class. mainly used for intersection check"""
+    """Line class. mainly used for intersection check
+
+    Attributes:
+        point1 (Point): Description
+        point2 (Point): Description
+    """
 
     def __init__(self, point1, point2):
         """init line
@@ -22,6 +27,27 @@ class Line(object):
             bool: return true when intersects
         """
         pass
+
+    def __on_segment(self, point1, point2, point3):
+        """Given three colinear points p, q, r, the function checks if
+           point q lies on line segment 'pr'
+
+        Args:
+            point1 (Point): p
+            point2 (Point): q
+            point3 (Point): r
+
+        Returns:
+            bool: true when they are on segment
+        """
+
+        if (point2.x <= max(point1.x, point3.x)
+            and point2.x >= min(point1.x, point3.x)
+            and point2.y <= max(point1.y, point3.y)
+                and point2.y >= min(point1.y, point3.y)):
+            return True
+        else:
+            return False
 
     def __orientation(self, point1, point2, point3):
         """To find orientation of ordered triplet (p, q, r).
