@@ -28,12 +28,12 @@ class Line(object):
         """
 
         # Find the four orientations needed for general and special cases
-        o1 = self.__orientation(self.point1, self.point2, another_line.point1)
-        o2 = self.__orientation(self.point1, self.point2, another_line.point2)
-        o3 = self.__orientation(another_line.point1, another_line.point2,
-                                self.point1)
-        o4 = self.__orientation(another_line.point1, another_line.point2,
-                                self.point2)
+        o1 = self.orientation(self.point1, self.point2, another_line.point1)
+        o2 = self.orientation(self.point1, self.point2, another_line.point2)
+        o3 = self.orientation(another_line.point1, another_line.point2,
+                              self.point1)
+        o4 = self.orientation(another_line.point1, another_line.point2,
+                              self.point2)
 
         # General case
         if o1 != o2 and o3 != o4:
@@ -41,25 +41,25 @@ class Line(object):
 
         # Special Cases
         # p1, q1 and p2 are colinear and p2 lies on segment p1q1
-        if o1 == 0 and self.__on_segment(self.point1, another_line.point1, self.point2):
+        if o1 == 0 and self.on_segment(self.point1, another_line.point1, self.point2):
             return True
 
         # p1, q1 and p2 are colinear and q2 lies on segment p1q1
-        if o2 == 0 and self.__on_segment(self.point1, another_line.point2, self.point2):
+        if o2 == 0 and self.on_segment(self.point1, another_line.point2, self.point2):
             return True
 
         # p2, q2 and p1 are colinear and p1 lies on segment p2q2
-        if o3 == 0 and self.__on_segment(another_line.point1, self.point1, another_line.point2):
+        if o3 == 0 and self.on_segment(another_line.point1, self.point1, another_line.point2):
             return True
 
         # p2, q2 and q1 are colinear and q1 lies on segment p2q2
-        if o4 == 0 and self.__on_segment(another_line.point1, self.point2, another_line.point2):
+        if o4 == 0 and self.on_segment(another_line.point1, self.point2, another_line.point2):
             return True
 
         # Doesn't fall in any of the above cases
         return False
 
-    def __on_segment(self, point1, point2, point3):
+    def on_segment(self, point1, point2, point3):
         """Given three colinear points p, q, r, the function checks if
            point q lies on line segment 'pr'
 
@@ -80,7 +80,7 @@ class Line(object):
         else:
             return False
 
-    def __orientation(self, point1, point2, point3):
+    def orientation(self, point1, point2, point3):
         """To find orientation of ordered triplet (p, q, r).
 
         Args:
@@ -114,8 +114,25 @@ class Point(object):
 
 
 def is_inside(polygon, point):
-    print([i for i in zip(polygon, polygon[1:])])
-    return True or False
+    line2 = Line(Point(point[0], point[1]), Point(100, point[1]))
+    intersections = 0
+    point_pairs = [i for i in zip(polygon, polygon[1:])]
+    while point_pairs:
+        i = point_pairs.pop()
+        p1 = Point(i[0][0], i[0][1])
+        q1 = Point(i[1][0], i[1][1])
+        line1 = Line(p1, q1)
+        if line1.intersect_with(line2):
+            # infinitesimally move the vertex when intersects
+            point_pairs[-1] = (point_pairs[-1][0],
+                               (point_pairs[-1][-1][0] - 1, point_pairs[-1][-1][1] - 1))
+            if line1.orientation(p1, Point(*point), q1) == 0:
+                return line1.on_segment(p1, Point(*point), q1)
+            intersections += 1
+    if intersections % 2:
+        return True
+    else:
+        return False
 
 
 if __name__ == '__main__':
