@@ -128,7 +128,9 @@ def answer(relations, question):
 
     question_element, question_category = question.split('-')
     index = empty_slots[category_of(question_element)].index(question_element)
-    return empty_slots[question_category + 's'][index]
+    if question_category not in empty_slots:
+        question_category = question_category + 's'
+    return empty_slots[question_category][index]
 
 
 if __name__ == '__main__':
