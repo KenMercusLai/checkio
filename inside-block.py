@@ -103,6 +103,15 @@ class Line(object):
         else:
             return 2
 
+    def double_length(self):
+        """double the length of current line from point1 to point2
+
+        Returns:
+            tuple: new end point coordinations
+        """
+        return (self.point1.x + 2 * (self.point2.x - self.point1.x),
+                self.point1.y + 2 * (self.point2.y - self.point1.y))
+
 
 class Point(object):
 
@@ -116,16 +125,19 @@ class Point(object):
 def is_inside(polygon, point):
     line2 = Line(Point(point[0], point[1]), Point(100, point[1]))
     intersections = 0
-    point_pairs = [i for i in zip(polygon, polygon[1:])]
+    point_pairs = [
+        i for i in zip(polygon, polygon[1:])] + [(polygon[-1], polygon[0])]
     while point_pairs:
+        # we draw polygon reversely
         i = point_pairs.pop()
-        p1 = Point(i[0][0], i[0][1])
-        q1 = Point(i[1][0], i[1][1])
+        q1 = Point(i[0][0], i[0][1])
+        p1 = Point(i[1][0], i[1][1])
         line1 = Line(p1, q1)
         if line1.intersect_with(line2):
-            # infinitesimally move the vertex when intersects
-            point_pairs[-1] = (point_pairs[-1][0],
-                               (point_pairs[-1][-1][0] - 1, point_pairs[-1][-1][1] - 1))
+            # double the length when find a intersection
+            if point_pairs:
+                point_pairs[-1] = (point_pairs[-1][0],
+                                   line1.double_length())
             if line1.orientation(p1, Point(*point), q1) == 0:
                 return line1.on_segment(p1, Point(*point), q1)
             intersections += 1
