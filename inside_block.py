@@ -147,7 +147,7 @@ def is_inside(polygon, point):
         return False
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)),
                      (2, 2)) == True, "First"
     assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)),
