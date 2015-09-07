@@ -1,4 +1,6 @@
 from copy import deepcopy
+from functools import reduce
+
 unitlists = [[(i, j) for j in range(3)] for i in range(3)] + \
     [[(j, i) for j in range(3)] for i in range(3)] + \
     [[(j, j) for j in range(3)]] + \
@@ -16,11 +18,12 @@ def remove_units(grid, mark_to_remove):
 
 def most_valuable_cell(remained_unit_lists, grid, your_mark):
     result = {}
+    for i in unitlists:
+        for j in i:
+            result[j] = 0
     # possible connection cell
     for i in remained_unit_lists:
         for j in i:
-            if j not in result:
-                result[j] = 0
             result[j] += 1
     # defence cell
     grid = list(grid)
@@ -32,6 +35,18 @@ def most_valuable_cell(remained_unit_lists, grid, your_mark):
                         for kk in k:
                             if kk in result.keys():
                                 result[kk] += 1
+    for i in unitlists:
+        score = reduce(lambda x, y: x*y, [4 if grid[j[0]][j[1]] not in [your_mark, '.'] else 1 for j in i ])
+        for j in i:
+            if j in result.keys():
+                result[j] += score
+    # offence cell
+    for i in remained_unit_lists:
+        score = sum([1 for j in i if grid[j[0]][j[1]] == your_mark])
+        if score == 2:
+            for j in i:
+                if j in result.keys():
+                    result[j] += 100
     return sorted(result.items(), key=lambda x: x[1], reverse=True)
 
 def x_and_o(grid, your_mark):
@@ -43,7 +58,10 @@ def x_and_o(grid, your_mark):
     for i in cell_list:
         if list(grid)[i[0][0]][i[0][1]] == '.':
             return i[0]
-    return 1, 1
+    for i in range(3):
+        for j in range(3):
+            if list(grid)[i][j] == '.':
+                return i, j
 
 
 if __name__ == '__main__':
