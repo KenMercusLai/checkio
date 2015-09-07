@@ -2,6 +2,7 @@ __author__ = 'KenMercusLai'
 
 
 class Building:
+
     def __init__(self, south, west, width_WE, width_NS, height=10):
         self.south = south
         self.west = west
@@ -25,8 +26,9 @@ class Building:
         return 'Building({}, {}, {}, {}, {})'.format(self.south, self.west, self.WE, self.NS, self.height)
 
 
-if __name__ == '__main__':
-    # These "asserts" using only for self-checking and not necessary for auto-testing
+if __name__ == '__main__':  # pragma: no cover
+    # These "asserts" using only for self-checking and not necessary for
+    # auto-testing
     def json_dict(d):
         return dict((k, list(v)) for k, v in d.items())
 
@@ -37,6 +39,4 @@ if __name__ == '__main__':
     assert b.area() == 6, "Area"
     assert b.volume() == 60, "Volume"
     assert b2.volume() == 30, "Volume2"
-    print str(b)
     assert str(b) == "Building(1, 2, 2, 3, 10)", "String"
-

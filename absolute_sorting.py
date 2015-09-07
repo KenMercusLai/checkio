@@ -3,7 +3,7 @@ def checkio(numbers_array):
 
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     def check_it(array):
         if not isinstance(array, (list, tuple)):
             raise TypeError("The result should be a list or tuple.")

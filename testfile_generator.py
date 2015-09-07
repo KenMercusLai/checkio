@@ -9,7 +9,7 @@ with urllib.request.urlopen(sys.argv[1]) as response, open('temp.py', 'wb') as o
 
 # import temp to get TEST values
 from temp import TESTS
-with open('test_auto_generated.py', 'wb') as output:
+with open('tests/test_auto_generated.py', 'wb') as output:
     output.write(b"""import unittest
 
 
