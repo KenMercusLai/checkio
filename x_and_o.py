@@ -14,13 +14,24 @@ def remove_units(grid, mark_to_remove):
                 result = [k for k in result if (i, j) not in k]
     return result
 
-def most_valuable_cell(unitlists):
+def most_valuable_cell(remained_unit_lists, grid, your_mark):
     result = {}
-    for i in unitlists:
+    # possible connection cell
+    for i in remained_unit_lists:
         for j in i:
             if j not in result:
                 result[j] = 0
             result[j] += 1
+    # defence cell
+    grid = list(grid)
+    for i in range(3):
+        for j in range(3):
+            if grid[i][j] in ['X', 'O'] and grid[i][j] != your_mark:
+                for k in unitlists:
+                    if (i, j) in k:
+                        for kk in k:
+                            if kk in result.keys():
+                                result[kk] += 1
     return sorted(result.items(), key=lambda x: x[1], reverse=True)
 
 def x_and_o(grid, your_mark):
@@ -28,7 +39,7 @@ def x_and_o(grid, your_mark):
         remained_units = remove_units(grid, 'O')
     else:
         remained_units = remove_units(grid, 'X')
-    cell_list = most_valuable_cell(remained_units)
+    cell_list = most_valuable_cell(remained_units, grid, your_mark)
     for i in cell_list:
         if list(grid)[i[0][0]][i[0][1]] == '.':
             return i[0]
