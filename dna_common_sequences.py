@@ -1,14 +1,21 @@
+CACHE = {}
+
+
 def generate_subsequences(sequence, length):
+    if (sequence, length) in CACHE:
+        return CACHE[(sequence, length)]
     result = []
     if len(sequence) == 1:
         return list(sequence)
     for i in range(len(sequence) - 1):
         if length > 1:
-            result += [sequence[i] +
-                       j for j in generate_subsequences(sequence[i + 1:], length - 1)]
+            result += [sequence[i] + j
+                       for j in generate_subsequences(sequence[i + 1:], length - 1)]
         else:
-            return list(sequence)
+            result = list(sequence)
+            break
     result = [i for i in result if len(i) == length]
+    CACHE[(sequence, length)] = result
     return result
 
 
@@ -28,3 +35,5 @@ if __name__ == '__main__':
     assert common("ACGTC", "TTACTC") == "ACTC", "One"
     assert common("CGCTA", "TACCG") == "CC,CG,TA", "Two"
     assert common("GCTT", "AAAAA") == "", "None"
+    print(generate_subsequences(
+        'AACGTTTTGGGTTTAGAGAAAGTGCTCACAGTAGGTACGTCCCCCAGACCCCACGCCAATGTAT', 42))
