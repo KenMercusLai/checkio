@@ -1,69 +1,48 @@
 from itertools import combinations
 from copy import deepcopy
-CACHE = {}
+
+POSSIBLE_ELEMENTS = 'ATCG'
 
 
-def generate_subsequences(sequence, length):
-    if (sequence, length) in CACHE:
-        return CACHE[(sequence, length)]
-    result = []
-    if len(sequence) == 1:
-        return list(sequence)
-    for i in range(len(sequence) - 1):
-        if length > 1:
-            result += [sequence[i] + j
-                       for j in generate_subsequences(sequence[i + 1:], length - 1)]
-        else:
-            result = list(sequence)
-            break
-    result = [i for i in result if len(i) == length]
-    CACHE[(sequence, length)] = result
-    return result
+def findall(sequence, start_index, target):
+    return [i for i in range(start_index, len(sequence)) if sequence[i] == target]
 
 
-def common(first, second):    
-    # build common str matches at length 2
-    result = {}
-    for i in combinations(range(len(first)), 2):
-        first_subsequence = [first[ii] for ii in i]
-        for j in combinations(range(len(second)), 2):
-            second_subsequence = [second[jj] for jj in j]
-            if first_subsequence == second_subsequence:
-                if i not in result:
-                    result[i] = []
-                result[i].append(j)
-
+def common(first, second):
+    results = []
     longer_result = 1
     while longer_result:
-        print(len(result))
-        longer_result = {}
-        for i in result:
-            i = list(i)
-            # remove unexpanable subsequences early
-            if i[-1] == len(first) - 1:
-                continue
-            for j in result[tuple(i)]:
-                j = list(j)
-                if j[-1] == len(second) - 1:
+        longer_result = []
+        print('--------')
+        print(len(results))
+        if results:
+            for j in results:
+                if j[0][-1] == len(first) - 1 or j[1][-1] == len(second) - 1:
                     continue
-
-                # test combinations
-                for expand_i in range(i[-1]+1, len(first)):
-                    first_subsequence = [first[ii] for ii in i + [expand_i]]
-                    for expand_j in range(j[-1]+1, len(second)):
-                        second_subsequence = [second[jj] for jj in j + [expand_j]]
-                        if first_subsequence == second_subsequence:
-                            if tuple(i + [expand_i]) not in longer_result:
-                                longer_result[tuple(i + [expand_i])] = []
-                            longer_result[tuple(i + [expand_i])].append(tuple(j + [expand_j]))
+                for target in POSSIBLE_ELEMENTS:
+                    index_of_first = findall(first, j[0][-1] + 1, target)
+                    index_of_second = findall(second, j[1][-1] + 1, target)
+                    for i_first in index_of_first:
+                        for i_second in index_of_second:
+                            longer_result.append((j[0] + [i_first], j[1] + [i_second]))
+                    print(len(longer_result))
+        else:
+            for i in POSSIBLE_ELEMENTS:
+                index_of_first = findall(first, 0, i)
+                index_of_second = findall(second, 0, i)
+                for j in index_of_first:
+                    for k in index_of_second:
+                        longer_result.append(([j], [k]))
         if longer_result:
-            result = deepcopy(longer_result)
-    print(result)
-    final_result = []
-    for i in result:
-        final_result.append(''.join([first[j] for j in i]))
-    return ','.join(sorted(final_result))
-    
+            results = deepcopy(longer_result)
+
+    # translate indexes into chars
+    sequences = []
+    for i in results:
+        sequences.append(''.join([first[j] for j in i[0]]))
+    print(','.join(sorted(list(set(sequences)))))
+    return ','.join(sorted(list(set(sequences))))
+
 
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for
@@ -72,4 +51,5 @@ if __name__ == '__main__':
     assert common("CGCTA", "TACCG") == "CC,CG,TA", "Two"
     assert common("GCTT", "AAAAA") == "", "None"
     assert common('TTGGTGTCGCTAGACC', 'CGCTAGTGGGGAAT') == 'TTGGGGAA'
-    common('AACGTTTTGGGTTTAGAGAAAGTGCTCACAGTAGGTACGTCCCCCAGACCCCACGCCAATGTAT', 'TTTGGGAATGCAATTTAGCTCACAGAGCATACAATGAGAACCACCGAGATCATATTAAGTCTCC') == 'TTTGGGAAGAAAGCTCACAGAGTACGAGACCCCAGCAATGTT,TTTGGGAAGAAAGCTCACAGAGTACGAGACCCCAGCAATTAT,TTTGGGAAGAAAGCTCACAGAGTACTAGACCCCAGCAATGTT,TTTGGGAAGAAAGCTCACAGAGTACTAGACCCCAGCAATTAT,TTTGGGAAGAATGCTCACAGAGTACGAGACCCCAGCAATGTT,TTTGGGAAGAATGCTCACAGAGTACGAGACCCCAGCAATTAT,TTTGGGAAGAATGCTCACAGAGTACTAGACCCCAGCAATGTT,TTTGGGAAGAATGCTCACAGAGTACTAGACCCCAGCAATTAT'
+    common('AACGTTTTGGGTTTAGAGAAAGTGCTCACAGTAGGTACGTCCCCCAGACCCCACGCCAATGTAT',
+           'TTTGGGAATGCAATTTAGCTCACAGAGCATACAATGAGAACCACCGAGATCATATTAAGTCTCC') == 'TTTGGGAAGAAAGCTCACAGAGTACGAGACCCCAGCAATGTT,TTTGGGAAGAAAGCTCACAGAGTACGAGACCCCAGCAATTAT,TTTGGGAAGAAAGCTCACAGAGTACTAGACCCCAGCAATGTT,TTTGGGAAGAAAGCTCACAGAGTACTAGACCCCAGCAATTAT,TTTGGGAAGAATGCTCACAGAGTACGAGACCCCAGCAATGTT,TTTGGGAAGAATGCTCACAGAGTACGAGACCCCAGCAATTAT,TTTGGGAAGAATGCTCACAGAGTACTAGACCCCAGCAATGTT,TTTGGGAAGAATGCTCACAGAGTACTAGACCCCAGCAATTAT'
