@@ -4,37 +4,51 @@ from copy import deepcopy
 POSSIBLE_ELEMENTS = 'ATCG'
 
 
-def findall(sequence, start_index, target):
-    return [i for i in range(start_index, len(sequence)) if sequence[i] == target]
+def findfirst(sequence, start_index, target):
+    for i in range(start_index, len(sequence)):
+        if sequence[i] == target:
+            return [i]
+    return []
 
 
 def common(first, second):
     results = []
-    longer_result = 1
-    while longer_result:
-        longer_result = []
+    new_result_counter = 1
+    while new_result_counter:
+        new_result_counter = 0
         print('--------')
         print(len(results))
         if results:
-            for j in results:
-                if j[0][-1] == len(first) - 1 or j[1][-1] == len(second) - 1:
-                    continue
+            for j in range(len(results)):
+                # if j[0][-1] == len(first) - 1 or j[1][-1] == len(second) - 1:
+                #     continue
+                # print(j)
                 for target in POSSIBLE_ELEMENTS:
-                    index_of_first = findall(first, j[0][-1] + 1, target)
-                    index_of_second = findall(second, j[1][-1] + 1, target)
+                    # print(target)
+                    index_of_first = findfirst(
+                        first, results[j][0][-1] + 1, target)
+                    index_of_second = findfirst(
+                        second, results[j][1][-1] + 1, target)
+
                     for i_first in index_of_first:
                         for i_second in index_of_second:
-                            longer_result.append((j[0] + [i_first], j[1] + [i_second]))
-                    print(len(longer_result))
+                            results.append((results[j][0] + [i_first],
+                                            results[j][1] + [i_second]))
+                            new_result_counter += 1
+                # print((new_result_counter))
+                # input()
         else:
             for i in POSSIBLE_ELEMENTS:
-                index_of_first = findall(first, 0, i)
-                index_of_second = findall(second, 0, i)
+                index_of_first = findfirst(first, 0, i)
+
+                index_of_second = findfirst(second, 0, i)
+
                 for j in index_of_first:
                     for k in index_of_second:
-                        longer_result.append(([j], [k]))
-        if longer_result:
-            results = deepcopy(longer_result)
+                        results.append(([j], [k]))
+                        new_result_counter += 1
+        if new_result_counter:
+            results = results[-new_result_counter:]
 
     # translate indexes into chars
     sequences = []
@@ -51,5 +65,6 @@ if __name__ == '__main__':
     assert common("CGCTA", "TACCG") == "CC,CG,TA", "Two"
     assert common("GCTT", "AAAAA") == "", "None"
     assert common('TTGGTGTCGCTAGACC', 'CGCTAGTGGGGAAT') == 'TTGGGGAA'
-    common('AACGTTTTGGGTTTAGAGAAAGTGCTCACAGTAGGTACGTCCCCCAGACCCCACGCCAATGTAT',
+    assert common('GGAGTACCATGGGCGGGACGTCACAGCCCCCAACTCA', 'AAGGTGACGCAAATGGTATATTCGCTAAGGATT') == 'AGTACCATGGACGCAAGAT,AGTACCATGGACGTAAGAT,AGTACCATGGATACGCAAA,AGTACCATGGATACGCAAT,AGTACCATGGCGCTAAGAT,GGGACCATGGACGCAAGAT,GGGACCATGGACGTAAGAT,GGGACCATGGATACGCAAA,GGGACCATGGATACGCAAT,GGGACCATGGCGCTAAGAT,GGTACCATGGACGCAAGAT,GGTACCATGGACGTAAGAT,GGTACCATGGATACGCAAA,GGTACCATGGATACGCAAT,GGTACCATGGCGCTAAGAT'
+    assert common('AACGTTTTGGGTTTAGAGAAAGTGCTCACAGTAGGTACGTCCCCCAGACCCCACGCCAATGTAT',
            'TTTGGGAATGCAATTTAGCTCACAGAGCATACAATGAGAACCACCGAGATCATATTAAGTCTCC') == 'TTTGGGAAGAAAGCTCACAGAGTACGAGACCCCAGCAATGTT,TTTGGGAAGAAAGCTCACAGAGTACGAGACCCCAGCAATTAT,TTTGGGAAGAAAGCTCACAGAGTACTAGACCCCAGCAATGTT,TTTGGGAAGAAAGCTCACAGAGTACTAGACCCCAGCAATTAT,TTTGGGAAGAATGCTCACAGAGTACGAGACCCCAGCAATGTT,TTTGGGAAGAATGCTCACAGAGTACGAGACCCCAGCAATTAT,TTTGGGAAGAATGCTCACAGAGTACTAGACCCCAGCAATGTT,TTTGGGAAGAATGCTCACAGAGTACTAGACCCCAGCAATTAT'
