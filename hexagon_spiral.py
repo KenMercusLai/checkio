@@ -33,20 +33,21 @@ def convert_to_position(level, shift):
     return position_map_of_numbers[shift]
 
 
-def calc_distance((x0, y0), (x1, y1)):
-    return max(abs(y1 - y0), abs(x1 - x0), abs((x1 - y1)*-1 - (x0 - y0)*-1))
+def calc_distance(num0, num1):
+    return max(abs(num1[1] - num0[1]), abs(num1[0] - num0[0]),
+               abs((num1[0] - num1[1]) * -1 - (num0[0] - num0[1]) * -1))
 
 
 def hex_spiral(first, second):
     return calc_distance(*map(lambda x: convert_to_position(x[0], x[1]),
                               [determine_level(first), determine_level(second)]))
 
-# These "asserts" using only for self-checking and not necessary for auto-testing
-if __name__ == '__main__':
+# These "asserts" using only for self-checking and not necessary for
+# auto-testing
+if __name__ == '__main__':  # pragma: no cover
     assert hex_spiral(2, 9) == 1, "First"
     assert hex_spiral(9, 2) == 1, "Reverse First"
     assert hex_spiral(6, 19) == 2, "Second, short way"
     assert hex_spiral(5, 11) == 3, "Third"
     assert hex_spiral(13, 15) == 2, "Fourth, One row"
     assert hex_spiral(11, 17) == 4, "Fifth, One more test"
-
