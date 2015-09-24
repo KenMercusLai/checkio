@@ -188,25 +188,23 @@ class Tests(unittest.TestCase):
         grid = self.clear_zone(list(zip(*self.clear_zone(grid))))
         return tuple("".join(trow) for trow in zip(*grid))
 
-    def initial(self, maze, player):
-        return maze, self.get_visible(maze, player)
-
     def checker(self, func, player, maze):
         step = 0
         while True:
             result = func(self.get_visible(maze, player))
-            if not isinstance(result, str) or any(ch not in DIR.keys() for ch in result):
+            if not isinstance(result, str) or any(ch not in DIR.keys() for ch in result):  # pragma: no cover
                 print("The function should return a string with directions.")
                 return False
 
             for act in result:
-                if step >= MAX_STEP:
+                if step >= MAX_STEP:  # pragma: no cover
                     print("You are tired and your flashlight is off. Bye bye.")
                     return False
                 r, c = player[0] + DIR[act][0], player[1] + DIR[act][1]
                 if maze[r][c] == WALL:
-                    print("BAM! You in the wall at {}, {}.".format(r, c))
-                    return False
+                    print(
+                        "BAM! You in the wall at {}, {}.".format(r, c))  # pragma: no cover
+                    return False  # pragma: no cover
                 elif maze[r][c] == EXIT:
                     print("GRATZ!")
                     return True
