@@ -1,4 +1,21 @@
+def translate_map_to_memory(map_array):
+    return int(''.join([''.join(i) for i in map_array]), 2)
+
+def translate_memory_to_map(memory):
+    return [list(bin(memory)[2:].zfill(100)[i:i+10]) for i in range(0, 100, 10)]
+
+def find_possible_position(scanner):
+    result = []
+    for y in range(scanner['N'], 10-scanner['S']):
+        for x in range(scanner['W'], 10-scanner['E']):
+            result.append((y, x))
+    return result
+
 def find_path(scanner, memory):
+    positions = find_possible_position(scanner)
+    if len(positions) == 1:
+        print(translate_memory_to_map(memory))
+        
     return "SE", memory
 
 
