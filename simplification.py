@@ -70,6 +70,22 @@ class Polynomial:
 
 def tokenise(expr):
     symbols = list(expr)
+    # merge numbers
+    changed = True
+    while changed:
+        changed = False
+        for i in range(len(symbols) - 1):
+            try:
+                int(symbols[i])
+                int(symbols[i + 1])
+                symbols = symbols[
+                    :i] + [symbols[i] + symbols[i + 1]] + symbols[i + 2:]
+                changed = True
+                break
+            except ValueError:
+                pass
+
+    # convert numbers and x
     for i in range(len(symbols)):
         try:
             int(symbols[i])
@@ -78,6 +94,7 @@ def tokenise(expr):
             if symbols[i] == 'x':
                 symbols[i] = Polynomial([0, 1])
 
+    # convert neg values
     while '-' in symbols:
         index = symbols.index('-')
         if index == 0 or symbols[index - 1] == '(':
@@ -89,8 +106,13 @@ def tokenise(expr):
     return symbols
 
 
+def calc(tokens):
+    pass
+
+
 def simplify(expr):
-    print(tokenise(expr))
+    tokens = tokenise(expr)
+    print(calc(tokens))
 
 
 if __name__ == "__main__":  # pragma: no cover
