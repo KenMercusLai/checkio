@@ -84,7 +84,7 @@ def tokenise(expr):
                 break
             except ValueError:
                 pass
-
+    print(symbols)
     # convert numbers and x
     for i in range(len(symbols)):
         try:
@@ -93,15 +93,15 @@ def tokenise(expr):
         except ValueError:
             if symbols[i] == 'x':
                 symbols[i] = Polynomial([0, 1])
-    # convert neg values
-    while '-' in symbols:
-        index = symbols.index('-')
-        if index == 0 or symbols[index - 1] == '(':
-            symbols = symbols[:index] + \
-                [-symbols[index + 1]] + symbols[index + 2:]
-        else:
-            symbols = symbols[
-                :index] + ['+', -symbols[index + 1]] + symbols[index + 2:]
+    # # convert neg values
+    # while '-' in symbols:
+    #     index = symbols.index('-')
+    #     if index == 0 or symbols[index - 1] == '(':
+    #         symbols = symbols[:index] + \
+    #             [-symbols[index + 1]] + symbols[index + 2:]
+    #     else:
+    #         symbols = symbols[
+    #             :index] + ['+', -symbols[index + 1]] + symbols[index + 2:]
     return symbols
 
 
@@ -114,22 +114,27 @@ def calc(tokens):
             sub_tokens = tokens[:right_bracket]
             sub_tokens.reverse()
             left_bracket = len(sub_tokens) - sub_tokens.index('(') - 1
-            tokens = calc(
+            tokens = tokens[:left_bracket] + calc(
                 tokens[left_bracket + 1:right_bracket]) + tokens[right_bracket + 1:]
         elif '*' in tokens:
             index = tokens.index('*')
-            tokens = tokens[:index-1] + [tokens[index-1]*tokens[index+11]] + tokens[index+2:]
+            tokens = tokens[:index-1] + [tokens[index-1]*tokens[index+1]] + tokens[index+2:]
+        elif '-' in tokens:
+            index = tokens.index('-')
+            tokens = tokens[:index-1] + [tokens[index-1]-tokens[index+1]] + tokens[index+2:]
         else:
             index = tokens.index('+')
             tokens = tokens[:index-1] + [tokens[index-1]+tokens[index+1]] + tokens[index+2:]
         print(tokens)
-        input()
+        # input()
     return tokens
 
 
 def simplify(expr):
     tokens = tokenise(expr)
-    print(calc(tokens))
+    result = calc(tokens)[0]
+    print(str(result))
+    return str(result)
 
 
 if __name__ == "__main__":  # pragma: no cover
