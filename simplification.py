@@ -62,6 +62,10 @@ class Polynomial:
         for i in range(1, len(result)):
             if result[i][0] != '-':
                 result[i] = '+' + result[i]
+        for i in range(len(result)):
+            if result[i][0] == '-':
+                if result[i][1] == '1' and '*' in result[i] and result[i][2] == '*':
+                    result[i] = result[i][0] + result[i][3:]
 
         if result[-1] == '+0' and len(result) > 1:
             result.pop()
@@ -97,9 +101,7 @@ def tokenise(expr):
 
 
 def calc(tokens):
-    print('input', tokens)
     while len(tokens) > 1:
-        # find )
         if ')' in tokens:
             right_bracket = tokens.index(')')
             sub_tokens = tokens[:right_bracket]
@@ -109,22 +111,19 @@ def calc(tokens):
                 tokens[left_bracket + 1:right_bracket]) + tokens[right_bracket + 1:]
         elif '*' in tokens:
             index = tokens.index('*')
-            tokens = tokens[:index-1] + [tokens[index-1]*tokens[index+1]] + tokens[index+2:]
+            tokens = tokens[:index - 1] + [tokens[index - 1] * tokens[index + 1]] + tokens[index + 2:]
         elif '-' in tokens:
             index = tokens.index('-')
-            tokens = tokens[:index-1] + [tokens[index-1]-tokens[index+1]] + tokens[index+2:]
+            tokens = tokens[:index - 1] + [tokens[index - 1] - tokens[index + 1]] + tokens[index + 2:]
         else:
             index = tokens.index('+')
-            tokens = tokens[:index-1] + [tokens[index-1]+tokens[index+1]] + tokens[index+2:]
-        print(tokens)
-        input()
+            tokens = tokens[:index - 1] + [tokens[index - 1] + tokens[index + 1]] + tokens[index + 2:]
     return tokens
 
 
 def simplify(expr):
     tokens = tokenise(expr)
     result = calc(tokens)[0]
-    print(str(result))
     return str(result)
 
 
