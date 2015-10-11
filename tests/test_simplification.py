@@ -16,6 +16,8 @@ class Tests(unittest.TestCase):
                    * Polynomial([2, 1])) == 'x**3+2*x**2-4*x-8'
         assert str(Polynomial([2]) * Polynomial([3, 2]) -
                    Polynomial([0, 1]) + Polynomial([0, 0, 0, 0, 1])) == 'x**4+3*x+6'
+        assert str(Polynomial([0, 1])) == 'x'
+        assert str(Polynomial([0, 1])-Polynomial([0, 1])) == '0'
 
     def test_Extra(self):
         assert simplify('(x-1)*(x-1)') == 'x**2-2*x+1'
