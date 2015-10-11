@@ -84,7 +84,7 @@ def tokenise(expr):
                 break
             except ValueError:
                 pass
-    print(symbols)
+
     # convert numbers and x
     for i in range(len(symbols)):
         try:
@@ -93,15 +93,6 @@ def tokenise(expr):
         except ValueError:
             if symbols[i] == 'x':
                 symbols[i] = Polynomial([0, 1])
-    # # convert neg values
-    # while '-' in symbols:
-    #     index = symbols.index('-')
-    #     if index == 0 or symbols[index - 1] == '(':
-    #         symbols = symbols[:index] + \
-    #             [-symbols[index + 1]] + symbols[index + 2:]
-    #     else:
-    #         symbols = symbols[
-    #             :index] + ['+', -symbols[index + 1]] + symbols[index + 2:]
     return symbols
 
 
@@ -126,7 +117,7 @@ def calc(tokens):
             index = tokens.index('+')
             tokens = tokens[:index-1] + [tokens[index-1]+tokens[index+1]] + tokens[index+2:]
         print(tokens)
-        # input()
+        input()
     return tokens
 
 
