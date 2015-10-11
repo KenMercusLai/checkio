@@ -93,7 +93,6 @@ def tokenise(expr):
         except ValueError:
             if symbols[i] == 'x':
                 symbols[i] = Polynomial([0, 1])
-
     # convert neg values
     while '-' in symbols:
         index = symbols.index('-')
@@ -102,12 +101,30 @@ def tokenise(expr):
                 [-symbols[index + 1]] + symbols[index + 2:]
         else:
             symbols = symbols[
-                :index] + ['+', -symbols[index + 1].__neg__()] + symbols[index + 2:]
+                :index] + ['+', -symbols[index + 1]] + symbols[index + 2:]
     return symbols
 
 
 def calc(tokens):
-    pass
+    print('input', tokens)
+    while len(tokens) > 1:
+        # find )
+        if ')' in tokens:
+            right_bracket = tokens.index(')')
+            sub_tokens = tokens[:right_bracket]
+            sub_tokens.reverse()
+            left_bracket = len(sub_tokens) - sub_tokens.index('(') - 1
+            tokens = calc(
+                tokens[left_bracket + 1:right_bracket]) + tokens[right_bracket + 1:]
+        elif '*' in tokens:
+            index = tokens.index('*')
+            tokens = tokens[:index-1] + [tokens[index-1]*tokens[index+11]] + tokens[index+2:]
+        else:
+            index = tokens.index('+')
+            tokens = tokens[:index-1] + [tokens[index-1]+tokens[index+1]] + tokens[index+2:]
+        print(tokens)
+        input()
+    return tokens
 
 
 def simplify(expr):
