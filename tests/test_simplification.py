@@ -9,7 +9,7 @@ class Tests(unittest.TestCase):
         assert str(Polynomial([3]) + Polynomial([0, 4]) +
                    Polynomial([-24]) + Polynomial([0, -2])) == '2*x-21'
         assert str(Polynomial([-1, 1]) * Polynomial([-1, 1])) == 'x**2-2*x+1'
-        assert str(-Polynomial([-1, 1])) == '-1*x+1'
+        assert str(-Polynomial([-1, 1])) == '-x+1'
         assert str(-Polynomial([1])) == '-1'
         assert str(Polynomial([-2, 2]) * Polynomial([2, 2])) == '4*x**2-4'
         assert str(Polynomial([-2, 1]) * Polynomial([2, 1])
