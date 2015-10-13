@@ -1,5 +1,7 @@
 from copy import deepcopy
 import operator
+from collections import defaultdict
+import heapq
 
 DIRS = {
     "N": (-1, 0),
@@ -92,37 +94,88 @@ def chicken_space(yard):
     return adjencies
 
 
+def is_support(yard):
+    yard_string = ''.join(yard)
+    return yard_string.index('I') > yard_string.index('S')
+
+
+def build_topology(yard):
+    result = defaultdict(dict)
+    for y in range(len(yard)):
+        for x in range(len(yard[0])):
+            for i in DIRS.values():
+                if 0 <= y + i[0] <= len(yard) - 1 and 0 <= x + i[1] <= len(yard[0]) - 1:
+                    if yard[y + i[0]][x + i[1]] in ['C', '.']:
+                        result[(y, x)][(y + i[0], x + i[1])] = 1
+                        result[(y + i[0], x + i[1])][(y, x)] = 1
+    return result
+
+
+def shortest_path(graph, start, end):
+    queue = [(0, start, [])]
+    seen = set()
+    while True:
+        (cost, v, path) = heapq.heappop(queue)
+        if v not in seen:
+            path = path + [v]
+            seen.add(v)
+            if v == end:
+                break
+            for (next_item, c) in graph[v].items():
+                heapq.heappush(queue, (cost + c, next_item, path))
+    return path
+
+
 def hunt(yard):
-    original_space = chicken_space(yard)
+    topology = build_topology(yard)
     for i in yard:
         print(i)
 
-    I = position_of('I', yard)
-    result = {}
-    for i in possible_move_of(I[0], I[1], yard):
-        temp_yard = deepcopy(yard)
-        temp_yard = list(temp_yard)
-        temp_yard[I[0]] = list(temp_yard[I[0]])
-        temp_yard[I[0]][I[1]] = temp_yard[i[0]][i[1]]
-        temp_yard[I[0]] = ''.join(temp_yard[I[0]])
-        temp_yard[i[0]] = list(temp_yard[i[0]])
-        temp_yard[i[0]][i[1]] = 'I'
-        temp_yard[i[0]] = ''.join(temp_yard[i[0]])
-        temp_result = chicken_space(temp_yard)
-        if len(temp_result) <= len(original_space):
-            result[i] = chicken_space(temp_yard)
-    if not result:
-        return ''
+    if is_support(yard):
+        catcher_move = shortest_path(topology,
+                                     position_of('I', yard),
+                                     position_of('C', yard))
+        support_move = shortest_path(topology,
+                                     position_of('S', yard),
+                                     position_of('C', yard))
+        if catcher_move[1] == support_move[1]:
+            temp_topology = deepcopy(topology)
+            del temp_topology[catcher_move[1]]
+            support_move = shortest_path(temp_topology,
+                                         position_of('S', yard),
+                                         position_of('C', yard))
+            result = translate_move(position_of('I', yard), catcher_move[1])
+        else:
+            result = translate_move(position_of('I', yard), catcher_move[1])
+    else:
+        catcher_move = shortest_path(topology,
+                                     position_of('S', yard),
+                                     position_of('C', yard))
+        support_move = shortest_path(topology,
+                                     position_of('I', yard), 
+                                     position_of('C', yard))
+        if catcher_move[1] == support_move[1]:
+            temp_topology = deepcopy(topology)
+            for k, v in temp_topology.items():
+                try:
+                    del v[catcher_move[1]]
+                except KeyError:
+                    pass
+                temp_topology[k] = v
+            try:
+                support_move = shortest_path(
+                    temp_topology, position_of('I', yard), position_of('C', yard))
+                result = translate_move(position_of('I', yard), support_move[1])
+            except IndexError:
+                result = ''
+        else:
+            result = translate_move(position_of('I', yard), support_move[1])
     print(result)
-
-    C = position_of('C', yard)
-    if C in result:
-        return translate_move(I, C)
-    return translate_move(I, sorted(result.items(),
-                                    key=operator.itemgetter(1))[0][0])
+    print()
+    return result
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     # These checker is using only for your local testing
     # It's run function in the same environment, but in the grading it will be
     # in various
@@ -225,18 +278,18 @@ if __name__ == "__main__":
         print(ERROR_TIRED)
         return False
 
-    # assert checker(hunt, ("......",
-    #                       ".1.XX.",
-    #                       "...CX.",
-    #                       ".XX.X.",
-    #                       "...2..",
-    #                       "......"), "random"), "Example 1"
-    # assert checker(hunt, ("......",
-    #                       ".1.XX.",
-    #                       "...CX.",
-    #                       ".XX.X.",
-    #                       "...2..",
-    #                       "......"), "run_away"), "Example 1"
+    assert checker(hunt, ("......",
+                          ".1.XX.",
+                          "...CX.",
+                          ".XX.X.",
+                          "...2..",
+                          "......"), "random"), "Example 1"
+    assert checker(hunt, ("......",
+                          ".1.XX.",
+                          "...CX.",
+                          ".XX.X.",
+                          "...2..",
+                          "......"), "run_away"), "Example 1"
     assert checker(hunt, ("......",
                           ".1.XX.",
                           "...CX.",
