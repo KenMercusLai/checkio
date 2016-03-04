@@ -5,7 +5,7 @@
 			"file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
 			"name": "Anaconda Python Builder",
 			"selector": "source.python",
-			"shell_cmd": "\"$VIRTUAL_ENV/bin/python\" -u \"$file\""
+			"shell_cmd": "\"/Users/KenMLai/.virtualenvs/checkio/bin/python\" -u \"$file\""
 		}
 	],
 	"folders":
@@ -16,6 +16,6 @@
 	],
 	"settings":
 	{
-		"python_interpreter": "$VIRTUAL_ENV/bin/python"
+		"python_interpreter": "~/.virtualenvs/checkio/bin/python"
 	}
 }
