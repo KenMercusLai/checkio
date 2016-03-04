@@ -12,7 +12,7 @@ def checkio(data):
 
 
 #for self-testing
-if __name__ == "__main__":
+if __name__ == "__main__": #pragma: no cover
     assert checkio([1, 2, 3, 1, 3]) == [1, 3, 1, 3], "1st example"
     assert checkio([1, 2, 3, 4, 5]) == [], "2nd example"
     assert checkio([5, 5, 5, 5, 5]) == [5, 5, 5, 5, 5], "3rd example"
