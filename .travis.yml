@@ -8,5 +8,6 @@ before_install:
 script:
     - py.test --cov .
 after_success:
-    - coveralls
+    - git config --global user.email "ken.mercus.lai@gmail.com"
+    - git config --global user.name "Ken M. Lai"
     - semantic-release publish
