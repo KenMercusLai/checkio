@@ -168,5 +168,5 @@ class Tests(unittest.TestCase):
             assert checkio(i['input']) == i['answer']
 
 
-if __name__ == "__main__":
+if __name__ == "__main__": #pragma: no cover
     unittest.main()
