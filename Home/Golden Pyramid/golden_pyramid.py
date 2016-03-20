@@ -2,6 +2,9 @@ from copy import deepcopy
 
 
 def count_gold(pyramid):
+    # iterate from bottom to top, try add the upper with connected lower two
+    # and keep the bigger one. So when reach the top, it the biggest number
+    # can be got
     result = []
     for i in pyramid[::-1]:
         temp_result = deepcopy(list(i))
@@ -14,7 +17,7 @@ def count_gold(pyramid):
     return max(result)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__': #pragma: no cover
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
     assert count_gold((
