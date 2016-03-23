@@ -1,6 +1,3 @@
-__author__ = 'KenMercusLai'
-
-
 def index_power(array, n):
     """
         Find Nth power of the element with index N.
@@ -10,8 +7,7 @@ def index_power(array, n):
     else:
         return array[n] ** n
 
-
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
     assert index_power([1, 2, 3, 4], 2) == 9, "Square"
