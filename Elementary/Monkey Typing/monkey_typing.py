@@ -1,12 +1,8 @@
 def count_words(text, words):
-    counter = 0
-    for i in words:
-        if text.lower().find(i) != -1:
-            counter += 1
-    return counter
+    return sum([1 for i in words if text.lower().find(i) != -1])
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     # These uu"1sserts" using only for self-checking and not necessary for
     # auto-testing
     assert count_words(u"How aresjfhdskfhskd you?",
