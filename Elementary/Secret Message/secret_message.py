@@ -2,12 +2,9 @@ import re
 
 
 def find_message(text):
-    """
-        Find a secret message
-    """
     return ''.join(re.findall('[A-Z]', text))
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
     assert find_message(
