@@ -1,14 +1,17 @@
 def checkio(*args):
     if args:
-        min_value = min(args)
-        max_value = max(args)
-        return max_value - min_value
+        result = max(args) - min(args)
+        if isinstance(result, int):
+            return result
+        else:
+            return round(result, 3)
     else:
         return 0
 
+
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing
-if __name__ == '__main__':
+if __name__ == '__main__': # pragma: no cover
     def almost_equal(checked, correct, significant_digits):
         precision = 0.1 ** significant_digits
         return correct - precision < checked < correct + precision
