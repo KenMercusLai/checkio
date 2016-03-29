@@ -32,7 +32,7 @@ def boolean(x, y, operation):
         else:
             return 0
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
     assert boolean(1, 0, "conjunction") == 0, "and"
