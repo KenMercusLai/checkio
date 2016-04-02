@@ -1,5 +1,6 @@
 import unittest
-from min_max import min, max
+
+from min_max import max, min  # noqa
 
 
 class Tests(unittest.TestCase):

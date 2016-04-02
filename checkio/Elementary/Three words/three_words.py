@@ -1,4 +1,5 @@
-is_word = lambda x: 1 if x.isalpha() else 0
+def is_word(x):
+    return 1 if x.isalpha() else 0
 
 
 def checkio(words):
@@ -11,8 +12,8 @@ def checkio(words):
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing
 if __name__ == '__main__':  # pragma: no cover
-    assert checkio(u"Hello World hello") == True, "Hello"
-    assert checkio(u"He is 123 man") == False, "123 man"
-    assert checkio(u"1 2 3 4") == False, "Digits"
-    assert checkio(u"bla bla bla bla") == True, "Bla Bla"
-    assert checkio(u"Hi") == False, "Hi"
+    assert checkio(u"Hello World hello") is True, "Hello"
+    assert checkio(u"He is 123 man") is False, "123 man"
+    assert checkio(u"1 2 3 4") is False, "Digits"
+    assert checkio(u"bla bla bla bla") is True, "Bla Bla"
+    assert checkio(u"Hi") is False, "Hi"

@@ -1,4 +1,5 @@
 import unittest
+
 from house_password import checkio
 
 
@@ -138,20 +139,24 @@ class Tests(unittest.TestCase):
                 "answer": True
             },
             {
-                "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaSSSSSSSSSSSSSSSSSSSSSSSSS111111111111",
+                "input": "aaaaaaaaaaaaaaaaaaaaaaaaaa"
+                         "SSSSSSSSSSSSSSSSSSSSSSSSS111111111111",
                 "answer": True
             },
 
             {
-                "input": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+                "input": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJ"
+                         "KLMNOPQRSTUVWXYZ0123456789",
                 "answer": True
             },
             {
-                "input": "9876543210ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvutsrqponmlkjihgfedcba",
+                "input": "9876543210ZYXWVUTSRQPONMLKJIHGFEDCBAzyxwvut"
+                         "srqponmlkjihgfedcba",
                 "answer": True
             },
             {
-                "input": "IAKxnvZokrsWP1S0NCfJq4pti9Q6c8gXmB2alzuwUVRbD73OGE5HjMTFYLyhed",
+                "input": "IAKxnvZokrsWP1S0NCfJq4pti9Q6c8gXmB2alzuwUVR"
+                         "bD73OGE5HjMTFYLyhed",
                 "answer": True
             },
         ]
@@ -166,5 +171,5 @@ class Tests(unittest.TestCase):
             assert checkio(i['input']) == i['answer']
 
 
-if __name__ == "__main__": #pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     unittest.main()

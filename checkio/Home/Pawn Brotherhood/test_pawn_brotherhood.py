@@ -1,4 +1,5 @@
 import unittest
+
 from pawn_brotherhood import safe_pawns
 
 

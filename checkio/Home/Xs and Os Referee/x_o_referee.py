@@ -17,8 +17,9 @@ def checkio(game_result):
 
     for i in check_lines:
         a, b, c = i
-        if (game_result[a[0]][a[1]] != '.' and 
-            game_result[a[0]][a[1]] == game_result[b[0]][b[1]] == game_result[c[0]][c[1]]):
+        if (game_result[a[0]][a[1]] != '.' and
+                game_result[a[0]][a[1]] == game_result[b[0]][b[1]] and
+                game_result[b[0]][b[1]] == game_result[c[0]][c[1]]):
             return game_result[a[0]][a[1]]
     return "D"
 

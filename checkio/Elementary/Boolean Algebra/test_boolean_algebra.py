@@ -1,4 +1,5 @@
 import unittest
+
 from boolean_algebra import boolean
 
 

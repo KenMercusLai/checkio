@@ -5,8 +5,10 @@ def convert_bin(ip):
         ret += '{:>08}'.format(bin(int(i))[2:])
     return ret
 
+
 def convert_dec(ip):
-    return '.'.join([str(int(ip[i:i+8], 2)) for i in range(0, 32, 8)])
+    return '.'.join([str(int(ip[i:i + 8], 2)) for i in range(0, 32, 8)])
+
 
 def checkio(data):
     bin_data = []
@@ -20,9 +22,9 @@ def checkio(data):
             mask_length += 1
         else:
             break
-    
+
     # 'cut off' the unmasked part
-    summaried_bin = bin_data[0][:mask_length] + '0'*(32-mask_length)
+    summaried_bin = bin_data[0][:mask_length] + '0' * (32 - mask_length)
     return convert_dec(summaried_bin) + '/' + str(mask_length)
 
 # These "asserts" using only for self-checking and not necessary for
@@ -30,7 +32,7 @@ def checkio(data):
 if __name__ == '__main__':  # pragma: no cover
     assert (checkio(["172.16.12.0", "172.16.13.0", "172.16.14.0",
                      "172.16.15.0"]) == "172.16.12.0/22"), "First Test"
-    assert (checkio(["172.16.12.0", "172.16.13.0", "172.155.43.9"])
-            == "172.0.0.0/8"), "Second Test"
+    assert (checkio(["172.16.12.0", "172.16.13.0", "172.155.43.9"]) ==
+            "172.0.0.0/8"), "Second Test"
     assert (checkio(["172.16.12.0", "172.16.13.0", "172.155.43.9",
                      "146.11.2.2"]) == "128.0.0.0/2"), "Third Test"

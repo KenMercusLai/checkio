@@ -1,5 +1,6 @@
 import unittest
-from solution_for_anything import checkio
+
+from solution_for_anything import checkio  # noqa
 
 
 class Tests(unittest.TestCase):
@@ -36,10 +37,11 @@ class Tests(unittest.TestCase):
             assert eval(i['input']), i['input']
 
     def test_Extra(self):
-        import re, math
+        import re  # noqa
+        import math  # noqa
         for i in self.TESTS['2. Module']:
             assert eval(i['input']), i['input']
 
 
-if __name__ == "__main__": #pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     unittest.main()

@@ -13,7 +13,7 @@ def checkio(number):
 
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     assert checkio(15) == "Fizz Buzz", "15 is divisible by 3 and 5"
     assert checkio(6) == "Fizz", "6 is divisible by 3"
     assert checkio(5) == "Buzz", "5 is divisible by 5"

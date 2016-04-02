@@ -1,4 +1,5 @@
 import unittest
+
 from index_power import index_power
 
 

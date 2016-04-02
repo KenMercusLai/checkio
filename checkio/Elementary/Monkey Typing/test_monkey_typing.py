@@ -1,4 +1,5 @@
 import unittest
+
 from monkey_typing import count_words
 
 
@@ -6,23 +7,31 @@ class Tests(unittest.TestCase):
     TESTS = {
         "Basics": [
             {
-                "input": ['How aresjfhdskfhskd you?', ['how', 'are', 'you', 'hello']],
+                "input": ['How aresjfhdskfhskd you?',
+                          ['how', 'are', 'you', 'hello']],
                 "answer": 3,
-                "show": "'How aresjfhdskfhskd you?', {'you', 'how', 'hello', 'are'}",
-                "explanation": '<strong>How</strong> <strong>are</strong>sjfhdskfhskd <strong>you</strong>?'
+                "show": "'How aresjfhdskfhskd you?', "
+                        "{'you', 'how', 'hello', 'are'}",
+                "explanation": '<strong>How</strong> <strong>are</strong>'
+                               'sjfhdskfhskd <strong>you</strong>?'
             },
             {
-                "input": ['Bananas, give me bananas!!!', ['banana', 'bananas']],
+                "input": ['Bananas, give me bananas!!!',
+                          ['banana', 'bananas']],
                 "answer": 2,
                 "show": "'Bananas, give me bananas!!!', {'banana', 'bananas'}",
-                "explanation": '<strong>Bananas</strong>, give me <strong>bananas</strong>!!!'
+                "explanation": '<strong>Bananas</strong>, give me '
+                               '<strong>bananas</strong>!!!'
             },
             {
-                "input": ['Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
+                "input": ['Lorem ipsum dolor sit amet, consectetuer adipiscing'
+                          ' elit.',
                           ['sum', 'hamlet', 'infinity', 'anything']],
                 "answer": 1,
-                "show": "'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.', {'hamlet', 'sum', 'infinity', 'anything'}",
-                "explanation": 'Lorem ip<strong>sum</strong> dolor sit amet, consectetuer adipiscing elit.'
+                "show": "'Lorem ipsum dolor sit amet, consectetuer adipiscing "
+                        "elit.', {'hamlet', 'sum', 'infinity', 'anything'}",
+                "explanation": 'Lorem ip<strong>sum</strong> dolor sit amet, '
+                               'consectetuer adipiscing elit.'
             },
         ],
         "Edge": [
@@ -33,12 +42,26 @@ class Tests(unittest.TestCase):
                 "explanation": 'A'
             },
             {
-                "input": [
-                    'PWEtRJYqAKYqMcnJxZSStUOyAJkvdtRgdBxnPpXZkBBZXmgatDzedINMmRVxWCIeUfXShDvlWCQtgGYXOxsFpdlNHhxUBRAwAZqXdCkFdjYhBGwpVwJngGxgTDdBHVDdufWGbdENvxbOMylqdPWBiKpptHbXuZwFKBAwCGiXNkWxdHwadOqduygveRsmWfpjEWAztZyoLLJjdeTSHuhJRvUjNDPZyJLseXUROuedMIiudevXESwFjuZACswxnUhm',
-                    ['the', 'who', 'any', 'man', 'hey', 'box', 'zed']],
+                "input": ['PWEtRJYqAKYqMcnJxZSStUOyAJkvdtRgdBxnPpXZkBBZXmgatDz'
+                          'edINMmRVxWCIeUfXShDvlWCQtgGYXOxsFpdlNHhxUBRAwAZqXdC'
+                          'kFdjYhBGwpVwJngGxgTDdBHVDdufWGbdENvxbOMylqdPWBiKppt'
+                          'HbXuZwFKBAwCGiXNkWxdHwadOqduygveRsmWfpjEWAztZyoLLJj'
+                          'deTSHuhJRvUjNDPZyJLseXUROuedMIiudevXESwFjuZACswxnUh'
+                          'm',
+                          ['the', 'who', 'any', 'man', 'hey', 'box', 'zed']],
                 "answer": 1,
-                "show": "'PWEtRJYqAKYqMcnJxZSStUOyAJkvdtRgdBxnPpXZkBBZXmgatDzedINMmRVxWCIeUfXShDvlWCQtgGYXOxsFpdlNHhxUBRAwAZqXdCkFdjYhBGwpVwJngGxgTDdBHVDdufWGbdENvxbOMylqdPWBiKpptHbXuZwFKBAwCGiXNkWxdHwadOqduygveRsmWfpjEWAztZyoLLJjdeTSHuhJRvUjNDPZyJLseXUROuedMIiudevXESwFjuZACswxnUhm', {'man', 'who', 'the', 'any', 'zed', 'hey', 'box'}",
-                "explanation": 'PWEtRJYqAKYqMcnJxZSStUOyAJkvdtRgdBxnPpXZkBBZXmgatD<strong>zed</strong>INMmRVxWCIeUfXShDvlWCQtgGYXOxsFpdlNHhxUBRAwAZqXdCkFdjYhBGwpVwJngGxgTDdBHVDdufWGbdENvxbOMylqdPWBiKpptHbXuZwFKBAwCGiXNkWxdHwadOqduygveRsmWfpjEWAztZyoLLJjdeTSHuhJRvUjNDPZyJLseXUROuedMIiudevXESwFjuZACswxnUhm'
+                "show": "'PWEtRJYqAKYqMcnJxZSStUOyAJkvdtRgdBxnPpXZkBBZXmgatDze"
+                        "dINMmRVxWCIeUfXShDvlWCQtgGYXOxsFpdlNHhxUBRAwAZqXdCkFd"
+                        "jYhBGwpVwJngGxgTDdBHVDdufWGbdENvxbOMylqdPWBiKpptHbXuZ"
+                        "wFKBAwCGiXNkWxdHwadOqduygveRsmWfpjEWAztZyoLLJjdeTSHuh"
+                        "JRvUjNDPZyJLseXUROuedMIiudevXESwFjuZACswxnUhm', {'man"
+                        "', 'who', 'the', 'any', 'zed', 'hey', 'box'}",
+                "explanation": 'PWEtRJYqAKYqMcnJxZSStUOyAJkvdtRgdBxnPpXZkBBZXm'
+                               'gatD<strong>zed</strong>INMmRVxWCIeUfXShDvlWCQ'
+                               'tgGYXOxsFpdlNHhxUBRAwAZqXdCkFdjYhBGwpVwJngGxgT'
+                               'DdBHVDdufWGbdENvxbOMylqdPWBiKpptHbXuZwFKBAwCGi'
+                               'XNkWxdHwadOqduygveRsmWfpjEWAztZyoLLJjdeTSHuhJR'
+                               'vUjNDPZyJLseXUROuedMIiudevXESwFjuZACswxnUhm'
             },
         ],
         "Extra": [
@@ -61,28 +84,48 @@ class Tests(unittest.TestCase):
                 "explanation": 'Oooooooooooo Thhhhe'
             },
             {
-                "input": [
-                    'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.',
-                    ['far', 'word', 'vokal', 'count', 'tries']],
+                "input": ['Far far away, behind the word mountains, far from '
+                          'the countries Vokalia and Consonantia, there live '
+                          'the blind texts.',
+                          ['far', 'word', 'vokal', 'count', 'tries']],
                 "answer": 5,
-                "show": "'Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.', {'far', 'word', 'count', 'vokal', 'tries'}",
-                "explanation": '<strong>Far</strong> <strong>far</strong> away, behind the <strong>word</strong> mountains, <strong>far</strong> from the <strong>countries</strong> <strong>Vokal</strong>ia and Consonantia, there live the blind texts.'
+                "show": "'Far far away, behind the word mountains, far from "
+                        "the countries Vokalia and Consonantia, there live the"
+                        " blind texts.', {'far', 'word', 'count', 'vokal', "
+                        "'tries'}",
+                "explanation": '<strong>Far</strong> <strong>far</strong> '
+                               'away, behind the <strong>word</strong> '
+                               'mountains, <strong>far</strong> from the '
+                               '<strong>countries</strong> <strong>Vokal'
+                               '</strong>ia and Consonantia, there live the '
+                               'blind texts.'
             },
             {
-                "input": [
-                    'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.',
-                    ['nobody', 'hamlet', 'sophia', 'nikola', 'stephan']],
+                "input": ['The quick, brown fox jumps over a lazy dog. DJs '
+                          'flock by when MTV ax quiz prog. Junk MTV quiz '
+                          'graced by fox whelps.',
+                          ['nobody', 'hamlet', 'sophia', 'nikola', 'stephan']],
                 "answer": 0,
-                "show": "'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.', {'nobody', 'sophia', 'nikola', 'hamlet', 'stephan'}",
-                "explanation": 'The quick, brown fox jumps over a lazy dog. DJs flock by when MTV ax quiz prog. Junk MTV quiz graced by fox whelps.'
+                "show": "'The quick, brown fox jumps over a lazy dog. DJs "
+                        "flock by when MTV ax quiz prog. Junk MTV quiz graced "
+                        "by fox whelps.', {'nobody', 'sophia', 'nikola', "
+                        "'hamlet', 'stephan'}",
+                "explanation": 'The quick, brown fox jumps over a lazy dog. '
+                               'DJs flock by when MTV ax quiz prog. Junk MTV '
+                               'quiz graced by fox whelps.'
             },
             {
-                "input": [
-                    'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born',
-                    ['this', 'that', 'they', 'she', 'hello', 'world']],
+                "input": ['But I must explain to you how all this mistaken '
+                          'idea of denouncing pleasure and praising pain was '
+                          'born',
+                          ['this', 'that', 'they', 'she', 'hello', 'world']],
                 "answer": 1,
-                "show": "'But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born', {'this', 'world', 'she', 'hello', 'they', 'that'}",
-                "explanation": 'But I must explain to you how all <strong>this</strong> mistaken idea of denouncing pleasure and praising pain was born'
+                "show": "'But I must explain to you how all this mistaken idea"
+                        " of denouncing pleasure and praising pain was born', "
+                        "{'this', 'world', 'she', 'hello', 'they', 'that'}",
+                "explanation": 'But I must explain to you how all <strong>this'
+                               '</strong> mistaken idea of denouncing pleasure'
+                               ' and praising pain was born'
             },
         ]
     }

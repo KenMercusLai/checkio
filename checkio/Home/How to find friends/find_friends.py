@@ -47,12 +47,12 @@ if __name__ == '__main__':  # pragma: no cover
     assert check_connection(
         ("dr101-mr99", "mr99-out00", "dr101-out00", "scout1-scout2",
          "scout3-scout1", "scout1-scout4", "scout4-sscout", "sscout-super"),
-        "scout2", "scout3") == True, "Scout Brotherhood"
+        "scout2", "scout3") is True, "Scout Brotherhood"
     assert check_connection(
         ("dr101-mr99", "mr99-out00", "dr101-out00", "scout1-scout2",
          "scout3-scout1", "scout1-scout4", "scout4-sscout", "sscout-super"),
-        "super", "scout2") == True, "Super Scout"
+        "super", "scout2") is True, "Super Scout"
     assert check_connection(
         ("dr101-mr99", "mr99-out00", "dr101-out00", "scout1-scout2",
          "scout3-scout1", "scout1-scout4", "scout4-sscout", "sscout-super"),
-        "dr101", "sscout") == False, "I don't know any scouts."
+        "dr101", "sscout") is False, "I don't know any scouts."

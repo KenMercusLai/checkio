@@ -21,7 +21,8 @@ def longest_palindromic(text):
     for i in text_elements:
         for j in yield_substring(text, i):
             if is_palindromic(j):
-                if len(j) == len(palindromic) and text.find(j) < text.find(palindromic):
+                if (len(j) == len(palindromic) and
+                        text.find(j) < text.find(palindromic)):
                     palindromic = j
                 elif len(j) > len(palindromic):
                     palindromic = j

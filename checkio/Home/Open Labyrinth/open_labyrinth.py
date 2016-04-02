@@ -32,7 +32,8 @@ def checkio(maze_map):
                     connect_map[(row, col)][(row + 1, col)] = 1
                     connect_map[(row + 1, col)][(row, col)] = 1
                 # E
-                if col + 1 < len(maze_map[row]) and maze_map[row][col + 1] == 0:
+                if (col + 1 < len(maze_map[row]) and
+                        maze_map[row][col + 1] == 0):
                     connect_map[(row, col)][(row, col + 1)] = 1
                     connect_map[(row, col + 1)][(row, col)] = 1
                 # W

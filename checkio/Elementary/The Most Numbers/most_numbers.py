@@ -11,7 +11,7 @@ def checkio(*args):
 
 # These "asserts" using only for self-checking and not necessary for
 # auto-testing
-if __name__ == '__main__': # pragma: no cover
+if __name__ == '__main__':  # pragma: no cover
     def almost_equal(checked, correct, significant_digits):
         precision = 0.1 ** significant_digits
         return correct - precision < checked < correct + precision

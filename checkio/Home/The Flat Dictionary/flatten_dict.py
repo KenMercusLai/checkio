@@ -5,7 +5,7 @@ def flatten(dictionary):
             if value:
                 ret = flatten(value)
                 for i in ret:
-                    result[key+'/'+i] = ret[i]
+                    result[key + '/' + i] = ret[i]
             else:
                 result[key] = ''
         else:

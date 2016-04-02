@@ -3,12 +3,13 @@ def checkio(data):
     index = len(data) / 2
     if index == int(index):
         index = int(index)
-        return (data[index]+data[index-1])/2
+        return (data[index] + data[index - 1]) / 2
     else:
         return data[int(index)]
 
-#These "asserts" using only for self-checking and not necessary for auto-testing
-if __name__ == '__main__': #pragma: no cover
+# These "asserts" using only for self-checking and not necessary for
+# auto-testing
+if __name__ == '__main__':  # pragma: no cover
     assert checkio([1, 2, 3, 4, 5]) == 3, "Sorted list"
     assert checkio([3, 1, 2, 5, 3]) == 3, "Not sorted list"
     assert checkio([1, 300, 2, 200, 1]) == 2, "It's not an average"

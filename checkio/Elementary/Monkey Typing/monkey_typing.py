@@ -9,5 +9,6 @@ if __name__ == '__main__':  # pragma: no cover
                        {u"how", u"are", u"you", u"hello"}) == 3, "Example"
     assert count_words(u"Bananas, give me bananas!!!",
                        {u"banana", u"bananas"}) == 2, "BANANAS!"
-    assert count_words(u"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
-                       {u"sum", u"hamlet", u"infinity", u"anything"}) == 1, "Weird text"
+    assert count_words(
+        u"Lorem ipsum dolor sit amet, consectetuer adipiscing elit.",
+        {u"sum", u"hamlet", u"infinity", u"anything"}) == 1, "Weird text"
