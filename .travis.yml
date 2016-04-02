@@ -6,14 +6,29 @@ notifications:
   email: false
 python:
   - '3.4'
+env:
+ - TOX_ENV=isort
+ - TOX_ENV=flake8
+ - TOX_ENV=py3-tests
+ - TOX_ENV=coverage
 before_install:
-  - pip install pytest pytest-cov
-  - pip install coveralls
+  - pip install tox coverage flake8 pytest isort coveralls
 script:
-  - py.test --cov .
+  - curl -Lo travis_after_all.py https://raw.github.com/dmakhno/travis_after_all/master/travis_after_all.py
+  - tox -e $TOX_ENV
 after_success:
-  - coveralls
-  - git config --global user.name "semantic-release (via TravisCI)"
-  - git config --global user.email "ken.mercus.lai@gmail.com"
-  - pip install git+https://github.com/KenMercusLai/python-semantic-release.git
-  - semantic-release publish
+  - python travis_after_all.py https://api.travis-ci.com
+  - export $(cat .to_export_back)
+  - |
+      if [ "$BUILD_LEADER" = "YES" ]; then
+        if [ "$BUILD_AGGREGATE_STATUS" = "others_succeeded" ]; then
+          coveralls
+        fi
+      fi
+  # - coveralls
+  # - git config --global user.name "semantic-release (via TravisCI)"
+  # - git config --global user.email "ken.mercus.lai@gmail.com"
+  # - pip install git+https://github.com/KenMercusLai/python-semantic-release.git
+  # - semantic-release publish
+after_script:
+  - echo leader=$BUILD_LEADER status=$BUILD_AGGREGATE_STATUS
