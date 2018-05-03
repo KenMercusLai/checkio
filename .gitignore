@@ -53,3 +53,7 @@ coverage.xml
 docs/_build/
 
 checkio.sublime-workspace
+.venv
+.pytest_cache
+Pipfile.lock
+Pipfile

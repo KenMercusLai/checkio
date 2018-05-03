@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  checkio:
+    build: .
+    volumes:
+      - .:/opt
+    command: ["make", "watch"]
