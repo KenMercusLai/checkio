@@ -5,13 +5,27 @@ env:
 notifications:
   email: false
 python:
-  - '3.4'
-before_install:
-  - pip install tox coverage flake8 pytest isort coveralls
+  - 3.6
+
+cache:
+  pip: true
+  directories:
+    - env
+env:
+  global:
+    - RANDOM_SEED=0
+
+install:
+  - make install
+
 script:
-  - tox
+  - make check
+  - make test
+
 after_success:
+  - pip install coveralls scrutinizer-ocular
   - coveralls
+  - ocular
   - git config --global user.name "semantic-release (via TravisCI)"
   - git config --global user.email "ken.mercus.lai@gmail.com"
   - pip install git+https://github.com/KenMercusLai/python-semantic-release.git
