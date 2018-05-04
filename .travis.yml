@@ -1,4 +1,8 @@
 language: python
+env:
+  global:
+    secure: aK9xBVr2cjaYeLuYhZRXDRYfXzOTxcHTiDwq/eQre4HmnvDkRzrOl6Ele/hwmgGcHrfsDlAJrENIVAN5pwv/JVldTnVz0Vco41FFEDzhIzfN3J/6cxNfkdlp7r52uJW2GHru2863b538r13U8Rj1OJJbIvdECEM8zBgSqIJv+5IFS4qdrcVr3gRzhwOBrVUB5YoyCQUdNzhAWoRCHw4cX9yWaVM6ddwArLd64vKDU2O2Zgwa0AvS5BaMkfQX/AQVXyxV5pFDS9XlPzjO1JQxnEKOEawMl3oR2Xa3NiImckxqQFqR0TGV5zkr41dNPasQUTOMPpfdFfTeOfcMoVGEuFBYR+2KFsssgX/vlCW9w2G61mxTcABwglvreE09kfTFyM25Ep7/YQ/McDt6X7g9+4odNlXHFhZHXDbEGukfdvp0zlbix2uTRqGlOS0IE0tNxiaZeZQmDYh2+Ry9wyeBZSM739SocQzb2vQPUaB5e2MJN54U+aB5ZYVqYJuXg9lZYEDFBIU7C0xPZJjck+4spxXVFrOGDEsvTeewQXA/r62NjVoYAV5A2kTjmQzdsKWRoEZc4p+6ilIlZPaXtP59EBISLnsiFhwf1hnMkrFu1FwO1Nqmb7KrYDYj/O9lbJiYg9yMdMNGNZtXADgl5nZnTDj8cpt0+j4uGs77bWB7Jxo=
+
 python:
   - 3.6
 
@@ -26,6 +30,10 @@ after_success:
   - pip install coveralls scrutinizer-ocular
   - coveralls
   - ocular
+  - git config --global user.name "semantic-release (via TravisCI)"
+  - git config --global user.email "semantic-release@travis"
+  - pip install python-semantic-release
+  - semantic-release publish
 
 notifications:
   email:

@@ -2,4 +2,7 @@ FROM python:3.6
 
 WORKDIR /opt
 
-RUN pip install pipenv
+RUN apt-get update && \
+    apt-get -y install graphviz && \
+    pip install pipenv && \
+    pipenv run pip install pyinotify
