@@ -1,0 +1,13 @@
+site_name: checkio
+site_description: My solutions for CheckIO tasks
+site_author: Ken Lai
+repo_url: https://github.com/KenMercusLai/checkio
+
+theme: readthedocs
+
+pages:
+- Home: index.md
+- About:
+  - Release Notes: about/changelog.md
+  - Contributing: about/contributing.md
+  - License: about/license.md

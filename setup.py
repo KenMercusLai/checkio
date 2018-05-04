@@ -44,7 +44,7 @@ setuptools.setup(
     name=read_package_variable('__project__'),
     version=read_package_variable('__version__'),
 
-    description="My solutions for checkio tasks",
+    description="My solutions for CheckIO tasks",
     url='https://github.com/KenMercusLai/checkio',
     author='Ken Lai',
     author_email='ken.mercus.lai@gmail.com',

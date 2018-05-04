@@ -1,16 +1,10 @@
 def checkio(data):
-    if (len(data) >= 10 and
-            {str(i) for i in range(0, 10)}.intersection(set(data)) and
-            {chr(i) for i in range(ord('a'), ord('z') + 1)}
-        .intersection(set(data)) and
-            {chr(i) for i in range(ord('A'), ord('Z') + 1)}
-            .intersection(set(data))):
-        # replace this for solution
+    has_numbers = {str(i) for i in range(0, 10)}.intersection(set(data))
+    has_lower_chars = {chr(i) for i in range(ord('a'), ord('z') + 1)}.intersection(set(data))
+    has_upper_chars = {chr(i) for i in range(ord('A'), ord('Z') + 1)}.intersection(set(data))
+    if (len(data) >= 10 and has_numbers and has_lower_chars and has_upper_chars):
         return True
     return False
-
-# Some hints
-# Just check all conditions
 
 
 if __name__ == '__main__':  # pragma: no cover

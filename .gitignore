@@ -1,59 +1,50 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
+# Temporary Python files
+*.pyc
+*.egg-info
+__pycache__
+.ipynb_checkpoints
 
-# C extensions
-*.so
+# Temporary OS files
+Icon*
 
-# Distribution / packaging
-.Python
-env/
-bin/
-build/
-develop-eggs/
-dist/
-eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-*.egg-info/
-.installed.cfg
-*.egg
+# Temporary virtual environment files
+/.*cache/
+/.venv/
 
-# Installer logs
-pip-log.txt
-pip-delete-this-directory.txt
+# Temporary server files
+.env
+*.pid
 
-# Unit test / coverage reports
-htmlcov/
-.tox/
-.coverage
-.cache
-nosetests.xml
-coverage.xml
+# Generated documentation
+/docs/gen/
+/docs/apidocs/
+/site/
+/*.html
+/*.rst
+/docs/*.png
 
-# Translations
-*.mo
+# Google Drive
+*.gdoc
+*.gsheet
+*.gslides
+*.gdraw
 
-# Mr Developer
-.mr.developer.cfg
-.project
-.pydevproject
+# Testing and coverage results
+/.coverage
+/.coverage.*
+/htmlcov/
+/xmlreport/
+/pyunit.xml
+/tmp/
+*.tmp
 
-# Rope
-.ropeproject
+# Build and release directories
+/build/
+/dist/
+*.spec
 
-# Django stuff:
-*.log
-*.pot
+# Sublime Text
+*.sublime-workspace
 
-# Sphinx documentation
-docs/_build/
-
-checkio.sublime-workspace
-.venv
-.pytest_cache
-Pipfile.lock
-Pipfile
+# Eclipse
+.settings

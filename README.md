@@ -1,12 +1,39 @@
-checkio
-=======
-
 Unix: [![Unix Build Status](https://img.shields.io/travis/KenMercusLai/checkio/master.svg)](https://travis-ci.org/KenMercusLai/checkio) Windows: [![Windows Build Status](https://img.shields.io/appveyor/ci/KenMercusLai/checkio/master.svg)](https://ci.appveyor.com/project/KenMercusLai/checkio)<br>Metrics: [![Coverage Status](https://img.shields.io/coveralls/KenMercusLai/checkio/master.svg)](https://coveralls.io/r/KenMercusLai/checkio) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/KenMercusLai/checkio.svg)](https://scrutinizer-ci.com/g/KenMercusLai/checkio/?branch=master)<br>Usage: [![PyPI Version](https://img.shields.io/pypi/v/checkio.svg)](https://pypi.org/project/checkio)
 
 # Overview
 
-I've played CheckIO for years and seems have reached my bottleneck. In retrospect, these solutions are tracks of my improvement of python. Most of them were developed under Python2.7 and are workable under Python 3 but with aweful style. 
+My solutions for CheckIO tasks
 
-I've decide to migrate/test all solutions in Py3 environment one per day. Hoping this could help more people to understand & enjoy python.
+This project was generated with [cookiecutter](https://github.com/audreyr/cookiecutter) using [jacebrowning/template-python](https://github.com/jacebrowning/template-python).
 
-Love it? Star & Fork this!
+# Setup
+
+## Requirements
+
+* Python 3.6+
+
+## Installation
+
+Install checkio with pip:
+
+```sh
+$ pip install checkio
+```
+
+or directly from the source code:
+
+```sh
+$ git clone https://github.com/KenMercusLai/checkio.git
+$ cd checkio
+$ python setup.py install
+```
+
+# Usage
+
+After installation, the package can imported:
+
+```sh
+$ python
+>>> import checkio
+>>> checkio.__version__
+```

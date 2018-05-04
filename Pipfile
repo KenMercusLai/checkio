@@ -1,0 +1,48 @@
+[[source]]
+
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[requires]
+
+python_version = "3.6"
+
+[packages]
+
+checkio = { path = ".", editable = true }
+
+[dev-packages]
+
+# Linters
+pylint = "*"
+pycodestyle = "*"
+pydocstyle = "*"
+
+# Testing
+pytest = "~=3.3"
+pytest-describe = "*"
+pytest-expecter = "~=1.1"
+pytest-random = "*"
+pytest-cov = "*"
+freezegun = "*"
+
+# Reports
+coverage-space = "*"
+
+# Documentation
+mkdocs = "*"
+docutils = "*"
+pygments = "*"
+
+# Build
+wheel = "*"
+pyinstaller = "*"
+
+# Release
+twine = "*"
+
+# Tooling
+sniffer = "*"
+pync = { version = "<2.0", sys_platform = "== 'darwin'" }
+MacFSEvents = { version = "*", sys_platform = "== 'darwin'" }
