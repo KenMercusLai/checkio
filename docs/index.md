@@ -1,3 +1,1 @@
-# checkio
-
-My solutions for checkio tasks
+../README.md
