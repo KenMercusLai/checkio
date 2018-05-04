@@ -1,6 +1,3 @@
-from collections import Counter
-
-
 def long_repeat(line):
     # length the longest substring that consists of the same char
     if len(line) >= 2:
