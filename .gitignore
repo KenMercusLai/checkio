@@ -49,3 +49,17 @@ Icon*
 # Eclipse
 .settings
 .DS_Store
+
+Pipfile
+
+Pipfile\.lock
+
+# Virtual environment
+/.venv/
+
+# Temporary Python files
+*.pyc
+__pycache__/
+
+# Generated project
+/TemplateDemo/

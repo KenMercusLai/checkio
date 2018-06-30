@@ -39,7 +39,7 @@ doctor:  ## Confirm system dependencies are available
 
 # PROJECT DEPENDENCIES ########################################################
 
-DEPENDENCIES := $(VENV)/.pipenv-$(shell bin/checksum Pipfile* setup.py)
+DEPENDENCIES = $(VENV)/.pipenv-$(shell bin/checksum Pipfile* setup.py)
 
 .PHONY: install
 install: $(DEPENDENCIES)
@@ -51,12 +51,17 @@ $(DEPENDENCIES):
 
 # CHECKS ######################################################################
 
+ISORT := pipenv run isort
 PYLINT := pipenv run pylint
 PYCODESTYLE := pipenv run pycodestyle
 PYDOCSTYLE := pipenv run pydocstyle
 
 .PHONY: check
-check: pylint pycodestyle pydocstyle ## Run linters and static analysis
+check: isort pylint pycodestyle pydocstyle ## Run linters and static analysis
+
+.PHONY: isort
+isort: install
+	$(ISORT) $(PACKAGES) $(CONFIG) --recursive --apply
 
 .PHONY: pylint
 pylint: install
@@ -77,18 +82,13 @@ COVERAGE := pipenv run coverage
 COVERAGE_SPACE := pipenv run coverage.space
 
 RANDOM_SEED ?= $(shell date +%s)
-FAILURES := .pytest_cache/v/cache/lastfailed
-REPORTS ?= xmlreport
+FAILURES := .cache/v/cache/lastfailed
 
-PYTEST_CORE_OPTIONS := -ra -vv
-PYTEST_COV_OPTIONS := --cov=$(PACKAGE) --no-cov-on-fail --cov-report=term-missing:skip-covered --cov-report=html
-PYTEST_RANDOM_OPTIONS := --random --random-seed=$(RANDOM_SEED)
-
-PYTEST_OPTIONS := $(PYTEST_CORE_OPTIONS) $(PYTEST_RANDOM_OPTIONS)
-ifndef DISABLE_COVERAGE
-PYTEST_OPTIONS += $(PYTEST_COV_OPTIONS)
+PYTEST_OPTIONS := --random --random-seed=$(RANDOM_SEED)
+ifdef DISABLE_COVERAGE
+PYTEST_OPTIONS += --no-cov --disable-warnings
 endif
-PYTEST_RERUN_OPTIONS := $(PYTEST_CORE_OPTIONS) --last-failed --exitfirst
+PYTEST_RERUN_OPTIONS := --last-failed --exitfirst
 
 .PHONY: test
 test: test-all ## Run unit and integration tests
@@ -96,22 +96,22 @@ test: test-all ## Run unit and integration tests
 .PHONY: test-unit
 test-unit: install
 	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
-	$(PYTEST) $(PYTEST_OPTIONS) $(PACKAGE) --junitxml=$(REPORTS)/unit.xml
+	$(PYTEST) $(PACKAGE) $(PYTEST_OPTIONS)
 	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
 	$(COVERAGE_SPACE) $(REPOSITORY) unit
 
 .PHONY: test-int
 test-int: install
-	@ if test -e $(FAILURES); then $(PYTEST) $(PYTEST_RERUN_OPTIONS) tests; fi
+	@ if test -e $(FAILURES); then $(PYTEST) tests $(PYTEST_RERUN_OPTIONS); fi
 	@ rm -rf $(FAILURES)
-	$(PYTEST) $(PYTEST_OPTIONS) tests --junitxml=$(REPORTS)/integration.xml
+	$(PYTEST) tests $(PYTEST_OPTIONS)
 	$(COVERAGE_SPACE) $(REPOSITORY) integration
 
 .PHONY: test-all
 test-all: install
-	@ if test -e $(FAILURES); then $(PYTEST) $(PYTEST_RERUN_OPTIONS) $(PACKAGES); fi
+	@ if test -e $(FAILURES); then $(PYTEST) $(PACKAGES) $(PYTEST_RERUN_OPTIONS); fi
 	@ rm -rf $(FAILURES)
-	$(PYTEST) $(PYTEST_OPTIONS) $(PACKAGES) --junitxml=$(REPORTS)/overall.xml
+	$(PYTEST) $(PACKAGES) $(PYTEST_OPTIONS)
 	$(COVERAGE_SPACE) $(REPOSITORY) overall
 
 .PHONY: read-coverage
@@ -162,14 +162,11 @@ build: dist
 
 .PHONY: dist
 dist: install $(DIST_FILES)
-$(DIST_FILES): $(MODULES) README.rst CHANGELOG.rst
+$(DIST_FILES): $(MODULES)
 	rm -f $(DIST_FILES)
-	pipenv run python setup.py check --restructuredtext --strict --metadata
+	pipenv run python setup.py check --strict --metadata
 	pipenv run python setup.py sdist
 	pipenv run python setup.py bdist_wheel
-
-%.rst: %.md
-	pandoc -f markdown_github -t rst -o $@ $<
 
 .PHONY: exe
 exe: install $(EXE_FILES)
