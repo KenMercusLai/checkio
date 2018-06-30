@@ -29,13 +29,9 @@ def read_package_variable(key, filename='__init__.py'):
 
 def build_description():
     """Build a description for the project from documentation files."""
-    try:
-        readme = open("README.rst").read()
-        changelog = open("CHANGELOG.rst").read()
-    except IOError:
-        return "<placeholder>"
-    else:
-        return readme + '\n' + changelog
+    readme = open("README.md").read()
+    changelog = open("CHANGELOG.md").read()
+    return readme + '\n' + changelog
 
 
 check_python_version()
@@ -44,7 +40,7 @@ setuptools.setup(
     name=read_package_variable('__project__'),
     version=read_package_variable('__version__'),
 
-    description="My solutions for CheckIO tasks",
+    description="My solutions for checkio tasks",
     url='https://github.com/KenMercusLai/checkio',
     author='Ken Lai',
     author_email='ken.mercus.lai@gmail.com',
@@ -57,6 +53,7 @@ setuptools.setup(
     ]},
 
     long_description=build_description(),
+    long_description_content_type='text/markdown',
     license='MIT',
     classifiers=[
         # TODO: update this list to match your application: https://pypi.org/pypi?%3Aaction=list_classifiers

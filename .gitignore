@@ -20,7 +20,6 @@ Icon*
 /docs/apidocs/
 /site/
 /*.html
-/*.rst
 /docs/*.png
 
 # Google Drive
@@ -33,10 +32,6 @@ Icon*
 /.coverage
 /.coverage.*
 /htmlcov/
-/xmlreport/
-/pyunit.xml
-/tmp/
-*.tmp
 
 # Build and release directories
 /build/
@@ -48,18 +43,5 @@ Icon*
 
 # Eclipse
 .settings
-.DS_Store
+.DS_Store 
 
-Pipfile
-
-Pipfile\.lock
-
-# Virtual environment
-/.venv/
-
-# Temporary Python files
-*.pyc
-__pycache__/
-
-# Generated project
-/TemplateDemo/
