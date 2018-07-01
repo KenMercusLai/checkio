@@ -1,6 +1,8 @@
 import unittest
 
-from ethernet_ring_dimensioning import checkio, generate_path, segment_bandwidth
+from ethernet_ring_dimensioning import (
+    checkio, generate_path, segment_bandwidth,
+)
 
 
 def test_generate_path():
@@ -12,12 +14,12 @@ def test_generate_path():
 
 
 def test_segment_bandwidth():
-    assert segment_bandwidth('AEFCBG', 
-                             [("AC", 5), ("EC", 10), ("AB", 60)]) == {'AE': 5, 
-                                                                      'EF': 15, 
-                                                                      'FC': 15, 
-                                                                      'CB': 0, 
-                                                                      'BG': 60, 
+    assert segment_bandwidth('AEFCBG',
+                             [("AC", 5), ("EC", 10), ("AB", 60)]) == {'AE': 5,
+                                                                      'EF': 15,
+                                                                      'FC': 15,
+                                                                      'CB': 0,
+                                                                      'BG': 60,
                                                                       'GA': 60}
 
 

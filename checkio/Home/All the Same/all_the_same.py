@@ -1,4 +1,4 @@
-from typing import List, Any
+from typing import Any, List
 
 
 def all_the_same(elements: List[Any]) -> bool:
