@@ -4,7 +4,7 @@ from friendly_number import friendly_number
 
 
 class Tests(unittest.TestCase):
-    TESTS = TESTS = {
+    TESTS  = {
         "1. Base": [
             {
                 "input": [102, {}],
