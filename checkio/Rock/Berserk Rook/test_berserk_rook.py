@@ -68,11 +68,11 @@ class Tests(unittest.TestCase):
 
     def test_Basics(self):
         for i in self.TESTS['Basics']:
-            assert berserk_rook(i['input']) == i['answer']
+            assert berserk_rook(*i['input']) == i['answer']
 
     def test_Extra(self):
         for i in self.TESTS['Extra']:
-            assert berserk_rook(i['input']) == i['answer']
+            assert berserk_rook(*i['input']) == i['answer']
 
 
 if __name__ == "__main__":  # pragma: no cover
