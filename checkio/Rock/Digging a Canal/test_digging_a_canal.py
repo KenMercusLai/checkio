@@ -1,6 +1,6 @@
 import unittest
 
-from digging_a_canal import digging_a_canal
+from digging_a_canal import checkio
 
 
 class Tests(unittest.TestCase):
@@ -348,11 +348,11 @@ class Tests(unittest.TestCase):
 
     def test_Basics(self):
         for i in self.TESTS['Basics']:
-            assert digging_a_canal(i['input']) == i['answer']
+            assert checkio(i['input']) == i['answer']
 
     def test_Extra(self):
         for i in self.TESTS['Extra']:
-            assert digging_a_canal(i['input']) == i['answer']
+            assert checkio(i['input']) == i['answer']
 
 
 if __name__ == "__main__":  # pragma: no cover
