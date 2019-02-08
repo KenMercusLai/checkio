@@ -6,7 +6,7 @@ environment:
       PYTHON_MINOR: 6
 
 cache:
-  - .venv -> Makefile
+  - .venv -> poetry.lock
 
 install:
   # Add Make and Python to the PATH
@@ -15,7 +15,8 @@ install:
   - set PATH=C:\Python%PYTHON_MAJOR%%PYTHON_MINOR%;%PATH%
   - set PATH=C:\Python%PYTHON_MAJOR%%PYTHON_MINOR%\Scripts;%PATH%
   # Install system dependencies
-  - pip install pipenv
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - set PATH=%USERPROFILE%\.poetry\bin;%PATH%
   - make doctor
   # Install project dependencies
   - make install

@@ -1,12 +1,19 @@
-site_name: checkio
-site_description: My solutions for CheckIO tasks
+site_name: test_checkio
+site_description: Sample project generated from jacebrowning/template-python.
 site_author: Ken Lai
+
 repo_url: https://github.com/KenMercusLai/checkio
+edit_uri: https://github.com/KenMercusLai/checkio/edit/KenMercusLai/master/docs
 
 theme: readthedocs
 
-pages:
+markdown_extensions:
+  - codehilite:
+      linenums: true
+
+nav:
 - Home: index.md
+- Advanced: advanced.md
 - About:
   - Release Notes: about/changelog.md
   - Contributing: about/contributing.md

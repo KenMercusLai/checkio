@@ -10,10 +10,11 @@ python:
 cache:
   pip: true
   directories:
-    - .venv
+    - ${VIRTUAL_ENV}
 
 before_install:
-  - pip install pipenv
+  - curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
   - make doctor
 
 install:

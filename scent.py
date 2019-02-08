@@ -1,12 +1,9 @@
 """Configuration file for sniffer."""
-# pylint: disable=superfluous-parens,bad-continuation
 
-import subprocess
 import time
+import subprocess
 
-from sniffer.api import file_validator, runnable, select_runnable
-
-
+from sniffer.api import select_runnable, file_validator, runnable
 try:
     from pync import Notifier
 except ImportError:
@@ -18,7 +15,7 @@ else:
 watch_paths = ["checkio", "tests"]
 
 
-class Options(object):
+class Options:
     group = int(time.time())  # unique per run
     show_coverage = False
     rerun_args = None
