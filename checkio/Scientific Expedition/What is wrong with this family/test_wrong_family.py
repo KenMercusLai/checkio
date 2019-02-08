@@ -32,124 +32,99 @@ class Tests(unittest.TestCase):
     TESTS = {
         "Basics": [
             {
-                "input": [
-                    ['Logan', 'Mike']
-                ],
+                "input": [['Logan', 'Mike']],
                 "answer": True,
-                "explanation": "One father, one son"
+                "explanation": "One father, one son",
             },
             {
-                "input": [
-                    ['Logan', 'Mike'],
-                    ['Logan', 'Jack']
-                ],
+                "input": [['Logan', 'Mike'], ['Logan', 'Jack']],
                 "answer": True,
-                "explanation": "Two sons"
+                "explanation": "Two sons",
             },
             {
-                "input": [
-                    ['Logan', 'Mike'],
-                    ['Logan', 'Jack'],
-                    ['Mike', 'Alexander']
-                ],
+                "input": [['Logan', 'Mike'], ['Logan', 'Jack'], ['Mike', 'Alexander']],
                 "answer": True,
-                "explanation": "Grandfather"
+                "explanation": "Grandfather",
             },
             {
-                "input": [
-                    ['Logan', 'Mike'],
-                    ['Logan', 'Jack'],
-                    ['Mike', 'Logan']
-                ],
+                "input": [['Logan', 'Mike'], ['Logan', 'Jack'], ['Mike', 'Logan']],
                 "answer": False,
-                "explanation": "Can you be a father for your father?"
+                "explanation": "Can you be a father for your father?",
             },
             {
-                "input": [
-                    ['Logan', 'Mike'],
-                    ['Logan', 'Jack'],
-                    ['Mike', 'Jack']
-                ],
+                "input": [['Logan', 'Mike'], ['Logan', 'Jack'], ['Mike', 'Jack']],
                 "answer": False,
-                "explanation": "Can you be a father for your brother?"
+                "explanation": "Can you be a father for your brother?",
             },
             {
                 "input": [
                     ['Logan', 'William'],
                     ['Logan', 'Jack'],
-                    ['Mike', 'Alexander']
+                    ['Mike', 'Alexander'],
                 ],
                 "answer": False,
-                "explanation": "Looks like Mike is stranger in Logan's family"
-            }
+                "explanation": "Looks like Mike is stranger in Logan's family",
+            },
         ],
         "Extra": [
             {
-                "input": [
-                    ['Logan', 'William'],
-                    ['Logan', 'Jack'],
-                    ['Mike', 'Mike']
-                ],
+                "input": [['Logan', 'William'], ['Logan', 'Jack'], ['Mike', 'Mike']],
                 "answer": False,
-                "explanation": "Can you be a father for yourself?"
+                "explanation": "Can you be a father for yourself?",
             },
             {
                 "input": [
                     ['Logan', 'William'],
                     ['William', 'Jack'],
                     ['Jack', 'Mike'],
-                    ['Mike', 'Alexander']
+                    ['Mike', 'Alexander'],
                 ],
                 "answer": True,
-                "explanation": "Long family"
+                "explanation": "Long family",
             },
             {
                 "input": [
                     ['Logan', 'William'],
                     ['Mike', 'Alexander'],
-                    ['William', 'Alexander']
+                    ['William', 'Alexander'],
                 ],
                 "answer": False,
-                "explanation": "Who's Your Daddy?"
+                "explanation": "Who's Your Daddy?",
             },
             {
                 "input": [
                     ['Logan', 'Mike'],
                     ['Alexander', 'Jack'],
-                    ['Jack', 'Alexander']
+                    ['Jack', 'Alexander'],
                 ],
                 "answer": False,
-                "explanation": "Can you be a father of your father?"
+                "explanation": "Can you be a father of your father?",
             },
             {
-                "input": [
-                    ['Logan', 'Mike'],
-                    ['Alexander', 'Jack'],
-                    ['Jack', 'Logan']
-                ],
+                "input": [['Logan', 'Mike'], ['Alexander', 'Jack'], ['Jack', 'Logan']],
                 "answer": True,
-                "explanation": "Family connections can be listed in any directions"
+                "explanation": "Family connections can be listed in any directions",
             },
             {
                 "input": [
                     ['Logan', 'Mike'],
                     ['Alexander', 'Jack'],
                     ['Jack', 'Logan'],
-                    ['Alex', 'Bob']
+                    ['Alex', 'Bob'],
                 ],
                 "answer": False,
-                "explanation": "It's complex. You can not be a father of your grandfather and Alex is not in Logan's Family."
+                "explanation": "It's complex. You can not be a father of your grandfather and Alex is not in Logan's Family.",
             },
             {
                 "input": [
                     ['Logan', 'Mike'],
                     ['Alexander', 'Jack'],
-                    ['Mike', 'Alexander']
+                    ['Mike', 'Alexander'],
                 ],
                 "answer": True,
-                "explanation": "Grandfather, Father, Son."
+                "explanation": "Grandfather, Father, Son.",
             },
-        ]
+        ],
     }
 
     def test_Basics(self):

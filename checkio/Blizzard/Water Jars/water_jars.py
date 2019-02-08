@@ -3,7 +3,6 @@ gSecond = 0
 
 
 class AStar(object):
-
     def __init__(self, Goal):
         self.Goal = Goal
 
@@ -40,7 +39,6 @@ class AStar(object):
 
 
 class AStarNode(object):
-
     def __init__(self, Status, G, Parent):
         self.G = G
         self.H = None
@@ -64,7 +62,6 @@ class AStarNode(object):
 
 
 class WaterJarPuzzle(AStar):
-
     def __init__(self, Goal):
         super(WaterJarPuzzle, self).__init__(Goal)
 
@@ -80,7 +77,6 @@ class WaterJarPuzzle(AStar):
 
 
 class WaterJarPuzzleNode(AStarNode):
-
     def __init__(self, Status, G, Parent):
         super(WaterJarPuzzleNode, self).__init__(Status, G, Parent)
 
@@ -96,34 +92,36 @@ class WaterJarPuzzleNode(AStarNode):
         result.append(NewNode)
         # fill first jar
         if self.Status[0] < gFirst:
-            NewNode = WaterJarPuzzleNode((gFirst, self.Status[1]),
-                                         self.G + 1, self)
+            NewNode = WaterJarPuzzleNode((gFirst, self.Status[1]), self.G + 1, self)
             NewNode.Comment = '01'
             result.append(NewNode)
         # fill second jar
         if self.Status[1] < gSecond:
-            NewNode = WaterJarPuzzleNode((self.Status[0], gSecond),
-                                         self.G + 1, self)
+            NewNode = WaterJarPuzzleNode((self.Status[0], gSecond), self.G + 1, self)
             NewNode.Comment = '02'
             result.append(NewNode)
         # first -> second
         if self.Status[1] < gSecond:
             if (gSecond - self.Status[1]) >= self.Status[0]:
-                NewNode = WaterJarPuzzleNode((0, sum(self.Status)),
-                                             self.G + 1, self)
+                NewNode = WaterJarPuzzleNode((0, sum(self.Status)), self.G + 1, self)
             else:
-                NewNode = WaterJarPuzzleNode((self.Status[0] - (gSecond - self.Status[1]), gSecond),
-                                             self.G + 1, self)
+                NewNode = WaterJarPuzzleNode(
+                    (self.Status[0] - (gSecond - self.Status[1]), gSecond),
+                    self.G + 1,
+                    self,
+                )
             NewNode.Comment = '12'
             result.append(NewNode)
         # second -> first
         if self.Status[0] < gFirst:
             if (gFirst - self.Status[0]) >= self.Status[1]:
-                NewNode = WaterJarPuzzleNode((sum(self.Status), 0),
-                                             self.G + 1, self)
+                NewNode = WaterJarPuzzleNode((sum(self.Status), 0), self.G + 1, self)
             else:
-                NewNode = WaterJarPuzzleNode((gFirst, self.Status[1] - (gFirst - self.Status[0])),
-                                             self.G + 1, self)
+                NewNode = WaterJarPuzzleNode(
+                    (gFirst, self.Status[1] - (gFirst - self.Status[0])),
+                    self.G + 1,
+                    self,
+                )
             NewNode.Comment = '21'
             result.append(NewNode)
         return result
@@ -148,13 +146,14 @@ if __name__ == '__main__':
             "02": lambda f, s: (f, second_volume),
             "12": lambda f, s: (
                 f - (second_volume - s if f > second_volume - s else f),
-                second_volume if f > second_volume - s else s + f),
+                second_volume if f > second_volume - s else s + f,
+            ),
             "21": lambda f, s: (
                 first_volume if s > first_volume - f else s + f,
                 s - (first_volume - f if s > first_volume - f else s),
             ),
             "10": lambda f, s: (0, s),
-            "20": lambda f, s: (f, 0)
+            "20": lambda f, s: (f, 0),
         }
         first, second = 0, 0
         result = func(*initial_data)

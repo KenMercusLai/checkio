@@ -29,41 +29,29 @@ class Tests(unittest.TestCase):
         assert f.remove({"And", "Or"}) is True
 
     def test_Names(self):
-        f = Friends(({"nikola", "sophia"},
-                     {"stephen", "robot"},
-                     {"sophia", "pilot"}))
+        f = Friends(({"nikola", "sophia"}, {"stephen", "robot"}, {"sophia", "pilot"}))
         n = f.names()
         assert n == {"nikola", "sophia", "robot", "pilot", "stephen"}
 
-        f = Friends(({"nikola", "sophia"},
-                     {"stephen", "robot"},
-                     {"sophia", "pilot"}))
+        f = Friends(({"nikola", "sophia"}, {"stephen", "robot"}, {"sophia", "pilot"}))
         f.remove({"stephen", "robot"})
         n = f.names()
         assert n == {"nikola", "sophia", "pilot"}
 
     def test_Connected(self):
-        f = Friends(({"nikola", "sophia"},
-                     {"stephen", "robot"},
-                     {"sophia", "pilot"}))
+        f = Friends(({"nikola", "sophia"}, {"stephen", "robot"}, {"sophia", "pilot"}))
         n = f.connected("nikola")
         assert n == {"sophia"}
 
-        f = Friends(({"nikola", "sophia"},
-                     {"stephen", "robot"},
-                     {"sophia", "pilot"}))
+        f = Friends(({"nikola", "sophia"}, {"stephen", "robot"}, {"sophia", "pilot"}))
         n = f.connected("sophia")
         assert n == {"nikola", "pilot"}
 
-        f = Friends(({"nikola", "sophia"},
-                     {"stephen", "robot"},
-                     {"sophia", "pilot"}))
+        f = Friends(({"nikola", "sophia"}, {"stephen", "robot"}, {"sophia", "pilot"}))
         n = f.connected("DDD")
         assert n == set()
 
-        f = Friends(({"nikola", "sophia"},
-                     {"stephen", "robot"},
-                     {"sophia", "pilot"}))
+        f = Friends(({"nikola", "sophia"}, {"stephen", "robot"}, {"sophia", "pilot"}))
         f.add({"sophia", "stephen"})
         f.remove({"sophia", "nikola"})
         n = f.connected("sophia")

@@ -17,9 +17,11 @@ def checkio(game_result):
 
     for i in check_lines:
         a, b, c = i
-        if (game_result[a[0]][a[1]] != '.'
-                and game_result[a[0]][a[1]] == game_result[b[0]][b[1]]
-                and game_result[b[0]][b[1]] == game_result[c[0]][c[1]]):
+        if (
+            game_result[a[0]][a[1]] != '.'
+            and game_result[a[0]][a[1]] == game_result[b[0]][b[1]]
+            and game_result[b[0]][b[1]] == game_result[c[0]][c[1]]
+        ):
             return game_result[a[0]][a[1]]
     return "D"
 
@@ -27,19 +29,7 @@ def checkio(game_result):
 if __name__ == '__main__':  # pragma: no cover
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
-    assert checkio([
-        "X.O",
-        "XX.",
-        "XOO"]) == "X", "Xs wins"
-    assert checkio([
-        "OO.",
-        "XOX",
-        "XOX"]) == "O", "Os wins"
-    assert checkio([
-        "OOX",
-        "XXO",
-        "OXX"]) == "D", "Draw"
-    assert checkio([
-        "O.X",
-        "XX.",
-        "XOO"]) == "X", "Xs wins again"
+    assert checkio(["X.O", "XX.", "XOO"]) == "X", "Xs wins"
+    assert checkio(["OO.", "XOX", "XOX"]) == "O", "Os wins"
+    assert checkio(["OOX", "XXO", "OXX"]) == "D", "Draw"
+    assert checkio(["O.X", "XX.", "XOO"]) == "X", "Xs wins again"

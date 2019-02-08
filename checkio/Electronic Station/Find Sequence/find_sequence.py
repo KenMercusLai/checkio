@@ -10,14 +10,16 @@ def shear_45_ccw(array, m):
 def generateSlice(data):
     for aLine in data:
         for i in range(len(aLine) - 3):
-            yield aLine[i:i + 4]
+            yield aLine[i : i + 4]
 
 
 def isSequence(data):
-    if (data[0] == data[1]) and \
-       (data[1] == data[2]) and \
-       (data[2] == data[3]) and \
-       (type(data[0]) == int):
+    if (
+        (data[0] == data[1])
+        and (data[1] == data[2])
+        and (data[2] == data[3])
+        and (type(data[0]) == int)
+    ):
         return True
 
 
@@ -52,30 +54,34 @@ def checkio(data):
 # These "asserts" using only for self-checking
 # and not necessary for auto-testing
 if __name__ == '__main__':
-    assert checkio([
-        [1, 2, 1, 1],
-        [1, 1, 4, 1],
-        [1, 3, 1, 6],
-        [1, 7, 2, 5]
-    ]) == True, "Vertical"
-    assert checkio([
-        [7, 1, 4, 1],
-        [1, 2, 5, 2],
-        [3, 4, 1, 3],
-        [1, 1, 8, 1]
-    ]) == False, "Nothing here"
-    assert checkio([
-        [2, 1, 1, 6, 1],
-        [1, 3, 2, 1, 1],
-        [4, 1, 1, 3, 1],
-        [5, 5, 5, 5, 5],
-        [1, 1, 3, 1, 1]
-    ]) == True, "Long Horizontal"
-    assert checkio([
-        [7, 1, 1, 8, 1, 1],
-        [1, 1, 7, 3, 1, 5],
-        [2, 3, 1, 2, 5, 1],
-        [1, 1, 1, 5, 1, 4],
-        [4, 6, 5, 1, 3, 1],
-        [1, 1, 9, 1, 2, 1]
-    ]) == True, "Diagonal"
+    assert (
+        checkio([[1, 2, 1, 1], [1, 1, 4, 1], [1, 3, 1, 6], [1, 7, 2, 5]]) == True
+    ), "Vertical"
+    assert (
+        checkio([[7, 1, 4, 1], [1, 2, 5, 2], [3, 4, 1, 3], [1, 1, 8, 1]]) == False
+    ), "Nothing here"
+    assert (
+        checkio(
+            [
+                [2, 1, 1, 6, 1],
+                [1, 3, 2, 1, 1],
+                [4, 1, 1, 3, 1],
+                [5, 5, 5, 5, 5],
+                [1, 1, 3, 1, 1],
+            ]
+        )
+        == True
+    ), "Long Horizontal"
+    assert (
+        checkio(
+            [
+                [7, 1, 1, 8, 1, 1],
+                [1, 1, 7, 3, 1, 5],
+                [2, 3, 1, 2, 5, 1],
+                [1, 1, 1, 5, 1, 4],
+                [4, 6, 5, 1, 3, 1],
+                [1, 1, 9, 1, 2, 1],
+            ]
+        )
+        == True
+    ), "Diagonal"

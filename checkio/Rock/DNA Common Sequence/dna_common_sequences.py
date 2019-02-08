@@ -3,21 +3,19 @@
 
 
 def common(first, second):
-    dp_rec = [[('', )] * (len(second) + 1) for i in range(len(first) + 1)]
+    dp_rec = [[('',)] * (len(second) + 1) for i in range(len(first) + 1)]
     for i in range(1, len(first) + 1):
         for j in range(1, len(second) + 1):
             # same ending
             if first[i - 1] == second[j - 1]:
-                dp_rec[i][j] = tuple((s + first[i - 1])
-                                     for s in dp_rec[i - 1][j - 1])
+                dp_rec[i][j] = tuple((s + first[i - 1]) for s in dp_rec[i - 1][j - 1])
             # otherwise depend on LCS size
             else:
                 lcs_left_len = len(dp_rec[i][j - 1][0])
                 lcs_up_len = len(dp_rec[i - 1][j][0])
                 if lcs_left_len == lcs_up_len:
                     # remove duplicates
-                    dp_rec[i][j] = tuple(set(dp_rec[i][j - 1]
-                                             + dp_rec[i - 1][j]))
+                    dp_rec[i][j] = tuple(set(dp_rec[i][j - 1] + dp_rec[i - 1][j]))
                 elif lcs_left_len > lcs_up_len:
                     dp_rec[i][j] = dp_rec[i][j - 1]
                 else:

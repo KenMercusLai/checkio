@@ -33,81 +33,81 @@ class Tests(unittest.TestCase):
             {
                 "input": "10:37:49",
                 "answer": ".- .... : .-- .--- : -.. -..-",
-                "explanation": "103749"
+                "explanation": "103749",
             },
             {
                 "input": "21:34:56",
                 "answer": "-. ...- : .-- .-.. : -.- .--.",
-                "explanation": "213456"
+                "explanation": "213456",
             },
             {
                 "input": "00:1:02",
                 "answer": ".. .... : ... ...- : ... ..-.",
-                "explanation": "000102"
+                "explanation": "000102",
             },
             {
                 "input": "23:59:59",
                 "answer": "-. ..-- : -.- -..- : -.- -..-",
-                "explanation": "235959"
+                "explanation": "235959",
             },
             {
                 "input": "0:10:2",
                 "answer": ".. .... : ..- .... : ... ..-.",
-                "explanation": "001002"
-            }
+                "explanation": "001002",
+            },
         ],
         "Extra": [
             {
                 "input": "17:0:28",
                 "answer": ".- .--- : ... .... : .-. -...",
-                "explanation": "170028"
+                "explanation": "170028",
             },
             {
                 "input": "7:41:37",
                 "answer": ".. .--- : -.. ...- : .-- .---",
-                "explanation": "074137"
+                "explanation": "074137",
             },
             {
                 "input": "4:25:13",
                 "answer": ".. .-.. : .-. .-.- : ..- ..--",
-                "explanation": "042513"
+                "explanation": "042513",
             },
             {
                 "input": "15:18:8",
                 "answer": ".- .-.- : ..- -... : ... -...",
-                "explanation": "151808"
+                "explanation": "151808",
             },
             {
                 "input": "2:32:41",
                 "answer": ".. ..-. : .-- ..-. : -.. ...-",
-                "explanation": "023241"
+                "explanation": "023241",
             },
             {
                 "input": "9:44:31",
                 "answer": ".. -..- : -.. .-.. : .-- ...-",
-                "explanation": "094431"
+                "explanation": "094431",
             },
             {
                 "input": "3:8:2",
                 "answer": ".. ..-- : ... -... : ... ..-.",
-                "explanation": "030802"
+                "explanation": "030802",
             },
             {
                 "input": "5:1:9",
                 "answer": ".. .-.- : ... ...- : ... -..-",
-                "explanation": "050109"
+                "explanation": "050109",
             },
             {
                 "input": "09:02:08",
                 "answer": ".. -..- : ... ..-. : ... -...",
-                "explanation": "090208"
+                "explanation": "090208",
             },
             {
                 "input": "13:5:3",
                 "answer": ".- ..-- : ... .-.- : ... ..--",
-                "explanation": "130503"
-            }
-        ]
+                "explanation": "130503",
+            },
+        ],
     }
 
     def test_Basics(self):

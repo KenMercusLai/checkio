@@ -2,8 +2,12 @@ from typing import Any, List
 
 
 def all_the_same(elements: List[Any]) -> bool:
-    is_same = all([1 if elements[index + 1] == value else 0
-                  for index, value in enumerate(elements[:-1])])
+    is_same = all(
+        [
+            1 if elements[index + 1] == value else 0
+            for index, value in enumerate(elements[:-1])
+        ]
+    )
     return is_same
 
 

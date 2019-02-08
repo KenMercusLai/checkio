@@ -6,33 +6,14 @@ from most_frequent import most_frequent
 class Tests(unittest.TestCase):
     TESTS = {
         "Basics": [
-            {
-                "input": [
-                    'a', 'b', 'c',
-                    'a', 'b',
-                    'a'
-                ],
-                "answer": 'a'
-            },
-            {
-                "input": ['a', 'a', 'bi', 'bi', 'bi'],
-                "answer": 'bi'
-            }
+            {"input": ['a', 'b', 'c', 'a', 'b', 'a'], "answer": 'a'},
+            {"input": ['a', 'a', 'bi', 'bi', 'bi'], "answer": 'bi'},
         ],
         "Extra": [
-            {
-                "input": ['a'],
-                "answer": 'a'
-            },
-            {
-                "input": ['a', 'a'],
-                "answer": 'a'
-            },
-            {
-                "input": ['a', 'a', 'z'],
-                "answer": 'a'
-            }
-        ]
+            {"input": ['a'], "answer": 'a'},
+            {"input": ['a', 'a'], "answer": 'a'},
+            {"input": ['a', 'a', 'z'], "answer": 'a'},
+        ],
     }
 
     def test_Basics(self):

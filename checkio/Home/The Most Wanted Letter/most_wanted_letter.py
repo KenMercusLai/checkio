@@ -10,8 +10,11 @@ def checkio(text):
     # after having count numbers for all letter, sort them for the counter
     # number the letter bigger number first, if the number is the same,
     # 'smaller' letter comes first
-    return max(result,
-               key=lambda x: '{0:0100000d}'.format(result[x]) + chr(ord('z') - ord(x) + ord('a')))
+    return max(
+        result,
+        key=lambda x: '{0:0100000d}'.format(result[x])
+        + chr(ord('z') - ord(x) + ord('a')),
+    )
 
 
 if __name__ == '__main__':  # pragma: no cover

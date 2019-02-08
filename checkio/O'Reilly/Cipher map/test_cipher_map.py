@@ -8,218 +8,93 @@ class Tests(unittest.TestCase):
         "Basics": [
             {
                 "input": [
-                    [
-                        "X...",
-                        "..X.",
-                        "X..X",
-                        "...."
-                    ],
-                    [
-                        "itdf",
-                        "gdce",
-                        "aton",
-                        "qrdi"
-                    ]
+                    ["X...", "..X.", "X..X", "...."],
+                    ["itdf", "gdce", "aton", "qrdi"],
                 ],
-                "answer": "icantforgetiddqd"
+                "answer": "icantforgetiddqd",
             },
             {
                 "input": [
-                    [
-                        "....",
-                        "X..X",
-                        ".X..",
-                        "...X"
-                    ],
-                    [
-                        "xhwc",
-                        "rsqx",
-                        "xqzz",
-                        "fyzr"
-                    ]
+                    ["....", "X..X", ".X..", "...X"],
+                    ["xhwc", "rsqx", "xqzz", "fyzr"],
                 ],
-                "answer": "rxqrwsfzxqxzhczy"
+                "answer": "rxqrwsfzxqxzhczy",
             },
-
         ],
         "Edge": [
             {
                 "input": [
-                    [
-                        "X...",
-                        ".X..",
-                        "..X.",
-                        "...X",
-                    ],
-                    [
-                        "aaaa",
-                        "aaaa",
-                        "aaaa",
-                        "aaaa"
-                    ]
+                    ["X...", ".X..", "..X.", "...X"],
+                    ["aaaa", "aaaa", "aaaa", "aaaa"],
                 ],
-                "answer": "aaaaaaaaaaaaaaaa"
+                "answer": "aaaaaaaaaaaaaaaa",
             },
             {
                 "input": [
-                    [
-                        "X..X",
-                        "....",
-                        "....",
-                        "X..X",
-                    ],
-                    [
-                        "abcd",
-                        "efgh",
-                        "ijkl",
-                        "mnop"
-                    ]
+                    ["X..X", "....", "....", "X..X"],
+                    ["abcd", "efgh", "ijkl", "mnop"],
                 ],
-                "answer": "admpadmpadmpadmp"
+                "answer": "admpadmpadmpadmp",
             },
             {
                 "input": [
-                    [
-                        "....",
-                        ".XX.",
-                        ".XX.",
-                        "....",
-                    ],
-                    [
-                        "abcd",
-                        "efgh",
-                        "ijkl",
-                        "mnop"
-                    ]
+                    ["....", ".XX.", ".XX.", "...."],
+                    ["abcd", "efgh", "ijkl", "mnop"],
                 ],
-                "answer": "fgjkfgjkfgjkfgjk"
+                "answer": "fgjkfgjkfgjkfgjk",
             },
         ],
         "Extra": [
             {
                 "input": [
-                    [
-                        "X...",
-                        ".X..",
-                        "..X.",
-                        "...X"
-                    ],
-                    [
-                        "azbx",
-                        "azbx",
-                        "azbx",
-                        "azbx"
-                    ]
+                    ["X...", ".X..", "..X.", "...X"],
+                    ["azbx", "azbx", "azbx", "azbx"],
                 ],
-                "answer": "azbxxbzaazbxxbza"
+                "answer": "azbxxbzaazbxxbza",
             },
             {
                 "input": [
-                    [
-                        "XXXX",
-                        "....",
-                        "....",
-                        "....",
-                    ],
-                    [
-                        "call",
-                        "rsqi",
-                        "epzn",
-                        "yeee"
-                    ]
+                    ["XXXX", "....", "....", "...."],
+                    ["call", "rsqi", "epzn", "yeee"],
                 ],
-                "answer": "calllineyeeecrey"
+                "answer": "calllineyeeecrey",
             },
             {
                 "input": [
-                    [
-                        "X...",
-                        "X...",
-                        "X...",
-                        "X...",
-                    ],
-                    [
-                        "call",
-                        "rsqi",
-                        "epzn",
-                        "yeee"
-                    ]
+                    ["X...", "X...", "X...", "X..."],
+                    ["call", "rsqi", "epzn", "yeee"],
                 ],
-                "answer": "creycalllineyeee"
+                "answer": "creycalllineyeee",
             },
             {
                 "input": [
-                    [
-                        "X...",
-                        "..X.",
-                        ".X..",
-                        "...X",
-                    ],
-                    [
-                        "name",
-                        "goto",
-                        "line",
-                        "nope"
-                    ]
+                    ["X...", "..X.", ".X..", "...X"],
+                    ["name", "goto", "line", "nope"],
                 ],
-                "answer": "ntieeonnntieeonn"
+                "answer": "ntieeonnntieeonn",
             },
             {
                 "input": [
-                    [
-                        "XX..",
-                        "....",
-                        "....",
-                        "..XX",
-                    ],
-                    [
-                        "cree",
-                        "band",
-                        "test",
-                        "yepp"
-                    ]
+                    ["XX..", "....", "....", "..XX"],
+                    ["cree", "band", "test", "yepp"],
                 ],
-                "answer": "crppedtycrppedty"
+                "answer": "crppedtycrppedty",
             },
             {
                 "input": [
-                    [
-                        "....",
-                        "X..X",
-                        "X..X",
-                        "....",
-                    ],
-                    [
-                        "cree",
-                        "band",
-                        "test",
-                        "yepp"
-                    ]
+                    ["....", "X..X", "X..X", "...."],
+                    ["cree", "band", "test", "yepp"],
                 ],
-                "answer": "bdttreepbdttreep"
+                "answer": "bdttreepbdttreep",
             },
-
             {
                 "input": [
-                    [
-                        "...X",
-                        "..X.",
-                        "..X.",
-                        "...X",
-                    ],
-                    [
-                        "aazz",
-                        "aazz",
-                        "aazz",
-                        "aazz"
-                    ]
+                    ["...X", "..X.", "..X.", "...X"],
+                    ["aazz", "aazz", "aazz", "aazz"],
                 ],
-                "answer": "zzzzazazaaaaazaz"
+                "answer": "zzzzazazaaaaazaz",
             },
-
-
-
-        ]
+        ],
     }
 
     def test_Basics(self):

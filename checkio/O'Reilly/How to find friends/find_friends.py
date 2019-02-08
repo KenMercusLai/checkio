@@ -24,8 +24,11 @@ def check_connection(network, first, second):
     for i in all_people:
         # get indexes of groups that shares people
         # generate a reversed index to avoid issue when removing item from list
-        index_list = [j for j in range(len(connection_groups) - 1, -1, -1)
-                      if i in connection_groups[j]]
+        index_list = [
+            j
+            for j in range(len(connection_groups) - 1, -1, -1)
+            if i in connection_groups[j]
+        ]
 
         if len(index_list) > 1:
             temp = []
@@ -44,15 +47,54 @@ def check_connection(network, first, second):
 if __name__ == '__main__':  # pragma: no cover
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
-    assert check_connection(
-        ("dr101-mr99", "mr99-out00", "dr101-out00", "scout1-scout2",
-         "scout3-scout1", "scout1-scout4", "scout4-sscout", "sscout-super"),
-        "scout2", "scout3") is True, "Scout Brotherhood"
-    assert check_connection(
-        ("dr101-mr99", "mr99-out00", "dr101-out00", "scout1-scout2",
-         "scout3-scout1", "scout1-scout4", "scout4-sscout", "sscout-super"),
-        "super", "scout2") is True, "Super Scout"
-    assert check_connection(
-        ("dr101-mr99", "mr99-out00", "dr101-out00", "scout1-scout2",
-         "scout3-scout1", "scout1-scout4", "scout4-sscout", "sscout-super"),
-        "dr101", "sscout") is False, "I don't know any scouts."
+    assert (
+        check_connection(
+            (
+                "dr101-mr99",
+                "mr99-out00",
+                "dr101-out00",
+                "scout1-scout2",
+                "scout3-scout1",
+                "scout1-scout4",
+                "scout4-sscout",
+                "sscout-super",
+            ),
+            "scout2",
+            "scout3",
+        )
+        is True
+    ), "Scout Brotherhood"
+    assert (
+        check_connection(
+            (
+                "dr101-mr99",
+                "mr99-out00",
+                "dr101-out00",
+                "scout1-scout2",
+                "scout3-scout1",
+                "scout1-scout4",
+                "scout4-sscout",
+                "sscout-super",
+            ),
+            "super",
+            "scout2",
+        )
+        is True
+    ), "Super Scout"
+    assert (
+        check_connection(
+            (
+                "dr101-mr99",
+                "mr99-out00",
+                "dr101-out00",
+                "scout1-scout2",
+                "scout3-scout1",
+                "scout1-scout4",
+                "scout4-sscout",
+                "sscout-super",
+            ),
+            "dr101",
+            "sscout",
+        )
+        is False
+    ), "I don't know any scouts."

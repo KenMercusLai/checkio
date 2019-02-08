@@ -1,8 +1,12 @@
 def checkio(data):
     has_numbers = {str(i) for i in range(0, 10)}.intersection(set(data))
-    has_lower_chars = {chr(i) for i in range(ord('a'), ord('z') + 1)}.intersection(set(data))
-    has_upper_chars = {chr(i) for i in range(ord('A'), ord('Z') + 1)}.intersection(set(data))
-    if (len(data) >= 10 and has_numbers and has_lower_chars and has_upper_chars):
+    has_lower_chars = {chr(i) for i in range(ord('a'), ord('z') + 1)}.intersection(
+        set(data)
+    )
+    has_upper_chars = {chr(i) for i in range(ord('A'), ord('Z') + 1)}.intersection(
+        set(data)
+    )
+    if len(data) >= 10 and has_numbers and has_lower_chars and has_upper_chars:
         return True
     return False
 

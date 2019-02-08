@@ -4,12 +4,17 @@ from itertools import combinations
 
 COLS = "abcdefgh"
 ROWS = "12345678"
-THREATS = {c + r: set(
-    [c + ROWS[k] for k in range(8)]
-    + [COLS[k] + r for k in range(8)]
-    + [COLS[k] + ROWS[i - j + k] for k in range(8) if 0 <= i - j + k < 8]
-    + [COLS[k] + ROWS[- k + i + j] for k in range(8) if 0 <= - k + i + j < 8])
-    for i, r in enumerate(ROWS) for j, c in enumerate(COLS)}
+THREATS = {
+    c
+    + r: set(
+        [c + ROWS[k] for k in range(8)]
+        + [COLS[k] + r for k in range(8)]
+        + [COLS[k] + ROWS[i - j + k] for k in range(8) if 0 <= i - j + k < 8]
+        + [COLS[k] + ROWS[-k + i + j] for k in range(8) if 0 <= -k + i + j < 8]
+    )
+    for i, r in enumerate(ROWS)
+    for j, c in enumerate(COLS)
+}
 
 
 def checkAvailablePosition(board, placed):
@@ -29,7 +34,8 @@ def place_queens(placed):
     # print availablePositions
     remainedQueens = 8 - len(placed)
     queenPositionCombinations = [
-        i for i in combinations(availablePositions, remainedQueens)]
+        i for i in combinations(availablePositions, remainedQueens)
+    ]
     # print len(queenPositionCombinations)
     for position in queenPositionCombinations:
         colIndicators = set([i[0] for i in position] + [i[0] for i in placed])
@@ -44,8 +50,7 @@ def place_queens(placed):
             if len(i) == 1 and i[0] not in tempPositions:
                 break
             queen = i.pop()
-            tempPositions = checkAvailablePosition(
-                tempPositions, [queen])
+            tempPositions = checkAvailablePosition(tempPositions, [queen])
             if not tempPositions:
                 break
         # i is empty means all queen can be positioned
@@ -63,7 +68,9 @@ if __name__ == '__main__':
 
     def checker(func, placed, is_possible):
         user_set = func(placed.copy())
-        if not all(isinstance(c, str) and len(c) == 2 and check_coordinate(c) for c in user_set):
+        if not all(
+            isinstance(c, str) and len(c) == 2 and check_coordinate(c) for c in user_set
+        ):
             print("Wrong Coordinates")
             return False
         threats = []
@@ -86,4 +93,5 @@ if __name__ == '__main__':
 
     assert checker(place_queens, {"b2", "c4", "d6", "e8"}, True), "1st Example"
     assert checker(
-        place_queens, {"b2", "c4", "d6", "e8", "a7", "g5"}, False), "2nd Example"
+        place_queens, {"b2", "c4", "d6", "e8", "a7", "g5"}, False
+    ), "2nd Example"

@@ -2,8 +2,9 @@ import datetime
 
 
 def checkio(year):
-    return sum([1 for i in range(1, 13)
-                if datetime.datetime(year, i, 13).weekday() == 4])
+    return sum(
+        [1 for i in range(1, 13) if datetime.datetime(year, i, 13).weekday() == 4]
+    )
 
 
 if __name__ == '__main__':  # pragma: no cover

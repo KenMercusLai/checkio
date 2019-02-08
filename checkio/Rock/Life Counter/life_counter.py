@@ -2,21 +2,23 @@ from copy import deepcopy
 
 
 def count_neighbours(grid, row, col):
-    neighbors = [(-1, -1), (-1, 0), (-1, 1),
-                 (0, -1), (0, 1),
-                 (1, -1), (1, 0), (1, 1)]
-    grid = [[0] * (len(grid[0]) + 2)] \
-        + [[0] + list(i) + [0] for i in grid] \
+    neighbors = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    grid = (
+        [[0] * (len(grid[0]) + 2)]
+        + [[0] + list(i) + [0] for i in grid]
         + [[0] * (len(grid[0]) + 2)]
+    )
     return sum([grid[row + 1 + i[0]][col + 1 + i[1]] for i in neighbors])
 
 
 def life_counter(state, tick_n):
     cache = {}
     while tick_n:
-        state = [[0] * (len(state[0]) + 2)] \
-            + [[0] + list(i) + [0] for i in state] \
+        state = (
+            [[0] * (len(state[0]) + 2)]
+            + [[0] + list(i) + [0] for i in state]
             + [[0] * (len(state[0]) + 2)]
+        )
 
         # remove top and bottom empty lines
         while 1 and len(state) >= 2:
@@ -71,25 +73,47 @@ def life_counter(state, tick_n):
 if __name__ == '__main__':
     # These "asserts" using only for self-checking and not necessary for
     # auto-testing
-    assert life_counter(((0, 1, 0, 0, 0, 0, 0),
-                         (0, 0, 1, 0, 0, 0, 0),
-                         (1, 1, 1, 0, 0, 0, 0),
-                         (0, 0, 0, 0, 0, 1, 1),
-                         (0, 0, 0, 0, 0, 1, 1),
-                         (0, 0, 0, 0, 0, 0, 0),
-                         (1, 1, 1, 0, 0, 0, 0)), 4) == 15, "Example"
-    assert life_counter(((0, 1, 0, 0, 0, 0, 0),
-                         (0, 0, 1, 0, 0, 0, 0),
-                         (1, 1, 1, 0, 0, 0, 0),
-                         (0, 0, 0, 0, 0, 1, 1),
-                         (0, 0, 0, 0, 0, 1, 1),
-                         (0, 0, 0, 0, 0, 0, 0),
-                         (1, 1, 1, 0, 0, 0, 0)), 15) == 14, "Little later"
-    assert life_counter(((0, 1, 0),
-                         (0, 0, 1),
-                         (1, 1, 1)), 50) == 5, "Glider"
-    assert life_counter(((1, 1, 0, 1, 1),
-                         (1, 1, 0, 1, 1),
-                         (0, 0, 0, 0, 0),
-                         (1, 1, 0, 1, 1),
-                         (1, 1, 0, 1, 1)), 100) == 16, "Stones"
+    assert (
+        life_counter(
+            (
+                (0, 1, 0, 0, 0, 0, 0),
+                (0, 0, 1, 0, 0, 0, 0),
+                (1, 1, 1, 0, 0, 0, 0),
+                (0, 0, 0, 0, 0, 1, 1),
+                (0, 0, 0, 0, 0, 1, 1),
+                (0, 0, 0, 0, 0, 0, 0),
+                (1, 1, 1, 0, 0, 0, 0),
+            ),
+            4,
+        )
+        == 15
+    ), "Example"
+    assert (
+        life_counter(
+            (
+                (0, 1, 0, 0, 0, 0, 0),
+                (0, 0, 1, 0, 0, 0, 0),
+                (1, 1, 1, 0, 0, 0, 0),
+                (0, 0, 0, 0, 0, 1, 1),
+                (0, 0, 0, 0, 0, 1, 1),
+                (0, 0, 0, 0, 0, 0, 0),
+                (1, 1, 1, 0, 0, 0, 0),
+            ),
+            15,
+        )
+        == 14
+    ), "Little later"
+    assert life_counter(((0, 1, 0), (0, 0, 1), (1, 1, 1)), 50) == 5, "Glider"
+    assert (
+        life_counter(
+            (
+                (1, 1, 0, 1, 1),
+                (1, 1, 0, 1, 1),
+                (0, 0, 0, 0, 0),
+                (1, 1, 0, 1, 1),
+                (1, 1, 0, 1, 1),
+            ),
+            100,
+        )
+        == 16
+    ), "Stones"

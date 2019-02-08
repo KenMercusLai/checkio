@@ -18,23 +18,24 @@ def generate_path(ring, start, end):
 
     ring_chain = ring + ring
     if start_index < end_index:
-        path = ring[start_index:end_index + 1]
+        path = ring[start_index : end_index + 1]
         if len(path) * 2 > len(ring) + 2:
-            path = ring_chain[end_index:start_index + len(ring) + 1]
+            path = ring_chain[end_index : start_index + len(ring) + 1]
             path = path[::-1]
     else:
-        path = ring[end_index:start_index + 1]
+        path = ring[end_index : start_index + 1]
         if len(path) * 2 == len(ring) + 2:
-            path = ring_chain[start_index:end_index + len(ring) + 1]
+            path = ring_chain[start_index : end_index + len(ring) + 1]
         elif len(path) * 2 > len(ring) + 2:
-            path = ring_chain[start_index:end_index + len(ring) + 1]
+            path = ring_chain[start_index : end_index + len(ring) + 1]
             path = path[::-1]
     return path
 
 
 def segment_bandwidth(ring, flows):
-    ring_segments = (list(map(lambda x: x[0] + x[1], zip(ring, ring[1:])))
-                     + [ring[-1] + ring[0]])
+    ring_segments = list(map(lambda x: x[0] + x[1], zip(ring, ring[1:]))) + [
+        ring[-1] + ring[0]
+    ]
     path_segments = {i: 0 for i in ring_segments}
     for i in flows:
         start, end, bandwidth = i[0][0], i[0][1], i[1]
@@ -67,8 +68,7 @@ def checkio(ring, *flows):
 if __name__ == '__main__':  # pragma: no cover
     # These "asserts" are used only for self-checking and not necessary for
     # auto-testing
-    assert checkio("AEFCBG",
-                   ("AC", 5), ("EC", 10), ("AB", 60)) == [2, 2, 1, 0, 0]
+    assert checkio("AEFCBG", ("AC", 5), ("EC", 10), ("AB", 60)) == [2, 2, 1, 0, 0]
     assert checkio("ABCDEFGH", ("AD", 4)) == [0, 0, 3, 0, 0]
     assert checkio("ABCDEFGH", ("AD", 4), ("EA", 41)) == [4, 0, 3, 0, 0]
     assert checkio("ABCDEFGH", ["AD", 4], ["DA", 4]) == [0, 0, 3, 0, 0]

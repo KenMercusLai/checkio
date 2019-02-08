@@ -9,10 +9,12 @@ def test_possible_numbers():
     assert possible_numbers({'B', 'C', 'b', 'c'}, {'A'}, first_digit) == [1, 7]
     assert possible_numbers({'B', 'C', 'b', 'c'}, {'A'}, second_digit) == [1]
 
-    assert possible_numbers({'B', 'C', 'a', 'f', 'g', 'c', 'd'},
-                            {'A', 'G', 'D', 'e'}, first_digit) == [1, 3, 7]
-    assert possible_numbers({'B', 'C', 'a', 'f', 'g', 'c', 'd'},
-                            {'A', 'G', 'D', 'e'}, second_digit) == [5, 6]
+    assert possible_numbers(
+        {'B', 'C', 'a', 'f', 'g', 'c', 'd'}, {'A', 'G', 'D', 'e'}, first_digit
+    ) == [1, 3, 7]
+    assert possible_numbers(
+        {'B', 'C', 'a', 'f', 'g', 'c', 'd'}, {'A', 'G', 'D', 'e'}, second_digit
+    ) == [5, 6]
 
 
 # class Tests(unittest.TestCase):

@@ -23,10 +23,10 @@ def checkio(text):
         if len(j) == 1:
             not_striped = False
         for i in zip(j, j[1:]):
-            if ((i[0] in VOWELS + CONSONANTS)
-                    and (i[1] in VOWELS + CONSONANTS)):
-                if ((i[0] in CONSONANTS and i[1] in CONSONANTS)
-                        or (i[1] in VOWELS and i[0] in VOWELS)):
+            if (i[0] in VOWELS + CONSONANTS) and (i[1] in VOWELS + CONSONANTS):
+                if (i[0] in CONSONANTS and i[1] in CONSONANTS) or (
+                    i[1] in VOWELS and i[0] in VOWELS
+                ):
                     not_striped = False
                     break
             else:

@@ -19,10 +19,8 @@ class Line(object):
         # Find the four orientations needed for general and special cases
         o1 = self.orientation(self.point1, self.point2, another_line.point1)
         o2 = self.orientation(self.point1, self.point2, another_line.point2)
-        o3 = self.orientation(another_line.point1, another_line.point2,
-                              self.point1)
-        o4 = self.orientation(another_line.point1, another_line.point2,
-                              self.point2)
+        o3 = self.orientation(another_line.point1, another_line.point2, self.point1)
+        o4 = self.orientation(another_line.point1, another_line.point2, self.point2)
 
         # General case
         if o1 != o2 and o3 != o4:
@@ -30,27 +28,23 @@ class Line(object):
 
         # Special Cases
         # p1, q1 and p2 are colinear and p2 lies on segment p1q1
-        if o1 == 0 and self.on_segment(self.point1,
-                                       another_line.point1,
-                                       self.point2):
+        if o1 == 0 and self.on_segment(self.point1, another_line.point1, self.point2):
             return True
 
         # p1, q1 and p2 are colinear and q2 lies on segment p1q1
-        if o2 == 0 and self.on_segment(self.point1,
-                                       another_line.point2,
-                                       self.point2):
+        if o2 == 0 and self.on_segment(self.point1, another_line.point2, self.point2):
             return True
 
         # p2, q2 and p1 are colinear and p1 lies on segment p2q2
-        if o3 == 0 and self.on_segment(another_line.point1,
-                                       self.point1,
-                                       another_line.point2):
+        if o3 == 0 and self.on_segment(
+            another_line.point1, self.point1, another_line.point2
+        ):
             return True
 
         # p2, q2 and q1 are colinear and q1 lies on segment p2q2
-        if o4 == 0 and self.on_segment(another_line.point1,
-                                       self.point2,
-                                       another_line.point2):
+        if o4 == 0 and self.on_segment(
+            another_line.point1, self.point2, another_line.point2
+        ):
             return True
 
         # Doesn't fall in any of the above cases
@@ -72,10 +66,12 @@ class Line(object):
 
         """
 
-        if (point2.x <= max(point1.x, point3.x)
-                and point2.x >= min(point1.x, point3.x)
-                and point2.y <= max(point1.y, point3.y)
-                and point2.y >= min(point1.y, point3.y)):
+        if (
+            point2.x <= max(point1.x, point3.x)
+            and point2.x >= min(point1.x, point3.x)
+            and point2.y <= max(point1.y, point3.y)
+            and point2.y >= min(point1.y, point3.y)
+        ):
             return True
         else:
             return False
@@ -94,8 +90,9 @@ class Line(object):
                  2 --> Counterclockwise
 
         """
-        val = (point2.y - point1.y) * (point3.x - point2.x) - \
-            (point2.x - point1.x) * (point3.y - point2.y)
+        val = (point2.y - point1.y) * (point3.x - point2.x) - (point2.x - point1.x) * (
+            point3.y - point2.y
+        )
 
         if val == 0:
             return 0
@@ -111,8 +108,10 @@ class Line(object):
             tuple: new end point coordinations
 
         """
-        return (self.point1.x + 2 * (self.point2.x - self.point1.x),
-                self.point1.y + 2 * (self.point2.y - self.point1.y))
+        return (
+            self.point1.x + 2 * (self.point2.x - self.point1.x),
+            self.point1.y + 2 * (self.point2.y - self.point1.y),
+        )
 
 
 class Point(object):
@@ -126,8 +125,7 @@ class Point(object):
 def is_inside(polygon, point):
     line2 = Line(Point(point[0], point[1]), Point(100, point[1]))
     intersections = 0
-    point_pairs = [
-        i for i in zip(polygon, polygon[1:])] + [(polygon[-1], polygon[0])]
+    point_pairs = [i for i in zip(polygon, polygon[1:])] + [(polygon[-1], polygon[0])]
     while point_pairs:
         # we draw polygon reversely
         i = point_pairs.pop()
@@ -137,8 +135,7 @@ def is_inside(polygon, point):
         if line1.intersect_with(line2):
             # double the length when find a intersection
             if point_pairs:
-                point_pairs[-1] = (point_pairs[-1][0],
-                                   line1.double_length())
+                point_pairs[-1] = (point_pairs[-1][0], line1.double_length())
             if line1.orientation(p1, Point(*point), q1) == 0:
                 return line1.on_segment(p1, Point(*point), q1)
             intersections += 1
@@ -149,21 +146,21 @@ def is_inside(polygon, point):
 
 
 if __name__ == '__main__':  # pragma: no cover
-    assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)),
-                     (2, 2)) is True, "First"
-    assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)),
-                     (4, 2)) is False, "Second"
-    assert is_inside(((1, 1), (4, 1), (2, 3)),
-                     (3, 2)) is True, "Third"
-    assert is_inside(((1, 1), (4, 1), (1, 3)),
-                     (3, 3)) is False, "Fourth"
-    assert is_inside(((2, 1), (4, 1), (5, 3), (3, 4), (1, 3)),
-                     (4, 3)) is True, "Fifth"
-    assert is_inside(((2, 1), (4, 1), (3, 2), (3, 4), (1, 3)),
-                     (4, 3)) is False, "Sixth"
-    assert is_inside(((1, 1), (3, 2), (5, 1), (4, 3), (5, 5),
-                      (3, 4), (1, 5), (2, 3)),
-                     (3, 3)) is True, "Seventh"
-    assert is_inside(((1, 1), (1, 5), (5, 5), (5, 4), (2, 4),
-                      (2, 2), (5, 2), (5, 1)),
-                     (4, 3)) is False, "Eighth"
+    assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)), (2, 2)) is True, "First"
+    assert is_inside(((1, 1), (1, 3), (3, 3), (3, 1)), (4, 2)) is False, "Second"
+    assert is_inside(((1, 1), (4, 1), (2, 3)), (3, 2)) is True, "Third"
+    assert is_inside(((1, 1), (4, 1), (1, 3)), (3, 3)) is False, "Fourth"
+    assert is_inside(((2, 1), (4, 1), (5, 3), (3, 4), (1, 3)), (4, 3)) is True, "Fifth"
+    assert is_inside(((2, 1), (4, 1), (3, 2), (3, 4), (1, 3)), (4, 3)) is False, "Sixth"
+    assert (
+        is_inside(
+            ((1, 1), (3, 2), (5, 1), (4, 3), (5, 5), (3, 4), (1, 5), (2, 3)), (3, 3)
+        )
+        is True
+    ), "Seventh"
+    assert (
+        is_inside(
+            ((1, 1), (1, 5), (5, 5), (5, 4), (2, 4), (2, 2), (5, 2), (5, 1)), (4, 3)
+        )
+        is False
+    ), "Eighth"

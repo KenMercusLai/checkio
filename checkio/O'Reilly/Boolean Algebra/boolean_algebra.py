@@ -1,8 +1,10 @@
-OPERATION_NAMES = ("conjunction",
-                   "disjunction",
-                   "implication",
-                   "exclusive",
-                   "equivalence")
+OPERATION_NAMES = (
+    "conjunction",
+    "disjunction",
+    "implication",
+    "exclusive",
+    "equivalence",
+)
 
 
 def boolean(x, y, operation):

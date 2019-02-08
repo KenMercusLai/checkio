@@ -6,29 +6,14 @@ from easy_unpack import easy_unpack
 class Tests(unittest.TestCase):
     TESTS = {
         "Basics": [
-            {
-                "input": [1, 2, 3, 4, 5, 6, 7, 9],
-                "answer": (1, 3, 7)
-            },
-            {
-                "input": [1, 1, 1, 1],
-                "answer": (1, 1, 1)
-            },
-            {
-                "input": [6, 3, 7],
-                "answer": (6, 7, 3)
-            }
+            {"input": [1, 2, 3, 4, 5, 6, 7, 9], "answer": (1, 3, 7)},
+            {"input": [1, 1, 1, 1], "answer": (1, 1, 1)},
+            {"input": [6, 3, 7], "answer": (6, 7, 3)},
         ],
         "Extra": [
-            {
-                "input": [30, 40, 100],
-                "answer": (30, 100, 40)
-            },
-            {
-                "input": [5, 5, 5, 5, 5, 5],
-                "answer": (5, 5, 5)
-            }
-        ]
+            {"input": [30, 40, 100], "answer": (30, 100, 40)},
+            {"input": [5, 5, 5, 5, 5, 5], "answer": (5, 5, 5)},
+        ],
     }
 
     def test_Basics(self):

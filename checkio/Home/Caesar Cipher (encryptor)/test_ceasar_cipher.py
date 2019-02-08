@@ -6,29 +6,14 @@ from ceasar_cipher import to_encrypt
 class Tests(unittest.TestCase):
     TESTS = {
         "Basics": [
-            {
-                "input": ("a b c", 3),
-                "answer": 'd e f'
-            },
-            {
-                "input": ("a b c", -3),
-                "answer": 'x y z'
-            }
+            {"input": ("a b c", 3), "answer": 'd e f'},
+            {"input": ("a b c", -3), "answer": 'x y z'},
         ],
         "Extra": [
-            {
-                "input": ("simple text", 16),
-                "answer": "iycfbu junj"
-            },
-            {
-                "input": ("important text", 10),
-                "answer": "swzybdkxd dohd",
-            },
-            {
-                "input": ("state secret", -13),
-                "answer": "fgngr frperg",
-            }
-        ]
+            {"input": ("simple text", 16), "answer": "iycfbu junj"},
+            {"input": ("important text", 10), "answer": "swzybdkxd dohd"},
+            {"input": ("state secret", -13), "answer": "fgngr frperg"},
+        ],
     }
 
     def test_Basics(self):

@@ -29,7 +29,7 @@ class Tests(unittest.TestCase):
             {"input": 9549, "answer": 547},
             {"input": 6839, "answer": 3619},
             {"input": 4035, "answer": 4997},
-        ]
+        ],
     }
 
     def test_Basics(self):

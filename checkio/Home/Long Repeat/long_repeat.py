@@ -1,10 +1,13 @@
 def long_repeat(line):
     # length the longest substring that consists of the same char
     if len(line) >= 2:
-        slice_index = [index for index, value in enumerate(line[:-1])
-                       if value != line[index + 1]]
-        values = [slice_index[index + 1] - value
-                  for index, value in enumerate(slice_index[:-1])]
+        slice_index = [
+            index for index, value in enumerate(line[:-1]) if value != line[index + 1]
+        ]
+        values = [
+            slice_index[index + 1] - value
+            for index, value in enumerate(slice_index[:-1])
+        ]
         if values:
             return max(values)
     return len(line)

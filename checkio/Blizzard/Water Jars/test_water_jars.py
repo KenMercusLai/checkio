@@ -8,40 +8,27 @@ class Tests(unittest.TestCase):
         "Basics": [
             {
                 "input": [5, 7, 6],
-                "answer": ['02', '21', '10', '21', '02', '21', '10', '21', '02', '21']},
-            {
-                "input": [3, 4, 1],
-                "answer": ['02', '21']},
-            {
-                "input": [2, 1, 1],
-                "answer": ['02']},
-            {
-                "input": [8, 5, 2],
-                "answer": ['02', '21', '02', '21']},
-            {
-                "input": [9, 8, 7],
-                "answer": ['02', '21', '02', '21']},
-            {
-                "input": [8, 10, 4],
-                "answer": ['02', '21', '10', '21', '02', '21']},
-            {
-                "input": [2, 7, 1],
-                "answer": ['02', '21', '10', '21', '10', '21']},
+                "answer": ['02', '21', '10', '21', '02', '21', '10', '21', '02', '21'],
+            },
+            {"input": [3, 4, 1], "answer": ['02', '21']},
+            {"input": [2, 1, 1], "answer": ['02']},
+            {"input": [8, 5, 2], "answer": ['02', '21', '02', '21']},
+            {"input": [9, 8, 7], "answer": ['02', '21', '02', '21']},
+            {"input": [8, 10, 4], "answer": ['02', '21', '10', '21', '02', '21']},
+            {"input": [2, 7, 1], "answer": ['02', '21', '10', '21', '10', '21']},
             {
                 "input": [5, 8, 7],
-                "answer": ['01', '12', '01', '12', '20', '12', '01', '12']},
+                "answer": ['01', '12', '01', '12', '20', '12', '01', '12'],
+            },
         ],
         "Extra": [
-            {
-                "input": [9, 1, 6],
-                "answer": ['01', '12', '20', '12', '20', '12']},
-            {
-                "input": [7, 2, 4],
-                "answer": ['02', '21', '02', '21']},
+            {"input": [9, 1, 6], "answer": ['01', '12', '20', '12', '20', '12']},
+            {"input": [7, 2, 4], "answer": ['02', '21', '02', '21']},
             {
                 "input": [8, 1, 4],
-                "answer": ['01', '12', '20', '12', '20', '12', '20', '12']}
-        ]
+                "answer": ['01', '12', '20', '12', '20', '12', '20', '12'],
+            },
+        ],
     }
 
     def check_solution(self, func, initial_data, max_steps):
@@ -51,13 +38,14 @@ class Tests(unittest.TestCase):
             "02": lambda f, s: (f, second_volume),
             "12": lambda f, s: (
                 f - (second_volume - s if f > second_volume - s else f),
-                second_volume if f > second_volume - s else s + f),
+                second_volume if f > second_volume - s else s + f,
+            ),
             "21": lambda f, s: (
                 first_volume if s > first_volume - f else s + f,
                 s - (first_volume - f if s > first_volume - f else s),
             ),
             "10": lambda f, s: (0, s),
-            "20": lambda f, s: (f, 0)
+            "20": lambda f, s: (f, 0),
         }
         first, second = 0, 0
         result = func(*initial_data)

@@ -1,9 +1,26 @@
-FIRST_TEN = ["one", "two", "three", "four", "five", "six", "seven",
-             "eight", "nine"]
-SECOND_TEN = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-              "sixteen", "seventeen", "eighteen", "nineteen"]
-OTHER_TENS = ["twenty", "thirty", "forty", "fifty", "sixty", "seventy",
-              "eighty", "ninety"]
+FIRST_TEN = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
+SECOND_TEN = [
+    "ten",
+    "eleven",
+    "twelve",
+    "thirteen",
+    "fourteen",
+    "fifteen",
+    "sixteen",
+    "seventeen",
+    "eighteen",
+    "nineteen",
+]
+OTHER_TENS = [
+    "twenty",
+    "thirty",
+    "forty",
+    "fifty",
+    "sixty",
+    "seventy",
+    "eighty",
+    "ninety",
+]
 HUNDRED = "hundred"
 
 
@@ -12,9 +29,9 @@ def checkio(number):
     if number >= 0 and number <= 999:
         hundreds = number // 100
         if hundreds > 0:
-            number_string = (number_string
-                             + FIRST_TEN[hundreds - 1]
-                             + ' ' + HUNDRED + ' ')
+            number_string = (
+                number_string + FIRST_TEN[hundreds - 1] + ' ' + HUNDRED + ' '
+            )
         number = number - hundreds * 100
         if number >= 20 and number <= 99:
             number_string += OTHER_TENS[number // 10 - 2] + ' '
@@ -38,5 +55,6 @@ if __name__ == '__main__':
     assert checkio(212) == 'two hundred twelve', "5th example"
     assert checkio(40) == 'forty', "6th example"
     assert not checkio(212).endswith(
-        ' '), "Don't forget strip whitespaces at the end of string"
+        ' '
+    ), "Don't forget strip whitespaces at the end of string"
     print('Done! Go and Check it!')

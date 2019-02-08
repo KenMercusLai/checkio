@@ -4,9 +4,9 @@ def is_word(x):
 
 def checkio(words):
     word_list = [is_word(i) for i in words.split()]
-    consecutive_words = [sum(word_list[i:i + 3])
-                         for i in range(len(word_list))
-                         if word_list[i]]
+    consecutive_words = [
+        sum(word_list[i : i + 3]) for i in range(len(word_list)) if word_list[i]
+    ]
     return any([True for i in consecutive_words if i >= 3])
 
 

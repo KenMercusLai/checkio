@@ -14,7 +14,7 @@ def find_repeated_chars(line):
 def non_overlapping_range(repeated_indexes, line):
     ret = []
     for i, v in enumerate(repeated_indexes[:-1]):
-        for j in repeated_indexes[i + 1:]:
+        for j in repeated_indexes[i + 1 :]:
             max_repeated_len = min(j - i, len(line) - j)
             for k in range(max_repeated_len):
                 ret.append((v, j, k + 1))
@@ -29,7 +29,7 @@ def double_substring(line):
         for start, end, length in sub_strings:
             if length <= max_len:
                 continue
-            if line[start:start + length] == line[end:end + length]:
+            if line[start : start + length] == line[end : end + length]:
                 max_len = length
     return max_len
 

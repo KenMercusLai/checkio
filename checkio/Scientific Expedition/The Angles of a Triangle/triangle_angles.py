@@ -3,13 +3,13 @@ from math import acos, degrees
 
 def checkio(a, b, c):
     if a + b > c and b - a < c:
-        first_angle = round(degrees(acos((b ** 2 + c ** 2 - a ** 2) * 1.0
-                                         / (2 * b * c))))
-        second_angle = round(degrees(acos((a ** 2 + c ** 2 - b ** 2) * 1.0
-                                          / (2 * a * c))))
-        result = [first_angle,
-                  second_angle,
-                  180 - first_angle - second_angle]
+        first_angle = round(
+            degrees(acos((b ** 2 + c ** 2 - a ** 2) * 1.0 / (2 * b * c)))
+        )
+        second_angle = round(
+            degrees(acos((a ** 2 + c ** 2 - b ** 2) * 1.0 / (2 * a * c)))
+        )
+        result = [first_angle, second_angle, 180 - first_angle - second_angle]
         return list(map(int, sorted(result)))
     else:
         return [0, 0, 0]

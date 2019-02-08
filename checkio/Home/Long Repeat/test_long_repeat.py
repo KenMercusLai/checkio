@@ -6,30 +6,15 @@ from long_repeat import long_repeat
 class Tests(unittest.TestCase):
     TESTS = {
         "Basics": [
-            {
-                "input": "sdsffffse",
-                "answer": 4
-            },
-            {
-                "input": "ddvvrwwwrggg",
-                "answer": 3
-            }
+            {"input": "sdsffffse", "answer": 4},
+            {"input": "ddvvrwwwrggg", "answer": 3},
         ],
         "Extra": [
-            {
-                "input": "",
-                "answer": 0
-            }, {
-                "input": "abababaab",
-                "answer": 2
-            }, {
-                "input": "abababa",
-                "answer": 1
-            }, {
-                "input": "aa",
-                "answer": 2
-            }
-        ]
+            {"input": "", "answer": 0},
+            {"input": "abababaab", "answer": 2},
+            {"input": "abababa", "answer": 1},
+            {"input": "aa", "answer": 2},
+        ],
     }
 
     def test_Basics(self):

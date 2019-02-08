@@ -7,8 +7,16 @@ def most_frequent_days(year):
     # incompleted weekdays in the beginning and the end of the year.
 
     # incompleted weekdays in the beginning
-    week_list = ['', 'Monday', 'Tuesday', 'Wednesday', 'Thursday',
-                 'Friday', 'Saturday', 'Sunday']
+    week_list = [
+        '',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday',
+    ]
     weekdays = []
     for i in range(1, 8):
         weekday = datetime.datetime(year, 1, i).isoweekday()

@@ -17,13 +17,14 @@ class Tests(unittest.TestCase):
             gifts = []
             selected_gift = None
             for i in range(gifts_in_bag):
-                new_gift = uniform(0., scale)
+                new_gift = uniform(0.0, scale)
                 gifts.append(new_gift)
                 decision = choose_good_gift(new_gift, gifts_in_bag, i + 1)
                 if decision:
                     selected_gift = new_gift
-                    gifts.extend([uniform(0., scale)
-                                  for _ in range(gifts_in_bag - i - 1)])
+                    gifts.extend(
+                        [uniform(0.0, scale) for _ in range(gifts_in_bag - i - 1)]
+                    )
                     break
             if selected_gift is None:
                 priority = len(gifts)

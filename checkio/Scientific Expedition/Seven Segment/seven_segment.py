@@ -1,16 +1,18 @@
 from itertools import combinations
 
 
-SEGMENTS = [{'a', 'b', 'c', 'd', 'e', 'f'},
-            {'b', 'c'},
-            {'a', 'b', 'g', 'e', 'd'},
-            {'a', 'b', 'g', 'c', 'd'},
-            {'b', 'c', 'g', 'f'},
-            {'a', 'c', 'd', 'f', 'g'},
-            {'a', 'c', 'd', 'e', 'f', 'g'},
-            {'a', 'b', 'c'},
-            {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
-            {'a', 'b', 'c', 'd', 'f', 'g'}]
+SEGMENTS = [
+    {'a', 'b', 'c', 'd', 'e', 'f'},
+    {'b', 'c'},
+    {'a', 'b', 'g', 'e', 'd'},
+    {'a', 'b', 'g', 'c', 'd'},
+    {'b', 'c', 'g', 'f'},
+    {'a', 'c', 'd', 'f', 'g'},
+    {'a', 'c', 'd', 'e', 'f', 'g'},
+    {'a', 'b', 'c'},
+    {'a', 'b', 'c', 'd', 'e', 'f', 'g'},
+    {'a', 'b', 'c', 'd', 'f', 'g'},
+]
 
 
 def possible_numbers(lit_seg, broken_seg, digit_sets):
@@ -36,10 +38,14 @@ def seven_segment(lit_seg, broken_seg):
 
 
 if __name__ == '__main__':
-    assert seven_segment({'B', 'C', 'b', 'c'},
-                         {'A'}) == 2, '11, 71'
-    assert seven_segment({'B', 'C', 'a', 'f', 'g', 'c', 'd'},
-                         {'A', 'G', 'D', 'e'}) == 6, '15, 16, 35, 36, 75, 76'
-    assert seven_segment({'B', 'C', 'a', 'f', 'g', 'c', 'd'},
-                         {'A', 'G', 'D', 'F', 'b', 'e'}) == 20, '15...98'
+    assert seven_segment({'B', 'C', 'b', 'c'}, {'A'}) == 2, '11, 71'
+    assert (
+        seven_segment({'B', 'C', 'a', 'f', 'g', 'c', 'd'}, {'A', 'G', 'D', 'e'}) == 6
+    ), '15, 16, 35, 36, 75, 76'
+    assert (
+        seven_segment(
+            {'B', 'C', 'a', 'f', 'g', 'c', 'd'}, {'A', 'G', 'D', 'F', 'b', 'e'}
+        )
+        == 20
+    ), '15...98'
     print('"Run" is good. How is "Check"?')

@@ -8,14 +8,19 @@ def test_generate_segments():
     assert generate_segments(corners) == [(1, 2), (1, 5), (2, 6), (5, 6)]
 
     corners = [10, 11, 14, 15]
-    assert generate_segments(corners) == [(10, 11), (10, 14),
-                                          (11, 15), (14, 15)]
+    assert generate_segments(corners) == [(10, 11), (10, 14), (11, 15), (14, 15)]
 
     corners = [2, 4, 10, 12]
-    assert generate_segments(corners) == [(2, 3), (2, 6),
-                                          (3, 4), (4, 8),
-                                          (6, 10), (8, 12),
-                                          (10, 11), (11, 12)]
+    assert generate_segments(corners) == [
+        (2, 3),
+        (2, 6),
+        (3, 4),
+        (4, 8),
+        (6, 10),
+        (8, 12),
+        (10, 11),
+        (11, 12),
+    ]
 
 
 def test_generate_all_squares():
@@ -43,14 +48,10 @@ class Tests(unittest.TestCase):
                     [10, 14],
                     [12, 16],
                     [14, 15],
-                    [15, 16]
+                    [15, 16],
                 ],
                 "answer": 3,
-                "explanation": [
-                    [1, 1, 1],
-                    [6, 2, 2],
-                    [6, 1, 1]
-                ]
+                "explanation": [[1, 1, 1], [6, 2, 2], [6, 1, 1]],
             },
             {
                 "input": [
@@ -69,38 +70,20 @@ class Tests(unittest.TestCase):
                     [12, 16],
                     [13, 14],
                     [14, 15],
-                    [15, 16]
+                    [15, 16],
                 ],
                 "answer": 2,
-                "explanation": [
-                    [1, 3, 3],
-                    [6, 1, 1]
-                ]
+                "explanation": [[1, 3, 3], [6, 1, 1]],
             },
             {
-                "input": [
-                    [1, 2],
-                    [1, 5],
-                    [2, 6],
-                    [5, 6]
-                ],
+                "input": [[1, 2], [1, 5], [2, 6], [5, 6]],
                 "answer": 1,
-                "explanation": [
-                    [1, 1, 1]
-                ]
+                "explanation": [[1, 1, 1]],
             },
             {
-                "input": [
-                    [1, 2],
-                    [1, 5],
-                    [2, 6],
-                    [5, 9],
-                    [6, 10],
-                    [9, 10]
-                ],
+                "input": [[1, 2], [1, 5], [2, 6], [5, 9], [6, 10], [9, 10]],
                 "answer": 0,
-                "explanation": [
-                ]
+                "explanation": [],
             },
             {
                 "input": [
@@ -110,24 +93,15 @@ class Tests(unittest.TestCase):
                     [11, 10],
                     [10, 14],
                     [14, 13],
-                    [13, 9]
+                    [13, 9],
                 ],
                 "answer": 0,
-                "explanation": [
-                ]
+                "explanation": [],
             },
             {
-                "input": [
-                    [3, 4],
-                    [3, 7],
-                    [4, 8],
-                    [7, 8],
-                    [7, 11]
-                ],
+                "input": [[3, 4], [3, 7], [4, 8], [7, 8], [7, 11]],
                 "answer": 1,
-                "explanation": [
-                    [3, 1, 1]
-                ]
+                "explanation": [[3, 1, 1]],
             },
             {
                 "input": [
@@ -140,14 +114,10 @@ class Tests(unittest.TestCase):
                     [9, 10],
                     [14, 13],
                     [13, 9],
-                    [15, 14]
+                    [15, 14],
                 ],
                 "answer": 3,
-                "explanation": [
-                    [9, 1, 1],
-                    [10, 1, 1],
-                    [11, 1, 1]
-                ]
+                "explanation": [[9, 1, 1], [10, 1, 1], [11, 1, 1]],
             },
             {
                 "input": [
@@ -167,13 +137,10 @@ class Tests(unittest.TestCase):
                     [8, 12],
                     [8, 4],
                     [10, 11],
-                    [11, 15]
+                    [11, 15],
                 ],
                 "answer": 2,
-                "explanation": [
-                    [6, 1, 1],
-                    [10, 1, 1]
-                ]
+                "explanation": [[6, 1, 1], [10, 1, 1]],
             },
             {
                 "input": [
@@ -194,12 +161,10 @@ class Tests(unittest.TestCase):
                     [12, 16],
                     [13, 14],
                     [15, 14],
-                    [15, 16]
+                    [15, 16],
                 ],
                 "answer": 1,
-                "explanation": [
-                    [1, 3, 3]
-                ]
+                "explanation": [[1, 3, 3]],
             },
             {
                 "input": [
@@ -220,14 +185,10 @@ class Tests(unittest.TestCase):
                     [11, 7],
                     [4, 8],
                     [12, 8],
-                    [12, 16]
+                    [12, 16],
                 ],
                 "answer": 3,
-                "explanation": [
-                    [1, 3, 3],
-                    [1, 1, 1],
-                    [1, 2, 2]
-                ]
+                "explanation": [[1, 3, 3], [1, 1, 1], [1, 2, 2]],
             },
             {
                 "input": [
@@ -250,16 +211,11 @@ class Tests(unittest.TestCase):
                     [6, 10],
                     [6, 7],
                     [8, 7],
-                    [10, 14]
+                    [10, 14],
                 ],
                 "answer": 6,
-                "explanation": [
-                    [1, 3, 3],
-                    [6, 1, 1],
-                    [1, 2, 2],
-                    [6, 2, 2]
-                ]
-            }
+                "explanation": [[1, 3, 3], [6, 1, 1], [1, 2, 2], [6, 2, 2]],
+            },
         ],
         "Extra": [
             {
@@ -278,12 +234,10 @@ class Tests(unittest.TestCase):
                     [10, 14],
                     [12, 16],
                     [14, 15],
-                    [15, 16]
+                    [15, 16],
                 ],
                 "answer": 1,
-                "explanation": [
-                    [1, 1, 1]
-                ]
+                "explanation": [[1, 1, 1]],
             },
             {
                 "input": [
@@ -304,26 +258,12 @@ class Tests(unittest.TestCase):
                     [14, 15],
                     [15, 16],
                     [2, 6],
-                    [5, 6]
+                    [5, 6],
                 ],
                 "answer": 3,
-                "explanation": [
-                    [1, 3, 3],
-                    [1, 1, 1],
-                    [6, 1, 1]
-                ]
+                "explanation": [[1, 3, 3], [1, 1, 1], [6, 1, 1]],
             },
-            {
-                "input": [
-                    [3, 2],
-                    [3, 7],
-                    [2, 6],
-                    [2, 6]
-                ],
-                "answer": 0,
-                "explanation": [
-                ]
-            },
+            {"input": [[3, 2], [3, 7], [2, 6], [2, 6]], "answer": 0, "explanation": []},
             {
                 "input": [
                     [1, 2],
@@ -333,13 +273,11 @@ class Tests(unittest.TestCase):
                     [6, 10],
                     [9, 13],
                     [10, 14],
-                    [13, 14]
+                    [13, 14],
                 ],
                 "answer": 0,
-                "explanation": [
-                ]
+                "explanation": [],
             },
-
             {
                 "input": [
                     [8, 7],
@@ -348,24 +286,15 @@ class Tests(unittest.TestCase):
                     [3, 2],
                     [10, 14],
                     [5, 6],
-                    [13, 9]
+                    [13, 9],
                 ],
                 "answer": 0,
-                "explanation": [
-                ]
+                "explanation": [],
             },
             {
-                "input": [
-                    [3, 4],
-                    [3, 7],
-                    [4, 8],
-                    [7, 8],
-                    [9, 13]
-                ],
+                "input": [[3, 4], [3, 7], [4, 8], [7, 8], [9, 13]],
                 "answer": 1,
-                "explanation": [
-                    [3, 1, 1]
-                ]
+                "explanation": [[3, 1, 1]],
             },
             {
                 "input": [
@@ -380,14 +309,10 @@ class Tests(unittest.TestCase):
                     [13, 9],
                     [6, 7],
                     [10, 6],
-                    [11, 7]
+                    [11, 7],
                 ],
                 "answer": 3,
-                "explanation": [
-                    [9, 1, 1],
-                    [6, 1, 1],
-                    [11, 1, 1]
-                ]
+                "explanation": [[9, 1, 1], [6, 1, 1], [11, 1, 1]],
             },
             {
                 "input": [
@@ -407,12 +332,10 @@ class Tests(unittest.TestCase):
                     [8, 12],
                     [8, 4],
                     [10, 11],
-                    [3, 7]
+                    [3, 7],
                 ],
                 "answer": 1,
-                "explanation": [
-                    [6, 1, 1]
-                ]
+                "explanation": [[6, 1, 1]],
             },
             {
                 "input": [
@@ -433,12 +356,10 @@ class Tests(unittest.TestCase):
                     [12, 16],
                     [13, 14],
                     [15, 14],
-                    [15, 16]
+                    [15, 16],
                 ],
                 "answer": 1,
-                "explanation": [
-                    [1, 3, 3]
-                ]
+                "explanation": [[1, 3, 3]],
             },
             {
                 "input": [
@@ -458,13 +379,10 @@ class Tests(unittest.TestCase):
                     [11, 7],
                     [4, 8],
                     [12, 8],
-                    [12, 16]
+                    [12, 16],
                 ],
                 "answer": 2,
-                "explanation": [
-                    [1, 3, 3],
-                    [1, 2, 2]
-                ]
+                "explanation": [[1, 3, 3], [1, 2, 2]],
             },
             {
                 "input": [
@@ -486,15 +404,10 @@ class Tests(unittest.TestCase):
                     [6, 10],
                     [6, 7],
                     [8, 7],
-                    [10, 14]
+                    [10, 14],
                 ],
                 "answer": 4,
-                "explanation": [
-                    [1, 3, 3],
-                    [3, 1, 1],
-                    [9, 1, 1],
-                    [6, 2, 2]
-                ]
+                "explanation": [[1, 3, 3], [3, 1, 1], [9, 1, 1], [6, 2, 2]],
             },
             {
                 "input": [
@@ -534,9 +447,9 @@ class Tests(unittest.TestCase):
                     [9, 1, 1],
                     [10, 1, 1],
                     [11, 1, 1],
-                ]
-            }
-        ]
+                ],
+            },
+        ],
     }
 
     def test_Basics(self):
