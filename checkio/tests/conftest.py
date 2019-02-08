@@ -8,9 +8,8 @@ def pytest_configure(config):
     log.init(debug=True)
 
     terminal = config.pluginmanager.getplugin('terminal')
-    base = terminal.TerminalReporter
 
-    class QuietReporter(base):
+    class QuietReporter(terminal.TerminalReporter):  # type: ignore
         """Reporter that only shows dots when running tests."""
 
         def __init__(self, *args, **kwargs):
