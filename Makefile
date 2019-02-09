@@ -74,7 +74,7 @@ endif
 RANDOM_SEED ?= $(shell date +%s)
 FAILURES := .cache/v/cache/lastfailed
 
-PYTEST_OPTIONS := --random --random-seed=$(RANDOM_SEED)
+PYTEST_OPTIONS := --durations=10 --random --random-seed=$(RANDOM_SEED)
 ifdef DISABLE_COVERAGE
 PYTEST_OPTIONS += --no-cov --disable-warnings
 endif
