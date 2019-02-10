@@ -1,73 +1,52 @@
-from copy import deepcopy
+from collections import defaultdict
 
 
-def count_neighbours(grid, row, col):
+def count_neighbours(state, row, col):
     neighbors = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
-    grid = (
-        [[0] * (len(grid[0]) + 2)]
-        + [[0] + list(i) + [0] for i in grid]
-        + [[0] * (len(grid[0]) + 2)]
-    )
-    return sum([grid[row + 1 + i[0]][col + 1 + i[1]] for i in neighbors])
+    return sum([1 for i in neighbors if (row + i[0], col + i[1]) in state])
+
+
+def cell_changes(state):
+    changes = defaultdict(int)
+    if not state:
+        return changes
+    coordinates = state.keys()
+    min_row = min(map(lambda x: x[0], coordinates))
+    max_row = max(map(lambda x: x[0], coordinates))
+    min_col = min(map(lambda x: x[1], coordinates))
+    max_col = max(map(lambda x: x[1], coordinates))
+    for i in range(min_row - 1, max_row + 2):
+        for j in range(min_col - 1, max_col + 2):
+            neighbors = count_neighbours(state, i, j)
+            if (i, j) in state and neighbors not in [2, 3]:
+                changes[(i, j)] = 0
+            elif (i, j) not in state and neighbors == 3:
+                changes[(i, j)] = 1
+    return changes
+
+
+def translate_state(state):
+    translated_state = defaultdict(int)
+    for i in range(len(state)):
+        for j in range(len(state[0])):
+            if state[i][j] == 1:
+                translated_state[(i, j)] = 1
+    return translated_state
 
 
 def life_counter(state, tick_n):
-    cache = {}
-    while tick_n:
-        state = (
-            [[0] * (len(state[0]) + 2)]
-            + [[0] + list(i) + [0] for i in state]
-            + [[0] * (len(state[0]) + 2)]
-        )
-
-        # remove top and bottom empty lines
-        while 1 and len(state) >= 2:
-            if sum(state[0]) == 0 and sum(state[1]) == 0:
-                state = state[1:]
+    new_state = translate_state(state)
+    for _ in range(tick_n):
+        changes = cell_changes(new_state)
+        for i in changes:
+            if changes[i] == 0:
+                try:
+                    del new_state[i]
+                except KeyError:
+                    pass
             else:
-                break
-        while 1 and len(state) >= 2:
-            if sum(state[-1]) == 0 and sum(state[-2]) == 0:
-                state = state[:-1]
-            else:
-                break
-        # remove left and right empty cols
-        state = list(zip(*state[::]))
-        while 1 and len(state) >= 2:
-            if sum(state[0]) == 0 and sum(state[1]) == 0:
-                state = state[1:]
-            else:
-                break
-        while 1 and len(state) >= 2:
-            if sum(state[-1]) == 0 and sum(state[-2]) == 0:
-                state = state[:-1]
-            else:
-                break
-        state = list(zip(*state[::]))
-
-        if str(state) not in cache:
-            # calc new state
-            rows = len(state)
-            cols = len(state[0])
-            new_state = deepcopy(state)
-            new_state = [list(i) for i in new_state]
-            for i in range(rows):
-                for j in range(cols):
-                    neighbors = count_neighbours(state, i, j)
-                    if state[i][j]:
-                        if neighbors < 2:
-                            new_state[i][j] = 0
-                        elif neighbors in [2, 3]:
-                            new_state[i][j] = 1
-                        elif neighbors > 3:
-                            new_state[i][j] = 0
-                    else:
-                        if neighbors == 3:
-                            new_state[i][j] = 1
-            cache[str(state)] = new_state
-        state = deepcopy(cache[str(state)])
-        tick_n -= 1
-    return sum([sum(i) for i in state])
+                new_state[i] = 1
+    return sum(new_state.values())
 
 
 if __name__ == '__main__':

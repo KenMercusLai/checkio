@@ -1,6 +1,6 @@
 import unittest
 
-from life_counter import life_counter
+from life_counter import cell_changes, count_neighbours, life_counter, translate_state
 
 
 class Tests(unittest.TestCase):
@@ -327,6 +327,40 @@ class Tests(unittest.TestCase):
             },
         ],
     }
+
+    def test_count_neighbours(self):
+        assert (
+            count_neighbours(
+                {(0, 1): 1, (1, 2): 1, (2, 0): 1, (2, 1): 1, (2, 2): 1}, 0, 0
+            )
+            == 1
+        )
+        assert (
+            count_neighbours(
+                {(0, 1): 1, (1, 2): 1, (2, 0): 1, (2, 1): 1, (2, 2): 1}, 0, 1
+            )
+            == 1
+        )
+        assert (
+            count_neighbours(
+                {(0, 1): 1, (1, 2): 1, (2, 0): 1, (2, 1): 1, (2, 2): 1}, 1, 0
+            )
+            == 3
+        )
+
+    def test_translate_state(self):
+        assert dict(translate_state([(0, 1, 0), (0, 0, 1), (1, 1, 1)])) == {
+            (0, 1): 1,
+            (1, 2): 1,
+            (2, 0): 1,
+            (2, 1): 1,
+            (2, 2): 1,
+        }
+
+    def test_cell_changes(self):
+        assert cell_changes(
+            {(0, 1): 1, (1, 2): 1, (2, 0): 1, (2, 1): 1, (2, 2): 1}
+        ) == {(0, 1): 0, (2, 0): 0, (1, 0): 1, (3, 1): 1}
 
     def test_Basics(self):
         for i in self.TESTS['Basics']:
