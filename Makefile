@@ -86,7 +86,7 @@ test: test-all ## Run unit and integration tests
 .PHONY: test-unit
 test-unit: install
 	@ ( mv $(FAILURES) $(FAILURES).bak || true ) > /dev/null 2>&1
-	poetry run pytest $(PACKAGE) $(PYTEST_OPTIONS)
+	poetry run pytest $(PACKAGE) $(PYTEST_OPTIONS) -x
 	@ ( mv $(FAILURES).bak $(FAILURES) || true ) > /dev/null 2>&1
 	poetry run coveragespace $(REPOSITORY) unit
 
