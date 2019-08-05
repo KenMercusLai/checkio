@@ -1,13 +1,13 @@
-from itertools import product, permutations, combinations, islice
 import operator as op
 from functools import reduce
+from itertools import combinations, islice, permutations, product
 
 
 def ncr(n, r):
-    r = min(r, n-r)
-    numer = reduce(op.mul, range(n, n-r, -1), 1)
-    denom = reduce(op.mul, range(1, r+1), 1)
-    return numer // denom
+    r = min(r, n - r)
+    number = reduce(op.mul, range(n, n - r, -1), 1)
+    denom = reduce(op.mul, range(1, r + 1), 1)
+    return number // denom
 
 
 def number_combinations(size, number):
@@ -17,7 +17,7 @@ def number_combinations(size, number):
 def vertical_combination(combination):
     columns = {}
     for i in combination:
-        dominos = [tuple(sorted(i[j:j + 2])) for j in range(0, len(i), 2)]
+        dominos = [tuple(sorted(i[j : j + 2])) for j in range(0, len(i), 2)]
         if len(dominos) == len((set(dominos))):
             columns[i] = dominos
     return columns
@@ -44,7 +44,9 @@ def brute_force(size, number, columns):
         duplications = max_tile_duplicate(i, columns)
         if duplications:
             # skip
-            skip_combinations = ncr(total_column_combinations-duplications, size-duplications)-1
+            skip_combinations = (
+                ncr(total_column_combinations - duplications, size - duplications) - 1
+            )
             islice(domino_combinations, skip_combinations)
             continue
         # row check
@@ -52,11 +54,11 @@ def brute_force(size, number, columns):
         if not (len(set(row_sums)) == 1 and row_sums[0] == number):
             continue
         # diangal check
-        for diagnal_check in permutations(i):
-            diagnal1 = [diagnal_check[j][j] for j in range(size)]
-            diagnal2 = [diagnal_check[j][size - j - 1] for j in range(size)]
-            if (sum(diagnal1) == sum(diagnal2) == number):
-                return diagnal_check
+        for diagonal_check in permutations(i):
+            diagonal1 = [diagonal_check[j][j] for j in range(size)]
+            diagonal2 = [diagonal_check[j][size - j - 1] for j in range(size)]
+            if sum(diagonal1) == sum(diagonal2) == number:
+                return diagonal_check
 
 
 def magic_domino(size, number):
@@ -66,35 +68,58 @@ def magic_domino(size, number):
 
 
 if __name__ == '__main__':
-    #These "asserts" using only for self-checking and not necessary for auto-testing
+    # These "asserts" using only for self-checking and not necessary for auto-testing
     import itertools
 
     def check_data(size, number, user_result):
 
         # check types
-        check_container_type = lambda o: any(map(lambda t: isinstance(o, t), (list, tuple)))
-        check_cell_type = lambda i: isinstance(i, int)
-        if not (check_container_type(user_result) and
-                all(map(check_container_type, user_result)) and
-                all(map(lambda row: all(map(check_cell_type, row)), user_result))):
-            raise Exception("You should return a list/tuple of lists/tuples with integers.")
+        def check_container_type(o):
+            return any(map(lambda t: isinstance(o, t), (list, tuple)))
+
+        def check_cell_type(i):
+            return isinstance(i, int)
+
+        if not (
+            check_container_type(user_result)
+            and all(map(check_container_type, user_result))
+            and all(map(lambda row: all(map(check_cell_type, row)), user_result))
+        ):
+            raise Exception(
+                "You should return a list/tuple of lists/tuples with integers."
+            )
 
         # check sizes
-        check_size = lambda o: len(o) == size
+        def check_size(o):
+            return len(o) == size
+
         if not (check_size(user_result) and all(map(check_size, user_result))):
             raise Exception("Wrong size of answer.")
 
         # check is it a possible numbers (from 0 to 6 inclusive)
-        if not all(map(lambda x: 0 <= x <= 6, itertools.chain.from_iterable(user_result))):
+        if not all(
+            map(lambda x: 0 <= x <= 6, itertools.chain.from_iterable(user_result))
+        ):
             raise Exception("Wrong matrix integers (can't be domino tiles)")
 
         # check is it a magic square
-        seq_sum_check = lambda seq: sum(seq) == number
-        diagonals_indexes = zip(*map(lambda i: ((i, i), (i, size - i - 1)), range(size)))
-        values_from_indexes = lambda inds: itertools.starmap(lambda x, y: user_result[y][x], inds)
-        if not (all(map(seq_sum_check, user_result)) and  # rows
-                all(map(seq_sum_check, zip(*user_result))) and  # columns
-                all(map(seq_sum_check, map(values_from_indexes, diagonals_indexes)))):  # diagonals
+        def seq_sum_check(seq):
+            return sum(seq) == number
+
+        diagonals_indexes = zip(
+            *map(lambda i: ((i, i), (i, size - i - 1)), range(size))
+        )
+
+        def values_from_indexes(inds):
+            return itertools.starmap(lambda x, y: user_result[y][x], inds)
+
+        if not (
+            all(map(seq_sum_check, user_result))
+            and all(map(seq_sum_check, zip(*user_result)))  # rows
+            and all(  # columns
+                map(seq_sum_check, map(values_from_indexes, diagonals_indexes))
+            )
+        ):  # diagonals
             raise Exception("It's not a magic square.")
 
         # check is it domino square
