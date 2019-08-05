@@ -30,7 +30,9 @@ after_success:
   - ocular
   - git config --global user.name "semantic-release (via TravisCI)"
   - git config --global user.email "semantic-release@travis"
-  - pip install python-semantic-release
+  - apt update
+  - apt install -y npm
+  - npm -g install semantic-release @semantic-release/changelog @semantic-release/git @semantic-release/commit-analyzer @semantic-release/release-notes-generator
   - semantic-release publish
 
 notifications:
