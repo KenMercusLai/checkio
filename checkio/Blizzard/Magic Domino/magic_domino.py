@@ -1,70 +1,103 @@
 import operator as op
 from functools import reduce
-from itertools import combinations, islice, permutations, product
+from itertools import chain, combinations, islice, permutations, product
+from random import shuffle
 
 
-def ncr(n, r):
-    r = min(r, n - r)
-    number = reduce(op.mul, range(n, n - r, -1), 1)
-    denom = reduce(op.mul, range(1, r + 1), 1)
-    return number // denom
+flatten = lambda x: [j for i in x for j in i]
 
 
-def number_combinations(size, number):
-    return [i for i in product(*[list(range(7))] * size) if sum(i) == number]
+def dominos():
+    return [(i, j) for i in range(7) for j in range(i, 7)]
 
 
-def vertical_combination(combination):
-    columns = {}
-    for i in combination:
-        dominos = [tuple(sorted(i[j : j + 2])) for j in range(0, len(i), 2)]
-        if len(dominos) == len((set(dominos))):
-            columns[i] = dominos
-    return columns
+def tile_combinations(tiles, size, number):
+    return [i for i in combinations(tiles, size // 2) if sum(map(sum, i)) == number]
 
 
-def has_duplicate_tiles(status, columns):
-    tiles = []
-    for i in status:
-        tiles += columns[i]
-    return len(tiles) != len(set(tiles))
+def combine_columns(columns, size, exception=set()):
+    if size == 0:
+        yield []
+    for i, v in enumerate(columns):
+        new_exception = set(v) | exception
+        sub_columns = [
+            item
+            for item in columns[i + 1 :]
+            if not any([tile in new_exception for tile in item])
+        ]
+        for j in combine_columns(sub_columns, size - 1, new_exception):
+            # print(v)
+            ret = [v] + j
+            # print(ret)
+            yield ret
 
 
-def max_tile_duplicate(status, columns):
-    for i in range(2, len(status) + 1):
-        if has_duplicate_tiles(status[:i], columns):
-            return i
-    return 0
+def row_sum_check(columns, number, size):
+    for i in range(size):
+        item_index, sub_item_index = i // 2, i % 2
+        if sum([i[item_index][sub_item_index] for i in columns]) != number:
+            return False
+    return True
 
 
-def brute_force(size, number, columns):
-    total_column_combinations = len(columns)
-    domino_combinations = combinations(columns.keys(), size)
-    for i in domino_combinations:
-        duplications = max_tile_duplicate(i, columns)
-        if duplications:
-            # skip
-            skip_combinations = (
-                ncr(total_column_combinations - duplications, size - duplications) - 1
+def diagonal_check(columns, number, size):
+    diagonal_indexes = []
+    reversed_diagonal_indexes = []
+    for i in range(size):
+        diagonal_indexes.append((i // 2, i % 2))
+        reversed_diagonal_indexes.append(((size - 1 - i) // 2, (size - 1 - i) % 2))
+
+    for i in permutations(columns):
+        if (
+            sum(
+                [
+                    value[diagonal_indexes[row][0]][diagonal_indexes[row][1]]
+                    for row, value in enumerate(i)
+                ]
             )
-            islice(domino_combinations, skip_combinations)
-            continue
-        # row check
-        row_sums = list(map(sum, list(zip(*i))))
-        if not (len(set(row_sums)) == 1 and row_sums[0] == number):
-            continue
-        # diangal check
-        for diagonal_check in permutations(i):
-            diagonal1 = [diagonal_check[j][j] for j in range(size)]
-            diagonal2 = [diagonal_check[j][size - j - 1] for j in range(size)]
-            if sum(diagonal1) == sum(diagonal2) == number:
-                return diagonal_check
+            == number
+            and sum(
+                [
+                    value[reversed_diagonal_indexes[row][0]][
+                        reversed_diagonal_indexes[row][1]
+                    ]
+                    for row, value in enumerate(i)
+                ]
+            )
+            == number
+        ):
+            return i
+    return False
+
+
+def brute_force(domino, number, size):
+    shuffled_cols = []
+    for column in domino:
+        element_list = []
+        for element in column:
+            element_list.append(list(set([element, element[::-1]])))
+
+        # find out all possible permutations of a column
+        col_possibilities = []
+        for i in permutations(element_list, len(element_list)):
+            col_possibilities.append(product(*i))
+        col_possibilities = chain(*col_possibilities)
+        shuffled_cols.append(col_possibilities)
+
+    for i in product(*shuffled_cols):
+        if row_sum_check(i, number, size):
+            ret = diagonal_check(i, number, size)
+            if ret:
+                return ret
 
 
 def magic_domino(size, number):
-    valid_number_combinations = number_combinations(size, number)
-    columns = vertical_combination(valid_number_combinations)
-    return list(zip(*brute_force(size, number, columns)))
+    domino_tiles = dominos()
+    columns = tile_combinations(domino_tiles, size, number)
+    for i in combine_columns(columns, size):
+        ret = brute_force(i, number, size)
+        if ret:
+            return list(zip(*[flatten(j) for j in ret]))
 
 
 if __name__ == '__main__':

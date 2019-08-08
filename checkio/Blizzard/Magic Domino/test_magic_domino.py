@@ -2,6 +2,8 @@ import itertools
 import random
 import unittest
 
+import pytest
+
 from magic_domino import magic_domino
 
 
@@ -68,14 +70,12 @@ class Tests(unittest.TestCase):
                 raise Exception("It's not a domino magic square.")
             tiles.add(tile)
 
-    # def test_Basics(self):
-    #     for i in self.TESTS['Basics']:
-    #         print(i)
-    #         self.check_data(i['answer'][0], i['answer'][1], magic_domino(*i['input']))
+    def test_Basics(self):
+        for i in self.TESTS['Basics']:
+            self.check_data(i['answer'][0], i['answer'][1], magic_domino(*i['input']))
 
     def test_Extra(self):
         for i in self.TESTS['Extra']:
-            print('extra', i)
             self.check_data(i['answer'][0], i['answer'][1], magic_domino(*i['input']))
 
 
