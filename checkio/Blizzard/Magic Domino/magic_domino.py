@@ -26,9 +26,7 @@ def combine_columns(columns, size, exception=set()):
             if not any([tile in new_exception for tile in item])
         ]
         for j in combine_columns(sub_columns, size - 1, new_exception):
-            # print(v)
             ret = [v] + j
-            # print(ret)
             yield ret
 
 
